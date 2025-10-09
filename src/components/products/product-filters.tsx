@@ -235,7 +235,6 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
                     id={category.id}
                     checked={filters.selectedCategories.includes(category.slug)}
                     onChange={() => handleCategoryChange(category.slug)}
-                    className="h-4 w-4 rounded border border-gray-600 bg-gray-800 text-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-0 focus:ring-offset-gray-800"
                   />
                   <label 
                     htmlFor={category.id}
@@ -265,7 +264,6 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
               id="in-stock"
               checked={filters.inStockOnly}
               onChange={(e) => handleFilterChange('inStockOnly', e.target.checked)}
-              className="h-4 w-4 rounded border border-gray-600 bg-gray-800 text-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-0 focus:ring-offset-gray-800"
             />
             <label 
               htmlFor="in-stock"
