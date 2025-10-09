@@ -67,12 +67,15 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
   // Sync with initial filters when they change
   useEffect(() => {
     if (initialFilters) {
+      // Handle multiple categories from comma-separated string
+      const categories = initialFilters.category && initialFilters.category !== 'all'
+        ? initialFilters.category.split(',').map(cat => cat.trim()).filter(cat => cat)
+        : ['all'];
+      
       setFilters({
         search: initialFilters.search || '',
         priceRange: [initialFilters.minPrice || 0, initialFilters.maxPrice || 1000],
-        selectedCategories: initialFilters.category && initialFilters.category !== 'all' 
-          ? [initialFilters.category] 
-          : ['all'],
+        selectedCategories: categories,
         inStockOnly: initialFilters.inStock || false,
       });
     }
@@ -228,25 +231,34 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
             </div>
           ) : (
             <div className="space-y-2 max-h-60 overflow-y-auto">
-              {categories.map((category) => (
-                <div key={category.id} className="flex items-center space-x-2 py-1">
-                  <input
-                    type="checkbox"
-                    id={category.id}
-                    checked={filters.selectedCategories.includes(category.slug)}
-                    onChange={() => handleCategoryChange(category.slug)}
-                  />
-                  <label 
-                    htmlFor={category.id}
-                    className="text-xs sm:text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex-1 cursor-pointer truncate"
-                  >
-                    {category.name}
-                  </label>
-                  <span className="text-xs sm:text-sm text-muted-foreground flex-shrink-0">
-                    ({category.productCount})
-                  </span>
-                </div>
-              ))}
+              {categories.map((category) => {
+                const isChecked = filters.selectedCategories.includes(category.slug);
+                console.log(`Checkbox for ${category.name}:`, { 
+                  slug: category.slug, 
+                  isChecked, 
+                  selectedCategories: filters.selectedCategories 
+                });
+                
+                return (
+                  <div key={category.id} className="flex items-center space-x-2 py-1">
+                    <input
+                      type="checkbox"
+                      id={category.id}
+                      checked={isChecked}
+                      onChange={() => handleCategoryChange(category.slug)}
+                    />
+                    <label 
+                      htmlFor={category.id}
+                      className="text-xs sm:text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex-1 cursor-pointer truncate"
+                    >
+                      {category.name}
+                    </label>
+                    <span className="text-xs sm:text-sm text-muted-foreground flex-shrink-0">
+                      ({category.productCount})
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           )}
         </CardContent>
