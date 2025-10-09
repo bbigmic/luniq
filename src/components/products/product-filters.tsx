@@ -89,7 +89,7 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
       inStock: filters.inStockOnly || undefined,
       category: categoryFilter,
     });
-  }, [filters]);
+  }, [filters, onFiltersChange]);
 
   const handleFilterChange = (key: string, value: any) => {
     setFilters(prev => ({
