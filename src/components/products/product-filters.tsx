@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -45,6 +45,7 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
       : ['all'],
     inStockOnly: initialFilters?.inStock || false,
   });
+  const previousFiltersRef = useRef<string>('');
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -82,13 +83,21 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
       ? undefined
       : filters.selectedCategories.join(','); // Pass multiple categories as comma-separated string
 
-    onFiltersChange({
+    const currentFilters = {
       search: filters.search || undefined,
       minPrice: filters.priceRange[0],
       maxPrice: filters.priceRange[1],
       inStock: filters.inStockOnly || undefined,
       category: categoryFilter,
-    });
+    };
+
+    const currentFiltersString = JSON.stringify(currentFilters);
+    
+    // Only call onFiltersChange if filters actually changed
+    if (currentFiltersString !== previousFiltersRef.current) {
+      previousFiltersRef.current = currentFiltersString;
+      onFiltersChange(currentFilters);
+    }
   }, [filters, onFiltersChange]);
 
   const handleFilterChange = (key: string, value: any) => {
