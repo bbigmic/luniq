@@ -174,9 +174,6 @@ export function ProductGrid() {
                     src={product.image} 
                     alt={product.name}
                     className="w-full h-full object-contain p-4 hover:scale-105 transition-transform duration-300"
-                    onError={(e) => {
-                      e.currentTarget.src = '/images/products/placeholder.svg';
-                    }}
                   />
                 </div>
                 
