@@ -45,13 +45,15 @@ export async function GET(request: NextRequest) {
     }
 
     if (search) {
-      whereConditions.push(
-        or(
-          like(products.name, `%${search}%`),
-          like(products.description, `%${search}%`),
-          like(products.shortDescription, `%${search}%`)
-        )
-      );
+      const searchConditions = [
+        like(products.name, `%${search}%`),
+        like(products.description, `%${search}%`),
+        like(products.shortDescription, `%${search}%`)
+      ].filter(Boolean);
+      
+      if (searchConditions.length > 0) {
+        whereConditions.push(or(...searchConditions));
+      }
     }
 
     // Build order by clause
