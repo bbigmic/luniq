@@ -7,8 +7,8 @@ import { Toaster } from 'react-hot-toast';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'E-Commerce Platform - Dark Theme',
-  description: 'Modern e-commerce platform with dark theme and admin panel',
+  title: 'E-Commerce Platform - Dark Theme v2',
+  description: 'Modern e-commerce platform with dark theme, products page, and admin panel',
 };
 
 export default function RootLayout({
