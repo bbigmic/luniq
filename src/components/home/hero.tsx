@@ -27,9 +27,9 @@ export function Hero() {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/categories">
+              <Link href="/products">
                 <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                  Browse Categories
+                  Browse Products
                 </Button>
               </Link>
             </div>

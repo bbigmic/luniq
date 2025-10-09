@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -130,9 +131,11 @@ export function FeaturedProducts() {
         </div>
 
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg">
-            View All Products
-          </Button>
+          <Link href="/products">
+            <Button variant="outline" size="lg">
+              View All Products
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
