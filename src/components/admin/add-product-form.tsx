@@ -93,12 +93,22 @@ export function AddProductForm() {
       .trim();
   };
 
+  const generateSKU = (name: string) => {
+    const timestamp = Date.now().toString().slice(-6);
+    const namePrefix = name
+      .toUpperCase()
+      .replace(/[^A-Z0-9]/g, '')
+      .slice(0, 8);
+    return `${namePrefix}-${timestamp}`;
+  };
+
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value;
     setFormData(prev => ({
       ...prev,
       name,
       slug: generateSlug(name),
+      sku: prev.sku || generateSKU(name), // Only generate SKU if not already set
     }));
   };
 
@@ -116,6 +126,7 @@ export function AddProductForm() {
       price: parseFloat(formData.price),
       comparePrice: formData.comparePrice ? parseFloat(formData.comparePrice) : null,
       costPrice: formData.costPrice ? parseFloat(formData.costPrice) : null,
+      sku: formData.sku || generateSKU(formData.name), // Ensure SKU is always unique
     };
 
     console.log('Form data before submission:', formData);
