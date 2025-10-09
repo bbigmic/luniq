@@ -1,14 +1,12 @@
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
-import { DrizzleAdapter } from '@next-auth/drizzle-adapter';
 import { db } from './db';
 import { users } from './db/schema';
 import { eq } from 'drizzle-orm';
 import bcrypt from 'bcryptjs';
 
 export const authOptions: NextAuthOptions = {
-  adapter: DrizzleAdapter(db),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',

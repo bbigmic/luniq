@@ -15,7 +15,6 @@
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "@next-auth/drizzle-adapter": "^0.7.0",
     "next-auth": "^4.24.5",
     "drizzle-orm": "^0.29.1",
     "postgres": "^3.4.3",
