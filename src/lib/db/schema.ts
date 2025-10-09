@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, uuid, integer, decimal, boolean, json } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, uuid, integer, decimal, boolean, json, type PgTable } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 // Users table
@@ -19,7 +19,7 @@ export const users = pgTable('users', {
 });
 
 // Categories table
-export const categories = pgTable('categories', {
+export const categories: PgTable = pgTable('categories', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: text('name').notNull(),
   slug: text('slug').notNull().unique(),
