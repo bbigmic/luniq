@@ -1,6 +1,8 @@
-# E-Commerce Platform
+# E-Commerce Platform - Dark Theme
 
 A modern, full-stack e-commerce platform built with Next.js 14, TypeScript, and PostgreSQL. Features a beautiful homepage, comprehensive admin panel, and complete authentication system.
+
+**Latest Update**: Dark theme and products page added - Force deployment v3
 
 ## 🚀 Features
 
