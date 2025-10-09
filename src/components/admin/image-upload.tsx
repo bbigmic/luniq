@@ -74,6 +74,16 @@ export function ImageUpload({ images, onImagesChange, maxImages = 5 }: ImageUplo
     }
   };
 
+  const handleManualAddFromElement = (input: HTMLInputElement) => {
+    const url = input.value;
+    if (url && images.length < maxImages) {
+      onImagesChange([...images, url]);
+      input.value = ''; // Clear input
+    } else if (images.length >= maxImages) {
+      toast.error(`You can only add up to ${maxImages} images`);
+    }
+  };
+
   return (
     <div className="space-y-4">
       {/* Existing Images */}
@@ -158,14 +168,14 @@ export function ImageUpload({ images, onImagesChange, maxImages = 5 }: ImageUplo
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   e.preventDefault();
-                  handleManualAdd(e.target as HTMLInputElement);
+                  handleManualAddFromElement(e.target as HTMLInputElement);
                 }
               }}
             />
             <Button type="button" onClick={() => {
               const input = document.getElementById('imageUrl') as HTMLInputElement;
               if (input) {
-                handleManualAdd(input);
+                handleManualAddFromElement(input);
               }
             }}>
               Add URL
