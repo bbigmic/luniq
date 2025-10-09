@@ -92,19 +92,19 @@ export function ProductGrid({ filters = {} }: ProductGridProps) {
   return (
     <div className="space-y-6">
       {/* Sort Options */}
-      <div className="flex items-center justify-between">
-        <p className="text-muted-foreground">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <p className="text-muted-foreground text-sm sm:text-base">
           Showing {pagination.total} products
         </p>
         <div className="flex items-center gap-2">
-          <label htmlFor="sort" className="text-sm font-medium">
+          <label htmlFor="sort" className="text-xs sm:text-sm font-medium">
             Sort by:
           </label>
           <select
             id="sort"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="px-3 py-1 border border-input bg-background rounded-md text-sm"
+            className="px-2 sm:px-3 py-1 border border-input bg-background rounded-md text-xs sm:text-sm"
           >
             <option value="featured">Featured</option>
             <option value="price-low">Price: Low to High</option>

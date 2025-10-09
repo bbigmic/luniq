@@ -31,18 +31,18 @@ export function Newsletter() {
   };
 
   return (
-    <section className="py-20 bg-primary/5">
+    <section className="py-12 sm:py-20 bg-primary/5">
       <div className="container mx-auto px-4">
         <Card className="max-w-2xl mx-auto">
-          <CardContent className="p-8 text-center">
-            <div className="space-y-6">
-              <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
-                <Mail className="h-8 w-8 text-primary" />
+          <CardContent className="p-6 sm:p-8 text-center">
+            <div className="space-y-4 sm:space-y-6">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
+                <Mail className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
               </div>
               
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold">Stay Updated</h2>
-                <p className="text-muted-foreground">
+                <h2 className="text-2xl sm:text-3xl font-bold">Stay Updated</h2>
+                <p className="text-sm sm:text-base text-muted-foreground">
                   Subscribe to our newsletter and be the first to know about new products, 
                   exclusive deals, and special offers.
                 </p>

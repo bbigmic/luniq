@@ -7,10 +7,10 @@ export default function OrdersPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">My Orders</h1>
-          <p className="text-muted-foreground text-lg">
+      <main className="container mx-auto px-4 py-4 sm:py-8">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-4">My Orders</h1>
+          <p className="text-muted-foreground text-base sm:text-lg">
             Track and manage your order history
           </p>
         </div>

@@ -10,7 +10,7 @@ export default function CategoriesPage() {
       <Header />
       <main>
         <CategoriesHero />
-        <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-8 sm:py-12">
           <Suspense fallback={<div>Loading categories...</div>}>
             <CategoriesGrid />
           </Suspense>
