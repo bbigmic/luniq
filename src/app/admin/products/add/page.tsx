@@ -12,11 +12,14 @@ export default function AddProductPage() {
       <div className="flex">
         <AdminSidebar />
         <div className="flex-1 ml-64">
-          <AdminHeader title="Add New Product" />
+          <AdminHeader />
           <main className="p-6">
             <div className="max-w-4xl mx-auto">
+              <div className="mb-6">
+                <h1 className="text-3xl font-bold">Add New Product</h1>
+                <p className="text-muted-foreground">Create a new product for your store</p>
+              </div>
               <div className="bg-card rounded-lg border p-6">
-                <h2 className="text-2xl font-bold mb-6">Add New Product</h2>
                 <Suspense fallback={<div>Loading form...</div>}>
                   <AddProductForm />
                 </Suspense>
