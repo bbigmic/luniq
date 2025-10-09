@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { products, categories } from '@/lib/db/schema';
-import { eq, and, gte, lte, like, or } from 'drizzle-orm';
+import { eq, and, gte, lte, like, or, desc, asc } from 'drizzle-orm';
 
 export async function GET(request: NextRequest) {
   try {
@@ -58,20 +58,20 @@ export async function GET(request: NextRequest) {
     let orderBy;
     switch (sortBy) {
       case 'price-low':
-        orderBy = products.price;
+        orderBy = asc(products.price);
         break;
       case 'price-high':
-        orderBy = products.price;
+        orderBy = desc(products.price);
         break;
       case 'name':
-        orderBy = products.name;
+        orderBy = asc(products.name);
         break;
       case 'newest':
-        orderBy = products.createdAt;
+        orderBy = desc(products.createdAt);
         break;
       case 'featured':
       default:
-        orderBy = products.featured;
+        orderBy = [desc(products.featured), desc(products.createdAt)];
         break;
     }
 
@@ -98,7 +98,7 @@ export async function GET(request: NextRequest) {
       .from(products)
       .leftJoin(categories, eq(products.categoryId, categories.id))
       .where(and(...whereConditions))
-      .orderBy(sortBy === 'price-high' ? orderBy : orderBy)
+      .orderBy(orderBy)
       .limit(limit)
       .offset(offset);
 
