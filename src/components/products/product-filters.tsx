@@ -25,16 +25,25 @@ interface ProductFiltersProps {
     inStock?: boolean;
     search?: string;
   }) => void;
+  initialFilters?: {
+    category?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    inStock?: boolean;
+    search?: string;
+  };
 }
 
-export function ProductFilters({ onFiltersChange }: ProductFiltersProps) {
+export function ProductFilters({ onFiltersChange, initialFilters }: ProductFiltersProps) {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [filters, setFilters] = useState({
-    search: '',
-    priceRange: [0, 1000],
-    selectedCategories: ['all'],
-    inStockOnly: false,
+    search: initialFilters?.search || '',
+    priceRange: [initialFilters?.minPrice || 0, initialFilters?.maxPrice || 1000],
+    selectedCategories: initialFilters?.category && initialFilters.category !== 'all' 
+      ? [initialFilters.category] 
+      : ['all'],
+    inStockOnly: initialFilters?.inStock || false,
   });
 
   useEffect(() => {
@@ -53,6 +62,20 @@ export function ProductFilters({ onFiltersChange }: ProductFiltersProps) {
     };
     fetchCategories();
   }, []);
+
+  // Sync with initial filters when they change
+  useEffect(() => {
+    if (initialFilters) {
+      setFilters({
+        search: initialFilters.search || '',
+        priceRange: [initialFilters.minPrice || 0, initialFilters.maxPrice || 1000],
+        selectedCategories: initialFilters.category && initialFilters.category !== 'all' 
+          ? [initialFilters.category] 
+          : ['all'],
+        inStockOnly: initialFilters.inStock || false,
+      });
+    }
+  }, [initialFilters]);
 
   useEffect(() => {
     const categoryFilter = filters.selectedCategories.includes('all')

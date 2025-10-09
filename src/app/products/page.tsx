@@ -51,7 +51,10 @@ function ProductsPageContent() {
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           <aside className="lg:col-span-1 order-2 lg:order-1">
-            <ProductFilters onFiltersChange={handleFiltersChange} />
+            <ProductFilters 
+              onFiltersChange={handleFiltersChange} 
+              initialFilters={filters}
+            />
           </aside>
           
           <div className="lg:col-span-3 order-1 lg:order-2">
