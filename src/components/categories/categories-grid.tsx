@@ -1,5 +1,9 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { 
   Smartphone, 
   Shirt, 
@@ -7,67 +11,79 @@ import {
   Dumbbell, 
   Book, 
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  Loader2,
+  Car,
+  Heart,
+  Gamepad2,
+  Gem
 } from 'lucide-react';
 
-const categories = [
-  {
-    id: 'electronics',
-    name: 'Electronics',
-    description: 'Latest gadgets and technology',
-    icon: <Smartphone className="h-12 w-12" />,
-    productCount: 150,
-    color: 'bg-blue-500/10 text-blue-600',
-    href: '/products?category=electronics'
-  },
-  {
-    id: 'fashion',
-    name: 'Fashion',
-    description: 'Trendy clothing and accessories',
-    icon: <Shirt className="h-12 w-12" />,
-    productCount: 200,
-    color: 'bg-pink-500/10 text-pink-600',
-    href: '/products?category=fashion'
-  },
-  {
-    id: 'home-garden',
-    name: 'Home & Garden',
-    description: 'Everything for your home',
-    icon: <Home className="h-12 w-12" />,
-    productCount: 120,
-    color: 'bg-green-500/10 text-green-600',
-    href: '/products?category=home-garden'
-  },
-  {
-    id: 'sports',
-    name: 'Sports',
-    description: 'Fitness and outdoor gear',
-    icon: <Dumbbell className="h-12 w-12" />,
-    productCount: 80,
-    color: 'bg-orange-500/10 text-orange-600',
-    href: '/products?category=sports'
-  },
-  {
-    id: 'books',
-    name: 'Books',
-    description: 'Knowledge and entertainment',
-    icon: <Book className="h-12 w-12" />,
-    productCount: 300,
-    color: 'bg-purple-500/10 text-purple-600',
-    href: '/products?category=books'
-  },
-  {
-    id: 'beauty',
-    name: 'Beauty',
-    description: 'Health and beauty products',
-    icon: <Sparkles className="h-12 w-12" />,
-    productCount: 90,
-    color: 'bg-rose-500/10 text-rose-600',
-    href: '/products?category=beauty'
-  }
-];
+interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  productCount: number;
+}
+
+const categoryIcons: Record<string, any> = {
+  electronics: <Smartphone className="h-12 w-12" />,
+  fashion: <Shirt className="h-12 w-12" />,
+  'home-garden': <Home className="h-12 w-12" />,
+  sports: <Dumbbell className="h-12 w-12" />,
+  books: <Book className="h-12 w-12" />,
+  beauty: <Sparkles className="h-12 w-12" />,
+  automotive: <Car className="h-12 w-12" />,
+  health: <Heart className="h-12 w-12" />,
+  toys: <Gamepad2 className="h-12 w-12" />,
+  jewelry: <Gem className="h-12 w-12" />,
+};
+
+const categoryColors: Record<string, string> = {
+  electronics: 'bg-blue-500/10 text-blue-600',
+  fashion: 'bg-pink-500/10 text-pink-600',
+  'home-garden': 'bg-green-500/10 text-green-600',
+  sports: 'bg-orange-500/10 text-orange-600',
+  books: 'bg-purple-500/10 text-purple-600',
+  beauty: 'bg-rose-500/10 text-rose-600',
+  automotive: 'bg-gray-500/10 text-gray-600',
+  health: 'bg-red-500/10 text-red-600',
+  toys: 'bg-yellow-500/10 text-yellow-600',
+  jewelry: 'bg-amber-500/10 text-amber-600',
+};
 
 export function CategoriesGrid() {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('/api/categories');
+        if (response.ok) {
+          const data = await response.json();
+          setCategories(data.categories);
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <Loader2 className="h-8 w-8 animate-spin" />
+        <span className="ml-2">Loading categories...</span>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="text-center mb-12">
@@ -79,12 +95,12 @@ export function CategoriesGrid() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {categories.map((category) => (
-          <Link key={category.id} href={category.href}>
+          <Link key={category.id} href={`/products?category=${category.slug}`}>
             <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between mb-4">
-                  <div className={`w-16 h-16 rounded-lg flex items-center justify-center ${category.color}`}>
-                    {category.icon}
+                  <div className={`w-16 h-16 rounded-lg flex items-center justify-center ${categoryColors[category.slug] || 'bg-gray-500/10 text-gray-600'}`}>
+                    {categoryIcons[category.slug] || <Smartphone className="h-12 w-12" />}
                   </div>
                   <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 </div>
@@ -93,9 +109,9 @@ export function CategoriesGrid() {
                 <p className="text-muted-foreground mb-4">{category.description}</p>
                 
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">
+                  <Badge variant="outline">
                     {category.productCount} products
-                  </span>
+                  </Badge>
                   <span className="text-sm font-medium text-primary group-hover:underline">
                     Shop Now
                   </span>

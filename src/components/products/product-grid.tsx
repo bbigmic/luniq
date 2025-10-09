@@ -1,150 +1,100 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Heart, ShoppingCart, Star } from 'lucide-react';
+import { Heart, ShoppingCart, Star, Loader2 } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { useCart } from '@/contexts/cart-context';
 
-// Mock data with actual product images
-const products = [
-  {
-    id: '1',
-    name: 'Premium Wireless Headphones',
-    price: 299.99,
-    comparePrice: 399.99,
-    image: '/images/products/headphones.svg',
-    rating: 4.8,
-    reviews: 124,
-    badge: 'Best Seller',
-    category: 'Electronics',
-    inStock: true,
-  },
-  {
-    id: '2',
-    name: 'Smart Fitness Watch',
-    price: 199.99,
-    comparePrice: 249.99,
-    image: '/images/products/watch.svg',
-    rating: 4.6,
-    reviews: 89,
-    badge: 'New',
-    category: 'Electronics',
-    inStock: true,
-  },
-  {
-    id: '3',
-    name: 'Wireless Charging Pad',
-    price: 49.99,
-    comparePrice: 69.99,
-    image: '/images/products/placeholder.svg',
-    rating: 4.7,
-    reviews: 203,
-    badge: 'Sale',
-    category: 'Electronics',
-    inStock: true,
-  },
-  {
-    id: '4',
-    name: 'Bluetooth Speaker',
-    price: 79.99,
-    comparePrice: 99.99,
-    image: '/images/products/speaker.svg',
-    rating: 4.5,
-    reviews: 156,
-    badge: null,
-    category: 'Electronics',
-    inStock: true,
-  },
-  {
-    id: '5',
-    name: 'Gaming Laptop',
-    price: 1299.99,
-    comparePrice: 1499.99,
-    image: '/images/products/laptop.svg',
-    rating: 4.9,
-    reviews: 78,
-    badge: 'Best Seller',
-    category: 'Electronics',
-    inStock: true,
-  },
-  {
-    id: '6',
-    name: 'Smartphone Pro',
-    price: 899.99,
-    comparePrice: 999.99,
-    image: '/images/products/phone.svg',
-    rating: 4.7,
-    reviews: 92,
-    badge: 'Sale',
-    category: 'Electronics',
-    inStock: true,
-  },
-  {
-    id: '7',
-    name: 'Digital Camera',
-    price: 599.99,
-    comparePrice: 699.99,
-    image: '/images/products/camera.svg',
-    rating: 4.6,
-    reviews: 134,
-    badge: null,
-    category: 'Electronics',
-    inStock: true,
-  },
-  {
-    id: '8',
-    name: 'Tablet Pro',
-    price: 399.99,
-    comparePrice: 499.99,
-    image: '/images/products/tablet.svg',
-    rating: 4.8,
-    reviews: 167,
-    badge: 'New',
-    category: 'Electronics',
-    inStock: true,
-  },
-  {
-    id: '9',
-    name: 'Mechanical Keyboard',
-    price: 149.99,
-    comparePrice: 179.99,
-    image: '/images/products/keyboard.svg',
-    rating: 4.7,
-    reviews: 98,
-    badge: null,
-    category: 'Electronics',
-    inStock: true,
-  },
-];
+interface Product {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  shortDescription: string;
+  price: number;
+  comparePrice: number | null;
+  sku: string;
+  quantity: number;
+  status: string;
+  featured: boolean;
+  images: string[];
+  categoryName: string;
+  categorySlug: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
-export function ProductGrid() {
+interface ProductGridProps {
+  filters?: {
+    category?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    inStock?: boolean;
+    search?: string;
+  };
+}
+
+export function ProductGrid({ filters = {} }: ProductGridProps) {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState('featured');
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 12,
+    total: 0,
+    totalPages: 0,
+  });
   const { addItem } = useCart();
 
-  const sortedProducts = [...products].sort((a, b) => {
-    switch (sortBy) {
-      case 'price-low':
-        return a.price - b.price;
-      case 'price-high':
-        return b.price - a.price;
-      case 'rating':
-        return b.rating - a.rating;
-      case 'newest':
-        return b.id.localeCompare(a.id);
-      default:
-        return 0;
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      const params = new URLSearchParams({
+        page: pagination.page.toString(),
+        limit: pagination.limit.toString(),
+        sortBy,
+        ...(filters.category && { category: filters.category }),
+        ...(filters.minPrice && { minPrice: filters.minPrice.toString() }),
+        ...(filters.maxPrice && { maxPrice: filters.maxPrice.toString() }),
+        ...(filters.inStock && { inStock: filters.inStock.toString() }),
+        ...(filters.search && { search: filters.search }),
+      });
+
+      const response = await fetch(`/api/products?${params}`);
+      if (!response.ok) throw new Error('Failed to fetch products');
+      
+      const data = await response.json();
+      setProducts(data.products);
+      setPagination(data.pagination);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    } finally {
+      setLoading(false);
     }
-  });
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, [sortBy, filters, pagination.page]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <Loader2 className="h-8 w-8 animate-spin" />
+        <span className="ml-2">Loading products...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
       {/* Sort Options */}
       <div className="flex items-center justify-between">
         <p className="text-muted-foreground">
-          Showing {products.length} products
+          Showing {pagination.total} products
         </p>
         <div className="flex items-center gap-2">
           <label htmlFor="sort" className="text-sm font-medium">
@@ -159,101 +109,114 @@ export function ProductGrid() {
             <option value="featured">Featured</option>
             <option value="price-low">Price: Low to High</option>
             <option value="price-high">Price: High to Low</option>
-            <option value="rating">Customer Rating</option>
+            <option value="name">Name A-Z</option>
             <option value="newest">Newest</option>
           </select>
         </div>
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {sortedProducts.map((product) => (
-          <Card key={product.id} className="group hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 bg-gray-900 border-gray-700 hover:border-gray-600">
-            <CardHeader className="p-0">
-              <div className="relative overflow-hidden rounded-t-lg">
-                <div className="aspect-square bg-gray-800 flex items-center justify-center">
-                  <img 
-                    src={product.image} 
-                    alt={product.name}
-                    className="w-full h-full object-contain p-4 hover:scale-105 transition-transform duration-300"
-                  />
+      {products.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {products.map((product) => (
+            <Card key={product.id} className="group hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 bg-gray-900 border-gray-700 hover:border-gray-600">
+              <CardHeader className="p-0">
+                <div className="relative overflow-hidden rounded-t-lg">
+                  <div className="aspect-square bg-gray-800 flex items-center justify-center">
+                    <img
+                      src={product.images?.[0] || '/images/products/placeholder.svg'}
+                      alt={product.name}
+                      className="w-full h-full object-contain p-4 hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+
+                  {product.featured && (
+                    <Badge className="absolute top-2 left-2">
+                      Featured
+                    </Badge>
+                  )}
+
+                  {product.comparePrice && product.comparePrice > product.price && (
+                    <Badge variant="destructive" className="absolute top-2 right-2">
+                      Sale
+                    </Badge>
+                  )}
+
+                  <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Button variant="ghost" size="icon" className="h-8 w-8">
+                      <Heart className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
-                
-                {product.badge && (
-                  <Badge 
-                    variant={product.badge === 'Sale' ? 'destructive' : 'default'}
-                    className="absolute top-2 left-2"
-                  >
-                    {product.badge}
-                  </Badge>
-                )}
-                
-                <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Button variant="ghost" size="icon" className="h-8 w-8">
-                    <Heart className="h-4 w-4" />
-                  </Button>
+              </CardHeader>
+
+              <CardContent className="p-4 space-y-2">
+                <h3 className="font-semibold line-clamp-2">{product.name}</h3>
+                <p className="text-sm text-muted-foreground line-clamp-2">
+                  {product.shortDescription}
+                </p>
+
+                <div className="flex items-center space-x-2">
+                  <span className="text-lg font-bold">{formatPrice(product.price)}</span>
+                  {product.comparePrice && (
+                    <span className="text-sm text-muted-foreground line-through">
+                      {formatPrice(product.comparePrice)}
+                    </span>
+                  )}
                 </div>
-              </div>
-            </CardHeader>
 
-            <CardContent className="p-4 space-y-2">
-              <div className="flex items-center space-x-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`h-4 w-4 ${
-                      i < Math.floor(product.rating)
-                        ? 'fill-yellow-400 text-yellow-400'
-                        : 'text-muted-foreground'
-                    }`}
-                  />
-                ))}
-                <span className="text-sm text-muted-foreground ml-1">
-                  ({product.reviews})
-                </span>
-              </div>
-              
-              <h3 className="font-semibold line-clamp-2">{product.name}</h3>
-              
-              <div className="flex items-center space-x-2">
-                <span className="text-lg font-bold">{formatPrice(product.price)}</span>
-                {product.comparePrice && (
-                  <span className="text-sm text-muted-foreground line-through">
-                    {formatPrice(product.comparePrice)}
-                  </span>
-                )}
-              </div>
+                <p className="text-sm text-muted-foreground">{product.categoryName}</p>
+                <p className="text-xs text-muted-foreground">SKU: {product.sku}</p>
+              </CardContent>
 
-              <p className="text-sm text-muted-foreground">{product.category}</p>
-            </CardContent>
+              <CardFooter className="p-4 pt-0">
+                <Button
+                  className="w-full"
+                  size="sm"
+                  disabled={product.quantity === 0}
+                  onClick={() => addItem({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.images?.[0] || '/images/products/placeholder.svg',
+                    sku: product.sku
+                  })}
+                >
+                  <ShoppingCart className="mr-2 h-4 w-4" />
+                  {product.quantity > 0 ? 'Add to Cart' : 'Out of Stock'}
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">No products found matching your criteria.</p>
+        </div>
+      )}
 
-            <CardFooter className="p-4 pt-0">
-              <Button 
-                className="w-full" 
-                size="sm"
-                disabled={!product.inStock}
-                onClick={() => addItem({
-                  id: product.id,
-                  name: product.name,
-                  price: product.price,
-                  image: product.image,
-                  sku: product.id
-                })}
-              >
-                <ShoppingCart className="mr-2 h-4 w-4" />
-                {product.inStock ? 'Add to Cart' : 'Out of Stock'}
-              </Button>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
-
-      {/* Load More Button */}
-      <div className="text-center pt-8">
-        <Button variant="outline" size="lg">
-          Load More Products
-        </Button>
-      </div>
+      {/* Pagination */}
+      {pagination.totalPages > 1 && (
+        <div className="flex items-center justify-center space-x-2 pt-8">
+          <Button
+            variant="outline"
+            onClick={() => setPagination(prev => ({ ...prev, page: prev.page - 1 }))}
+            disabled={pagination.page === 1}
+          >
+            Previous
+          </Button>
+          <span className="px-4 py-2 text-sm">
+            Page {pagination.page} of {pagination.totalPages}
+          </span>
+          <Button
+            variant="outline"
+            onClick={() => setPagination(prev => ({ ...prev, page: prev.page + 1 }))}
+            disabled={pagination.page === pagination.totalPages}
+          >
+            Next
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
