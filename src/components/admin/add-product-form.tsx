@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,18 +14,34 @@ interface Category {
   slug: string;
 }
 
-const categories: Category[] = [
-  { id: '1', name: 'Electronics', slug: 'electronics' },
-  { id: '2', name: 'Fashion', slug: 'fashion' },
-  { id: '3', name: 'Home & Garden', slug: 'home-garden' },
-  { id: '4', name: 'Sports', slug: 'sports' },
-  { id: '5', name: 'Books', slug: 'books' },
-  { id: '6', name: 'Beauty', slug: 'beauty' },
-];
+// Categories will be fetched from API
 
 export function AddProductForm() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loadingCategories, setLoadingCategories] = useState(true);
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      setLoadingCategories(true);
+      const response = await fetch('/api/categories');
+      if (!response.ok) throw new Error('Failed to fetch categories');
+      
+      const data = await response.json();
+      setCategories(data.categories);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+      toast.error('Failed to load categories');
+    } finally {
+      setLoadingCategories(false);
+    }
+  };
+
   const [formData, setFormData] = useState({
     name: '',
     slug: '',
@@ -195,9 +211,12 @@ export function AddProductForm() {
                 value={formData.categoryId}
                 onChange={handleInputChange}
                 required
+                disabled={loadingCategories}
                 className="w-full px-3 py-2 border border-input bg-background rounded-md"
               >
-                <option value="">Select a category</option>
+                <option value="">
+                  {loadingCategories ? 'Loading categories...' : 'Select a category'}
+                </option>
                 {categories.map(category => (
                   <option key={category.id} value={category.id}>
                     {category.name}

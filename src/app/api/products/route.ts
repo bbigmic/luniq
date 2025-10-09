@@ -10,16 +10,17 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     
-    // Get query parameters
-    const category = searchParams.get('category');
-    const minPrice = searchParams.get('minPrice');
-    const maxPrice = searchParams.get('maxPrice');
-    const inStock = searchParams.get('inStock');
-    const search = searchParams.get('search');
-    const sortBy = searchParams.get('sortBy') || 'featured';
-    const page = parseInt(searchParams.get('page') || '1');
-    const limit = parseInt(searchParams.get('limit') || '12');
-    const offset = (page - 1) * limit;
+      // Get query parameters
+      const category = searchParams.get('category');
+      const minPrice = searchParams.get('minPrice');
+      const maxPrice = searchParams.get('maxPrice');
+      const inStock = searchParams.get('inStock');
+      const search = searchParams.get('search');
+      const featured = searchParams.get('featured');
+      const sortBy = searchParams.get('sortBy') || 'featured';
+      const page = parseInt(searchParams.get('page') || '1');
+      const limit = parseInt(searchParams.get('limit') || '12');
+      const offset = (page - 1) * limit;
 
     // Build where conditions
     let whereConditions = [eq(products.status, 'active')];
@@ -49,15 +50,19 @@ export async function GET(request: NextRequest) {
       whereConditions.push(gte(products.quantity, 1));
     }
 
-    if (search) {
-      whereConditions.push(
-        or(
-          like(products.name, `%${search}%`),
-          like(products.description, `%${search}%`),
-          like(products.shortDescription, `%${search}%`)
-        )!
-      );
-    }
+      if (search) {
+        whereConditions.push(
+          or(
+            like(products.name, `%${search}%`),
+            like(products.description, `%${search}%`),
+            like(products.shortDescription, `%${search}%`)
+          )!
+        );
+      }
+
+      if (featured === 'true') {
+        whereConditions.push(eq(products.featured, true));
+      }
 
     // Build order by clause
     let orderBy: any[];
