@@ -132,7 +132,10 @@ export function ProductFilters({ onFiltersChange }: ProductFiltersProps) {
             <Label>${filters.minPrice} - ${filters.maxPrice}</Label>
             <Slider
               value={[filters.minPrice, filters.maxPrice]}
-              onValueChange={(value) => handleFilterChange('minPrice', value[0]) && handleFilterChange('maxPrice', value[1])}
+              onValueChange={(value) => {
+                handleFilterChange('minPrice', value[0]);
+                handleFilterChange('maxPrice', value[1]);
+              }}
               max={1000}
               min={0}
               step={10}
