@@ -5,14 +5,14 @@ import { Badge } from '@/components/ui/badge';
 import { Heart, ShoppingCart, Star } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 
-// Mock data - replace with actual data fetching
+// Mock data with actual product images
 const featuredProducts = [
   {
     id: '1',
     name: 'Premium Wireless Headphones',
     price: 299.99,
     comparePrice: 399.99,
-    image: '/api/placeholder/300/300',
+    image: '/images/products/headphones.svg',
     rating: 4.8,
     reviews: 124,
     badge: 'Best Seller',
@@ -21,31 +21,31 @@ const featuredProducts = [
     id: '2',
     name: 'Smart Fitness Watch',
     price: 199.99,
-    comparePrice: null,
-    image: '/api/placeholder/300/300',
+    comparePrice: 249.99,
+    image: '/images/products/watch.svg',
     rating: 4.6,
     reviews: 89,
     badge: 'New',
   },
   {
     id: '3',
-    name: 'Wireless Charging Pad',
-    price: 49.99,
-    comparePrice: 69.99,
-    image: '/api/placeholder/300/300',
-    rating: 4.7,
-    reviews: 203,
-    badge: 'Sale',
+    name: 'Gaming Laptop',
+    price: 1299.99,
+    comparePrice: 1499.99,
+    image: '/images/products/laptop.svg',
+    rating: 4.9,
+    reviews: 78,
+    badge: 'Best Seller',
   },
   {
     id: '4',
-    name: 'Bluetooth Speaker',
-    price: 79.99,
-    comparePrice: null,
-    image: '/api/placeholder/300/300',
-    rating: 4.5,
-    reviews: 156,
-    badge: null,
+    name: 'Smartphone Pro',
+    price: 899.99,
+    comparePrice: 999.99,
+    image: '/images/products/phone.svg',
+    rating: 4.7,
+    reviews: 92,
+    badge: 'Sale',
   },
 ];
 
@@ -62,16 +62,18 @@ export function FeaturedProducts() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {featuredProducts.map((product) => (
-            <Card key={product.id} className="group hover:shadow-lg transition-all duration-300">
+            <Card key={product.id} className="group hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 bg-gray-900 border-gray-700 hover:border-gray-600">
               <CardHeader className="p-0">
                 <div className="relative overflow-hidden rounded-t-lg">
-                  <div className="aspect-square bg-muted flex items-center justify-center">
-                    <div className="text-center space-y-2">
-                      <div className="w-24 h-24 mx-auto bg-primary/10 rounded-lg flex items-center justify-center">
-                        <span className="text-2xl">📱</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground">Product Image</p>
-                    </div>
+                  <div className="aspect-square bg-gray-800 flex items-center justify-center">
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      className="w-full h-full object-contain p-4 hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        e.currentTarget.src = '/images/products/placeholder.svg';
+                      }}
+                    />
                   </div>
                   
                   {product.badge && (

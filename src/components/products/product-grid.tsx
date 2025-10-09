@@ -7,14 +7,14 @@ import { Badge } from '@/components/ui/badge';
 import { Heart, ShoppingCart, Star } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 
-// Mock data - replace with actual data fetching
+// Mock data with actual product images
 const products = [
   {
     id: '1',
     name: 'Premium Wireless Headphones',
     price: 299.99,
     comparePrice: 399.99,
-    image: '/api/placeholder/300/300',
+    image: '/images/products/headphones.svg',
     rating: 4.8,
     reviews: 124,
     badge: 'Best Seller',
@@ -25,8 +25,8 @@ const products = [
     id: '2',
     name: 'Smart Fitness Watch',
     price: 199.99,
-    comparePrice: null,
-    image: '/api/placeholder/300/300',
+    comparePrice: 249.99,
+    image: '/images/products/watch.svg',
     rating: 4.6,
     reviews: 89,
     badge: 'New',
@@ -38,19 +38,19 @@ const products = [
     name: 'Wireless Charging Pad',
     price: 49.99,
     comparePrice: 69.99,
-    image: '/api/placeholder/300/300',
+    image: '/images/products/placeholder.svg',
     rating: 4.7,
     reviews: 203,
     badge: 'Sale',
     category: 'Electronics',
-    inStock: false,
+    inStock: true,
   },
   {
     id: '4',
     name: 'Bluetooth Speaker',
     price: 79.99,
-    comparePrice: null,
-    image: '/api/placeholder/300/300',
+    comparePrice: 99.99,
+    image: '/images/products/speaker.svg',
     rating: 4.5,
     reviews: 156,
     badge: null,
@@ -59,10 +59,10 @@ const products = [
   },
   {
     id: '5',
-    name: 'Gaming Mechanical Keyboard',
-    price: 149.99,
-    comparePrice: 199.99,
-    image: '/api/placeholder/300/300',
+    name: 'Gaming Laptop',
+    price: 1299.99,
+    comparePrice: 1499.99,
+    image: '/images/products/laptop.svg',
     rating: 4.9,
     reviews: 78,
     badge: 'Best Seller',
@@ -71,10 +71,10 @@ const products = [
   },
   {
     id: '6',
-    name: '4K Ultra HD Monitor',
-    price: 399.99,
-    comparePrice: 499.99,
-    image: '/api/placeholder/300/300',
+    name: 'Smartphone Pro',
+    price: 899.99,
+    comparePrice: 999.99,
+    image: '/images/products/phone.svg',
     rating: 4.7,
     reviews: 92,
     badge: 'Sale',
@@ -83,10 +83,10 @@ const products = [
   },
   {
     id: '7',
-    name: 'Wireless Gaming Mouse',
-    price: 89.99,
-    comparePrice: null,
-    image: '/api/placeholder/300/300',
+    name: 'Digital Camera',
+    price: 599.99,
+    comparePrice: 699.99,
+    image: '/images/products/camera.svg',
     rating: 4.6,
     reviews: 134,
     badge: null,
@@ -95,13 +95,25 @@ const products = [
   },
   {
     id: '8',
-    name: 'Noise Cancelling Earbuds',
-    price: 179.99,
-    comparePrice: 229.99,
-    image: '/api/placeholder/300/300',
+    name: 'Tablet Pro',
+    price: 399.99,
+    comparePrice: 499.99,
+    image: '/images/products/tablet.svg',
     rating: 4.8,
     reviews: 167,
     badge: 'New',
+    category: 'Electronics',
+    inStock: true,
+  },
+  {
+    id: '9',
+    name: 'Mechanical Keyboard',
+    price: 149.99,
+    comparePrice: 179.99,
+    image: '/images/products/keyboard.svg',
+    rating: 4.7,
+    reviews: 98,
+    badge: null,
     category: 'Electronics',
     inStock: true,
   },
@@ -154,16 +166,18 @@ export function ProductGrid() {
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {sortedProducts.map((product) => (
-          <Card key={product.id} className="group hover:shadow-lg transition-all duration-300">
+          <Card key={product.id} className="group hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 bg-gray-900 border-gray-700 hover:border-gray-600">
             <CardHeader className="p-0">
               <div className="relative overflow-hidden rounded-t-lg">
-                <div className="aspect-square bg-muted flex items-center justify-center">
-                  <div className="text-center space-y-2">
-                    <div className="w-24 h-24 mx-auto bg-primary/10 rounded-lg flex items-center justify-center">
-                      <span className="text-2xl">📱</span>
-                    </div>
-                    <p className="text-sm text-muted-foreground">Product Image</p>
-                  </div>
+                <div className="aspect-square bg-gray-800 flex items-center justify-center">
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-full h-full object-contain p-4 hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      e.currentTarget.src = '/images/products/placeholder.svg';
+                    }}
+                  />
                 </div>
                 
                 {product.badge && (
