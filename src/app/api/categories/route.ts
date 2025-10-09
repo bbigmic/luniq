@@ -16,25 +16,39 @@ export async function GET() {
 
     const totalProducts = totalProductsResult[0]?.count || 0;
 
-    // Fetch categories with product counts using subquery
-    const categoriesData = await db
+    // First, let's get all categories
+    const allCategories = await db
       .select({
         id: categories.id,
         name: categories.name,
         slug: categories.slug,
         description: categories.description,
-        productCount: sql<number>`(
-          SELECT COUNT(*) 
-          FROM ${products} 
-          WHERE ${products.categoryId} = ${categories.id} 
-          AND ${products.status} = 'active'
-        )`,
       })
       .from(categories)
       .orderBy(categories.name);
 
+    // Then get product counts for each category using a separate query
+    const categoriesWithCounts = await Promise.all(
+      allCategories.map(async (category) => {
+        const productCountResult = await db
+          .select({ count: sql<number>`COUNT(*)` })
+          .from(products)
+          .where(
+            and(
+              eq(products.categoryId, category.id),
+              eq(products.status, 'active')
+            )
+          );
+
+        return {
+          ...category,
+          productCount: productCountResult[0]?.count || 0,
+        };
+      })
+    );
+
     return NextResponse.json({ 
-      categories: categoriesData,
+      categories: categoriesWithCounts,
       totalProducts 
     });
   } catch (error) {
