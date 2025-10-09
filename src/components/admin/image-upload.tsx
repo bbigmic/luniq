@@ -158,11 +158,16 @@ export function ImageUpload({ images, onImagesChange, maxImages = 5 }: ImageUplo
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   e.preventDefault();
-                  handleManualAdd(e as React.ChangeEvent<HTMLInputElement>);
+                  handleManualAdd(e.target as HTMLInputElement);
                 }
               }}
             />
-            <Button type="button" onClick={(e) => handleManualAdd(e as any)}>
+            <Button type="button" onClick={() => {
+              const input = document.getElementById('imageUrl') as HTMLInputElement;
+              if (input) {
+                handleManualAdd(input);
+              }
+            }}>
               Add URL
             </Button>
           </div>
