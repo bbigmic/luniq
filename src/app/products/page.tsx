@@ -1,12 +1,14 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { Suspense, useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { ProductGrid } from '@/components/products/product-grid';
 import { ProductFilters } from '@/components/products/product-filters';
 
-export default function ProductsPage() {
+function ProductsPageContent() {
+  const searchParams = useSearchParams();
   const [filters, setFilters] = useState({
     category: 'all',
     minPrice: 0,
@@ -14,6 +16,23 @@ export default function ProductsPage() {
     inStock: false,
     search: '',
   });
+
+  // Read URL parameters on page load
+  useEffect(() => {
+    const category = searchParams.get('category');
+    const minPrice = searchParams.get('minPrice');
+    const maxPrice = searchParams.get('maxPrice');
+    const inStock = searchParams.get('inStock');
+    const search = searchParams.get('search');
+
+    setFilters({
+      category: category || 'all',
+      minPrice: minPrice ? parseFloat(minPrice) : 0,
+      maxPrice: maxPrice ? parseFloat(maxPrice) : 1000,
+      inStock: inStock === 'true',
+      search: search || '',
+    });
+  }, [searchParams]);
 
   const handleFiltersChange = (newFilters: any) => {
     setFilters(newFilters);
@@ -44,5 +63,13 @@ export default function ProductsPage() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProductsPageContent />
+    </Suspense>
   );
 }
