@@ -66,7 +66,7 @@ export function ProductFilters({ onFiltersChange }: ProductFiltersProps) {
       inStock: filters.inStockOnly || undefined,
       category: categoryFilter,
     });
-  }, [filters, onFiltersChange]);
+  }, [filters]);
 
   const handleFilterChange = (key: string, value: any) => {
     setFilters(prev => ({

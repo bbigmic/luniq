@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -49,7 +49,7 @@ export function ProductGrid({ filters = {} }: ProductGridProps) {
   });
   const { addItem } = useCart();
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams({
@@ -74,11 +74,11 @@ export function ProductGrid({ filters = {} }: ProductGridProps) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [pagination.page, pagination.limit, sortBy, filters]);
 
   useEffect(() => {
     fetchProducts();
-  }, [sortBy, filters, pagination.page]);
+  }, [fetchProducts]);
 
   if (loading) {
     return (

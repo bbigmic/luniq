@@ -3,6 +3,9 @@ import { db } from '@/lib/db';
 import { categories, products } from '@/lib/db/schema';
 import { eq, sql, and } from 'drizzle-orm';
 
+// Force dynamic rendering for this API route
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     // Fetch categories with product counts
