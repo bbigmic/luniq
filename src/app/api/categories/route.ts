@@ -16,21 +16,21 @@ export async function GET() {
 
     const totalProducts = totalProductsResult[0]?.count || 0;
 
-    // Fetch categories with product counts
+    // Fetch categories with product counts using subquery
     const categoriesData = await db
       .select({
         id: categories.id,
         name: categories.name,
         slug: categories.slug,
         description: categories.description,
-        productCount: sql<number>`COUNT(${products.id})`,
+        productCount: sql<number>`(
+          SELECT COUNT(*) 
+          FROM ${products} 
+          WHERE ${products.categoryId} = ${categories.id} 
+          AND ${products.status} = 'active'
+        )`,
       })
       .from(categories)
-      .leftJoin(products, and(
-        eq(products.categoryId, categories.id),
-        eq(products.status, 'active')
-      ))
-      .groupBy(categories.id, categories.name, categories.slug, categories.description)
       .orderBy(categories.name);
 
     return NextResponse.json({ 
