@@ -167,13 +167,13 @@ INSERT INTO categories (name, slug, description) VALUES
 
 -- Sample admin user (password: admin123)
 INSERT INTO users (name, email, password, role) VALUES
-('Admin User', 'admin@example.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2', 'admin');
+('Admin User', 'admin@example.com', '$2a$12$rQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2', 'admin');
 
 -- Sample regular users (password: user123)
 INSERT INTO users (name, email, password, role, phone, address, city, country, zip_code) VALUES
-('John Doe', 'john@example.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2', 'user', '+1-555-0123', '123 Main St', 'New York', 'USA', '10001'),
-('Jane Smith', 'jane@example.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2', 'user', '+1-555-0124', '456 Oak Ave', 'Los Angeles', 'USA', '90210'),
-('Bob Johnson', 'bob@example.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2', 'user', '+1-555-0125', '789 Pine Rd', 'Chicago', 'USA', '60601');
+('John Doe', 'john@example.com', '$2a$12$sQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2', 'user', '+1-555-0123', '123 Main St', 'New York', 'USA', '10001'),
+('Jane Smith', 'jane@example.com', '$2a$12$sQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2', 'user', '+1-555-0124', '456 Oak Ave', 'Los Angeles', 'USA', '90210'),
+('Bob Johnson', 'bob@example.com', '$2a$12$sQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2', 'user', '+1-555-0125', '789 Pine Rd', 'Chicago', 'USA', '60601');
 
 -- Sample products with images
 INSERT INTO products (name, slug, description, short_description, price, compare_price, sku, quantity, category_id, status, featured, images) VALUES

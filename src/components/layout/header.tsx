@@ -49,6 +49,11 @@ export function Header() {
             <Link href="/categories" className="text-sm font-medium hover:text-primary transition-colors">
               Categories
             </Link>
+            {session && (
+              <Link href="/orders" className="text-sm font-medium hover:text-primary transition-colors">
+                Orders
+              </Link>
+            )}
             <Link href="/about" className="text-sm font-medium hover:text-primary transition-colors">
               About
             </Link>
@@ -139,6 +144,11 @@ export function Header() {
               <Link href="/categories" className="text-sm font-medium hover:text-primary transition-colors">
                 Categories
               </Link>
+              {session && (
+                <Link href="/orders" className="text-sm font-medium hover:text-primary transition-colors">
+                  Orders
+                </Link>
+              )}
               <Link href="/about" className="text-sm font-medium hover:text-primary transition-colors">
                 About
               </Link>

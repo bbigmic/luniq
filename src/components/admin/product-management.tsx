@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -16,58 +17,84 @@ import {
   MoreHorizontal
 } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+import { toast } from 'react-hot-toast';
 
 // Mock data - replace with actual data fetching
-const products = [
-  {
-    id: '1',
-    name: 'Premium Wireless Headphones',
-    sku: 'PWH-001',
-    price: 299.99,
-    comparePrice: 399.99,
-    quantity: 50,
-    status: 'active',
-    category: 'Electronics',
-    image: '/api/placeholder/100/100',
-  },
-  {
-    id: '2',
-    name: 'Smart Fitness Watch',
-    sku: 'SFW-002',
-    price: 199.99,
-    comparePrice: null,
-    quantity: 25,
-    status: 'active',
-    category: 'Electronics',
-    image: '/api/placeholder/100/100',
-  },
-  {
-    id: '3',
-    name: 'Wireless Charging Pad',
-    sku: 'WCP-003',
-    price: 49.99,
-    comparePrice: 69.99,
-    quantity: 0,
-    status: 'draft',
-    category: 'Electronics',
-    image: '/api/placeholder/100/100',
-  },
-  {
-    id: '4',
-    name: 'Bluetooth Speaker',
-    sku: 'BS-004',
-    price: 79.99,
-    comparePrice: null,
-    quantity: 15,
-    status: 'active',
-    category: 'Electronics',
-    image: '/api/placeholder/100/100',
-  },
-];
 
 export function ProductManagement() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
+  const [products, setProducts] = useState([
+    {
+      id: '1',
+      name: 'Premium Wireless Headphones',
+      sku: 'PWH-001',
+      price: 299.99,
+      comparePrice: 399.99,
+      quantity: 50,
+      status: 'active',
+      category: 'Electronics',
+      image: '/images/products/headphones.svg',
+    },
+    {
+      id: '2',
+      name: 'Smart Fitness Watch',
+      sku: 'SFW-002',
+      price: 199.99,
+      comparePrice: 249.99,
+      quantity: 25,
+      status: 'active',
+      category: 'Electronics',
+      image: '/images/products/watch.svg',
+    },
+    {
+      id: '3',
+      name: 'Wireless Charging Pad',
+      sku: 'WCP-003',
+      price: 49.99,
+      comparePrice: 69.99,
+      quantity: 30,
+      status: 'active',
+      category: 'Electronics',
+      image: '/images/products/placeholder.svg',
+    },
+    {
+      id: '4',
+      name: 'Bluetooth Speaker',
+      sku: 'BS-004',
+      price: 79.99,
+      comparePrice: 99.99,
+      quantity: 15,
+      status: 'active',
+      category: 'Electronics',
+      image: '/images/products/speaker.svg',
+    },
+    {
+      id: '5',
+      name: 'Gaming Laptop',
+      sku: 'GL-005',
+      price: 1299.99,
+      comparePrice: 1499.99,
+      quantity: 8,
+      status: 'active',
+      category: 'Electronics',
+      image: '/images/products/laptop.svg',
+    },
+  ]);
+
+  const handleDeleteProduct = async (productId: string) => {
+    if (window.confirm('Are you sure you want to delete this product? This action cannot be undone.')) {
+      try {
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        setProducts(prev => prev.filter(product => product.id !== productId));
+        toast.success('Product deleted successfully');
+      } catch (error) {
+        toast.error('Failed to delete product');
+      }
+    }
+  };
 
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -85,10 +112,12 @@ export function ProductManagement() {
             Manage your product catalog
           </p>
         </div>
-        <Button>
-          <Plus className="mr-2 h-4 w-4" />
-          Add Product
-        </Button>
+        <Link href="/admin/products/add">
+          <Button>
+            <Plus className="mr-2 h-4 w-4" />
+            Add Product
+          </Button>
+        </Link>
       </div>
 
       {/* Filters */}
@@ -156,8 +185,12 @@ export function ProductManagement() {
                 className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors"
               >
                 <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 bg-muted rounded-lg flex items-center justify-center">
-                    <Package className="h-8 w-8 text-muted-foreground" />
+                  <div className="w-16 h-16 bg-gray-800 rounded-lg flex items-center justify-center">
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      className="w-full h-full object-contain p-2"
+                    />
                   </div>
                   <div className="space-y-1">
                     <h3 className="font-medium">{product.name}</h3>
@@ -189,16 +222,22 @@ export function ProductManagement() {
                   </div>
                   
                   <div className="flex items-center space-x-2">
-                    <Button variant="ghost" size="icon">
+                    <Button variant="ghost" size="icon" title="View Product">
                       <Eye className="h-4 w-4" />
                     </Button>
-                    <Button variant="ghost" size="icon">
+                    <Button variant="ghost" size="icon" title="Edit Product">
                       <Edit className="h-4 w-4" />
                     </Button>
-                    <Button variant="ghost" size="icon">
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      title="Delete Product"
+                      onClick={() => handleDeleteProduct(product.id)}
+                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                    >
                       <Trash2 className="h-4 w-4" />
                     </Button>
-                    <Button variant="ghost" size="icon">
+                    <Button variant="ghost" size="icon" title="More Options">
                       <MoreHorizontal className="h-4 w-4" />
                     </Button>
                   </div>
