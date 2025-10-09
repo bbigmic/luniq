@@ -25,7 +25,7 @@ export const categories = pgTable('categories', {
   slug: text('slug').notNull().unique(),
   description: text('description'),
   image: text('image'),
-  parentId: uuid('parent_id').references(() => categories.id),
+  parentId: uuid('parent_id'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
@@ -158,12 +158,7 @@ export const usersRelations = relations(users, ({ many }) => ({
   cart: many(cart),
 }));
 
-export const categoriesRelations = relations(categories, ({ one, many }) => ({
-  parent: one(categories, {
-    fields: [categories.parentId],
-    references: [categories.id],
-  }),
-  children: many(categories),
+export const categoriesRelations = relations(categories, ({ many }) => ({
   products: many(products),
 }));
 
@@ -223,3 +218,4 @@ export const cartRelations = relations(cart, ({ one }) => ({
     references: [productVariants.id],
   }),
 }));
+
