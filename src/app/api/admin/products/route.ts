@@ -28,6 +28,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    console.log('Received product creation request:', body);
     
     const {
       name,
@@ -53,11 +54,35 @@ export async function POST(request: NextRequest) {
 
     // Validate required fields
     if (!name || !slug || !description || !price || !sku || !quantity || !categoryId) {
+      console.log('Missing required fields:', { name, slug, description, price, sku, quantity, categoryId });
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: 'Missing required fields', details: { name: !!name, slug: !!slug, description: !!description, price: !!price, sku: !!sku, quantity: !!quantity, categoryId: !!categoryId } },
         { status: 400 }
       );
     }
+
+    console.log('Creating product with data:', {
+      name,
+      slug,
+      description,
+      shortDescription: shortDescription || null,
+      price: price.toString(),
+      comparePrice: comparePrice ? comparePrice.toString() : null,
+      costPrice: costPrice ? costPrice.toString() : null,
+      sku,
+      barcode: barcode || null,
+      quantity,
+      lowStockThreshold: lowStockThreshold || 5,
+      weight: weight || null,
+      dimensions: null,
+      images: images || [],
+      categoryId,
+      status: status || 'active',
+      featured: featured || false,
+      metaTitle: metaTitle || null,
+      metaDescription: metaDescription || null,
+      tags: tags || [],
+    });
 
     // Create the product
     const newProduct = await db
@@ -86,11 +111,12 @@ export async function POST(request: NextRequest) {
       })
       .returning();
 
+    console.log('Product created successfully:', newProduct[0]);
     return NextResponse.json(newProduct[0], { status: 201 });
   } catch (error) {
     console.error('Error creating product:', error);
     return NextResponse.json(
-      { error: 'Failed to create product' },
+      { error: 'Failed to create product', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }

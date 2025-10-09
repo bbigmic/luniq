@@ -101,14 +101,21 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
   }, [filters, onFiltersChange]);
 
   const handleFilterChange = (key: string, value: any) => {
-    setFilters(prev => ({
-      ...prev,
-      [key]: value,
-    }));
+    console.log('Filter change:', key, value);
+    setFilters(prev => {
+      const newFilters = {
+        ...prev,
+        [key]: value,
+      };
+      console.log('New filters state:', newFilters);
+      return newFilters;
+    });
   };
 
-  const handleCategoryChange = (categoryId: string) => {
-    if (categoryId === 'all') {
+  const handleCategoryChange = (categorySlug: string) => {
+    console.log('Category changed:', categorySlug, 'Current categories:', filters.selectedCategories);
+    
+    if (categorySlug === 'all') {
       handleFilterChange('selectedCategories', ['all']);
     } else {
       const currentCategories = filters.selectedCategories.includes('all') 
@@ -116,18 +123,19 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
         : filters.selectedCategories;
       
       let newCategories;
-      if (currentCategories.includes(categoryId)) {
+      if (currentCategories.includes(categorySlug)) {
         // Remove category if already selected
-        newCategories = currentCategories.filter(id => id !== categoryId);
+        newCategories = currentCategories.filter(slug => slug !== categorySlug);
         // If no categories left, select 'all'
         if (newCategories.length === 0) {
           newCategories = ['all'];
         }
       } else {
         // Add category
-        newCategories = [...currentCategories, categoryId];
+        newCategories = [...currentCategories, categorySlug];
       }
       
+      console.log('New categories:', newCategories);
       handleFilterChange('selectedCategories', newCategories);
     }
   };
