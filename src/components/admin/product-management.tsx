@@ -52,11 +52,54 @@ export function ProductManagement() {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/products?limit=1000'); // Get all products
+      const response = await fetch('/api/admin/products');
       if (!response.ok) throw new Error('Failed to fetch products');
       
-      const data = await response.json();
-      setProducts(data.products);
+      const products = await response.json();
+      
+      // Transform the data to match the expected interface
+      const transformedProducts = await Promise.all(
+        products.map(async (product: any) => {
+          // Fetch category name
+          let categoryName = 'Uncategorized';
+          let categorySlug = 'uncategorized';
+          
+          try {
+            const categoriesResponse = await fetch('/api/categories');
+            if (categoriesResponse.ok) {
+              const categoriesData = await categoriesResponse.json();
+              const category = categoriesData.categories.find((cat: any) => cat.id === product.categoryId);
+              if (category) {
+                categoryName = category.name;
+                categorySlug = category.slug;
+              }
+            }
+          } catch (error) {
+            console.error('Error fetching category:', error);
+          }
+          
+          return {
+            id: product.id,
+            name: product.name,
+            slug: product.slug,
+            description: product.description,
+            shortDescription: product.shortDescription,
+            price: product.price,
+            comparePrice: product.comparePrice,
+            sku: product.sku,
+            quantity: product.quantity,
+            status: product.status,
+            featured: product.featured,
+            images: product.images,
+            categoryName,
+            categorySlug,
+            createdAt: product.createdAt,
+            updatedAt: product.updatedAt,
+          };
+        })
+      );
+      
+      setProducts(transformedProducts);
     } catch (error) {
       console.error('Error fetching products:', error);
       toast.error('Failed to load products');
@@ -68,15 +111,21 @@ export function ProductManagement() {
   const handleDeleteProduct = async (productId: string) => {
     if (window.confirm('Are you sure you want to delete this product? This action cannot be undone.')) {
       try {
-        // TODO: Implement actual delete API call
-        // const response = await fetch(`/api/products/${productId}`, { method: 'DELETE' });
-        // if (!response.ok) throw new Error('Failed to delete product');
+        const response = await fetch(`/api/admin/products/${productId}`, { 
+          method: 'DELETE' 
+        });
         
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || 'Failed to delete product');
+        }
+        
+        // Remove from local state
         setProducts(prev => prev.filter(product => product.id !== productId));
         toast.success('Product deleted successfully');
       } catch (error) {
         console.error('Error deleting product:', error);
-        toast.error('Failed to delete product');
+        toast.error(error instanceof Error ? error.message : 'Failed to delete product');
       }
     }
   };
@@ -298,9 +347,11 @@ export function ProductManagement() {
                           <Eye className="h-4 w-4" />
                         </Button>
                       </Link>
-                      <Button variant="ghost" size="sm">
-                        <Edit className="h-4 w-4" />
-                      </Button>
+                      <Link href={`/admin/products/edit/${product.id}`}>
+                        <Button variant="ghost" size="sm">
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                      </Link>
                       <Button 
                         variant="ghost" 
                         size="sm"
