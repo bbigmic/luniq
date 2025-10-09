@@ -15,14 +15,13 @@ export async function GET() {
         name: users.name,
         email: users.email,
         role: users.role,
-        status: users.status,
         createdAt: users.createdAt,
         updatedAt: users.updatedAt,
         orderCount: sql<number>`COUNT(${orders.id})`,
       })
       .from(users)
       .leftJoin(orders, eq(users.id, orders.userId))
-      .groupBy(users.id, users.name, users.email, users.role, users.status, users.createdAt, users.updatedAt)
+      .groupBy(users.id, users.name, users.email, users.role, users.createdAt, users.updatedAt)
       .orderBy(desc(users.createdAt));
 
     return NextResponse.json({ users: usersData });

@@ -24,7 +24,6 @@ interface User {
   name: string;
   email: string;
   role: 'user' | 'admin';
-  status: 'active' | 'inactive';
   createdAt: string;
   updatedAt: string;
   orderCount: number;
@@ -33,7 +32,7 @@ interface User {
 export function UserManagement() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterRole, setFilterRole] = useState('all');
-  const [filterStatus, setFilterStatus] = useState('all');
+  // Remove status filter since users table doesn't have status column
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -60,8 +59,7 @@ export function UserManagement() {
     const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          user.email.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesRole = filterRole === 'all' || user.role === filterRole;
-    const matchesStatus = filterStatus === 'all' || user.status === filterStatus;
-    return matchesSearch && matchesRole && matchesStatus;
+    return matchesSearch && matchesRole;
   });
 
   if (loading) {
@@ -104,16 +102,16 @@ export function UserManagement() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
-              Active Users
+              Regular Users
             </CardTitle>
             <UserCheck className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {users.filter(u => u.status === 'active').length}
+              {users.filter(u => u.role === 'user').length}
             </div>
             <p className="text-xs text-muted-foreground">
-              Currently active
+              Standard users
             </p>
           </CardContent>
         </Card>
@@ -136,16 +134,16 @@ export function UserManagement() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
-              Regular Users
+              Users with Orders
             </CardTitle>
             <User className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {users.filter(u => u.role === 'user').length}
+              {users.filter(u => u.orderCount > 0).length}
             </div>
             <p className="text-xs text-muted-foreground">
-              Standard users
+              Have placed orders
             </p>
           </CardContent>
         </Card>
@@ -178,15 +176,6 @@ export function UserManagement() {
                 <option value="user">User</option>
                 <option value="admin">Admin</option>
               </select>
-              <select
-                value={filterStatus}
-                onChange={(e) => setFilterStatus(e.target.value)}
-                className="px-3 py-2 border border-input bg-background rounded-md text-sm"
-              >
-                <option value="all">All Status</option>
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-              </select>
             </div>
           </div>
         </CardContent>
@@ -207,7 +196,7 @@ export function UserManagement() {
                 <User className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
                 <h3 className="text-lg font-medium mb-2">No users found</h3>
                 <p className="text-muted-foreground">
-                  {searchTerm || filterRole !== 'all' || filterStatus !== 'all'
+                  {searchTerm || filterRole !== 'all'
                     ? 'Try adjusting your search or filters'
                     : 'No users have registered yet'
                   }
@@ -240,8 +229,8 @@ export function UserManagement() {
                   
                   <div className="flex items-center space-x-4">
                     <div className="text-right">
-                      <Badge variant={user.status === 'active' ? 'default' : 'secondary'}>
-                        {user.status}
+                      <Badge variant={user.role === 'admin' ? 'default' : 'secondary'}>
+                        {user.role}
                       </Badge>
                     </div>
                     
