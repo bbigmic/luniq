@@ -55,19 +55,19 @@ export async function GET(request: NextRequest) {
     }
 
     // Build order by clause
-    let orderBy;
+    let orderBy: any[];
     switch (sortBy) {
       case 'price-low':
-        orderBy = asc(products.price);
+        orderBy = [asc(products.price)];
         break;
       case 'price-high':
-        orderBy = desc(products.price);
+        orderBy = [desc(products.price)];
         break;
       case 'name':
-        orderBy = asc(products.name);
+        orderBy = [asc(products.name)];
         break;
       case 'newest':
-        orderBy = desc(products.createdAt);
+        orderBy = [desc(products.createdAt)];
         break;
       case 'featured':
       default:
@@ -98,7 +98,7 @@ export async function GET(request: NextRequest) {
       .from(products)
       .leftJoin(categories, eq(products.categoryId, categories.id))
       .where(and(...whereConditions))
-      .orderBy(orderBy)
+      .orderBy(...orderBy)
       .limit(limit)
       .offset(offset);
 
