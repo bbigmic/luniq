@@ -1,0 +1,10 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#1e293b"/>
+  <path d="M60 40 L140 40 L140 160 L60 160 Z" fill="#374151" stroke="#4b5563" stroke-width="2"/>
+  <path d="M70 50 L130 50 L130 150 L70 150 Z" fill="#1f2937"/>
+  <path d="M80 60 L120 60" stroke="#6b7280" stroke-width="2"/>
+  <path d="M80 80 L120 80" stroke="#6b7280" stroke-width="2"/>
+  <path d="M80 100 L120 100" stroke="#6b7280" stroke-width="2"/>
+  <path d="M80 120 L120 120" stroke="#6b7280" stroke-width="2"/>
+  <text x="100" y="180" text-anchor="middle" fill="#94a3b8" font-family="Arial" font-size="12">Winter Coat</text>
+</svg>

@@ -1,0 +1,8 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#1e293b"/>
+  <path d="M90 40 L110 40 L110 160 L90 160 Z" fill="#92400e" stroke="#78350f" stroke-width="2"/>
+  <path d="M70 60 L130 60 L130 80 L70 80 Z" fill="#374151" stroke="#4b5563" stroke-width="2"/>
+  <path d="M75 65 L125 65 L125 75 L75 75 Z" fill="#1f2937"/>
+  <path d="M85 50 L115 50 L115 70 L85 70 Z" fill="#6b7280"/>
+  <text x="100" y="175" text-anchor="middle" fill="#94a3b8" font-family="Arial" font-size="12">Garden Tools</text>
+</svg>

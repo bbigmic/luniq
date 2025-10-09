@@ -1,0 +1,8 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#1e293b"/>
+  <path d="M70 50 L130 50 L130 160 L70 160 Z" fill="#3b82f6" stroke="#2563eb" stroke-width="2"/>
+  <path d="M60 60 L70 50 L70 70 L60 60 Z" fill="#1d4ed8"/>
+  <path d="M130 50 L140 60 L130 70 L130 50 Z" fill="#1d4ed8"/>
+  <path d="M80 70 L120 70 L120 90 L80 90 Z" fill="#1e40af"/>
+  <text x="100" y="180" text-anchor="middle" fill="#94a3b8" font-family="Arial" font-size="12">T-Shirt</text>
+</svg>

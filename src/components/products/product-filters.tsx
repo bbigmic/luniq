@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
-import { Filter, X, Search } from 'lucide-react';
+import { Filter, X, Search, Loader2 } from 'lucide-react';
 
 interface Category {
   id: string;
@@ -18,70 +18,101 @@ interface Category {
 }
 
 interface ProductFiltersProps {
-  onFiltersChange?: (filters: {
-    category: string;
-    minPrice: number;
-    maxPrice: number;
-    inStock: boolean;
-    search: string;
+  onFiltersChange: (filters: {
+    category?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    inStock?: boolean;
+    search?: string;
   }) => void;
 }
 
 export function ProductFilters({ onFiltersChange }: ProductFiltersProps) {
-  const [filters, setFilters] = useState({
-    category: 'all',
-    minPrice: 0,
-    maxPrice: 1000,
-    inStock: false,
-    search: '',
-  });
-
   const [categories, setCategories] = useState<Category[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loadingCategories, setLoadingCategories] = useState(true);
+  const [filters, setFilters] = useState({
+    search: '',
+    priceRange: [0, 1000],
+    selectedCategories: ['all'],
+    inStockOnly: false,
+  });
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
+        setLoadingCategories(true);
         const response = await fetch('/api/categories');
-        if (response.ok) {
-          const data = await response.json();
-          setCategories([
-            { id: 'all', name: 'All Categories', slug: 'all', description: '', productCount: 0 },
-            ...data.categories
-          ]);
-        }
+        if (!response.ok) throw new Error('Failed to fetch categories');
+        const data = await response.json();
+        setCategories([{ id: 'all', name: 'All Categories', slug: 'all', description: '', productCount: data.categories.reduce((sum: number, cat: Category) => sum + cat.productCount, 0) }, ...data.categories]);
       } catch (error) {
         console.error('Error fetching categories:', error);
       } finally {
-        setLoading(false);
+        setLoadingCategories(false);
       }
     };
-
     fetchCategories();
   }, []);
 
+  useEffect(() => {
+    const categoryFilter = filters.selectedCategories.includes('all')
+      ? undefined
+      : filters.selectedCategories.join(','); // Pass multiple categories as comma-separated string
+
+    onFiltersChange({
+      search: filters.search || undefined,
+      minPrice: filters.priceRange[0],
+      maxPrice: filters.priceRange[1],
+      inStock: filters.inStockOnly || undefined,
+      category: categoryFilter,
+    });
+  }, [filters, onFiltersChange]);
+
   const handleFilterChange = (key: string, value: any) => {
-    const newFilters = { ...filters, [key]: value };
-    setFilters(newFilters);
-    onFiltersChange?.(newFilters);
+    setFilters(prev => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
+  const handleCategoryChange = (categoryId: string) => {
+    if (categoryId === 'all') {
+      handleFilterChange('selectedCategories', ['all']);
+    } else {
+      const currentCategories = filters.selectedCategories.includes('all') 
+        ? [] 
+        : filters.selectedCategories;
+      
+      let newCategories;
+      if (currentCategories.includes(categoryId)) {
+        // Remove category if already selected
+        newCategories = currentCategories.filter(id => id !== categoryId);
+        // If no categories left, select 'all'
+        if (newCategories.length === 0) {
+          newCategories = ['all'];
+        }
+      } else {
+        // Add category
+        newCategories = [...currentCategories, categoryId];
+      }
+      
+      handleFilterChange('selectedCategories', newCategories);
+    }
   };
 
   const clearFilters = () => {
-    const defaultFilters = {
-      category: 'all',
-      minPrice: 0,
-      maxPrice: 1000,
-      inStock: false,
+    setFilters({
       search: '',
-    };
-    setFilters(defaultFilters);
-    onFiltersChange?.(defaultFilters);
+      priceRange: [0, 1000],
+      selectedCategories: ['all'],
+      inStockOnly: false,
+    });
   };
 
   const activeFiltersCount = [
-    filters.category !== 'all',
-    filters.minPrice > 0 || filters.maxPrice < 1000,
-    filters.inStock,
+    !filters.selectedCategories.includes('all'),
+    filters.priceRange[0] > 0 || filters.priceRange[1] < 1000,
+    filters.inStockOnly,
     filters.search.length > 0,
   ].filter(Boolean).length;
 
@@ -129,12 +160,11 @@ export function ProductFilters({ onFiltersChange }: ProductFiltersProps) {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label>${filters.minPrice} - ${filters.maxPrice}</Label>
+            <Label>${filters.priceRange[0]} - ${filters.priceRange[1]}</Label>
             <Slider
-              value={[filters.minPrice, filters.maxPrice]}
+              value={[filters.priceRange[0], filters.priceRange[1]]}
               onValueChange={(value) => {
-                handleFilterChange('minPrice', value[0]);
-                handleFilterChange('maxPrice', value[1]);
+                handleFilterChange('priceRange', value);
               }}
               max={1000}
               min={0}
@@ -151,20 +181,20 @@ export function ProductFilters({ onFiltersChange }: ProductFiltersProps) {
           <CardTitle className="text-lg">Categories</CardTitle>
         </CardHeader>
         <CardContent>
-          {loading ? (
-            <div className="text-center py-4">
-              <p className="text-sm text-muted-foreground">Loading categories...</p>
+          {loadingCategories ? (
+            <div className="flex items-center justify-center py-4">
+              <Loader2 className="h-5 w-5 animate-spin" />
+              <span className="ml-2 text-sm">Loading categories...</span>
             </div>
           ) : (
             <div className="space-y-2">
               {categories.map((category) => (
                 <div key={category.id} className="flex items-center space-x-2">
                   <input
-                    type="radio"
+                    type="checkbox"
                     id={category.id}
-                    name="category"
-                    checked={filters.category === category.id}
-                    onChange={() => handleFilterChange('category', category.id)}
+                    checked={filters.selectedCategories.includes(category.slug)}
+                    onChange={() => handleCategoryChange(category.slug)}
                     className="rounded border-gray-300"
                   />
                   <label 
@@ -193,8 +223,8 @@ export function ProductFilters({ onFiltersChange }: ProductFiltersProps) {
             <input
               type="checkbox"
               id="in-stock"
-              checked={filters.inStock}
-              onChange={(e) => handleFilterChange('inStock', e.target.checked)}
+              checked={filters.inStockOnly}
+              onChange={(e) => handleFilterChange('inStockOnly', e.target.checked)}
               className="rounded border-gray-300"
             />
             <label 

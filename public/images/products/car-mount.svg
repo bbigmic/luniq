@@ -1,0 +1,8 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#1e293b"/>
+  <path d="M80 80 L120 80 L120 120 L80 120 Z" fill="#374151" stroke="#4b5563" stroke-width="2"/>
+  <path d="M85 85 L115 85 L115 115 L85 115 Z" fill="#1f2937"/>
+  <path d="M90 90 L110 90 L110 110 L90 110 Z" fill="#111827"/>
+  <path d="M95 95 L105 95 M95 105 L105 105" stroke="#6b7280" stroke-width="2"/>
+  <text x="100" y="140" text-anchor="middle" fill="#94a3b8" font-family="Arial" font-size="12">Car Mount</text>
+</svg>

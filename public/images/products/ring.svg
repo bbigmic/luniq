@@ -1,0 +1,8 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#1e293b"/>
+  <circle cx="100" cy="100" r="35" fill="#6b7280" stroke="#4b5563" stroke-width="2"/>
+  <circle cx="100" cy="100" r="25" fill="#374151"/>
+  <circle cx="100" cy="100" r="15" fill="#1f2937"/>
+  <circle cx="100" cy="100" r="8" fill="#fbbf24"/>
+  <text x="100" y="150" text-anchor="middle" fill="#94a3b8" font-family="Arial" font-size="12">Silver Ring</text>
+</svg>

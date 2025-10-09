@@ -1,0 +1,9 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#1e293b"/>
+  <circle cx="100" cy="100" r="30" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+  <circle cx="100" cy="100" r="20" fill="#fcd34d" opacity="0.5"/>
+  <circle cx="100" cy="100" r="10" fill="#fbbf24"/>
+  <path d="M100 70 Q100 50 80 50 Q60 50 60 70 Q60 90 80 90 Q100 90 100 70" fill="#fbbf24" stroke="#f59e0b" stroke-width="1"/>
+  <path d="M100 130 Q100 150 80 150 Q60 150 60 130 Q60 110 80 110 Q100 110 100 130" fill="#fbbf24" stroke="#f59e0b" stroke-width="1"/>
+  <text x="100" y="175" text-anchor="middle" fill="#94a3b8" font-family="Arial" font-size="12">Gold Necklace</text>
+</svg>

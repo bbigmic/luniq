@@ -195,32 +195,32 @@ INSERT INTO products (name, slug, description, short_description, price, compare
 ('Webcam HD', 'webcam-hd', 'High-definition webcam perfect for video calls and streaming.', 'HD Webcam', 89.99, 119.99, 'WH-012', 22, (SELECT id FROM categories WHERE slug = 'electronics'), 'active', false, '["/images/products/placeholder.svg"]'),
 
 -- Fashion Category
-('Classic Denim Jacket', 'classic-denim-jacket', 'Timeless denim jacket made from premium cotton. Perfect for casual wear.', 'Premium denim jacket', 89.99, 119.99, 'CDJ-013', 40, (SELECT id FROM categories WHERE slug = 'fashion'), 'active', true, '["/images/products/placeholder.svg"]'),
-('Cotton T-Shirt', 'cotton-t-shirt', 'Soft cotton t-shirt available in multiple colors. Comfortable and stylish.', 'Premium cotton t-shirt', 24.99, 34.99, 'CTS-014', 100, (SELECT id FROM categories WHERE slug = 'fashion'), 'active', false, '["/images/products/placeholder.svg"]'),
-('Running Sneakers', 'running-sneakers', 'Comfortable running shoes with excellent cushioning and support.', 'Athletic running shoes', 129.99, 159.99, 'RS-015', 30, (SELECT id FROM categories WHERE slug = 'fashion'), 'active', false, '["/images/products/placeholder.svg"]'),
-('Leather Handbag', 'leather-handbag', 'Elegant leather handbag perfect for everyday use.', 'Genuine leather handbag', 199.99, 249.99, 'LH-016', 20, (SELECT id FROM categories WHERE slug = 'fashion'), 'active', true, '["/images/products/placeholder.svg"]'),
-('Winter Coat', 'winter-coat', 'Warm winter coat with water-resistant fabric and cozy lining.', 'Insulated winter coat', 149.99, 199.99, 'WC-017', 25, (SELECT id FROM categories WHERE slug = 'fashion'), 'active', false, '["/images/products/placeholder.svg"]'),
+('Classic Denim Jacket', 'classic-denim-jacket', 'Timeless denim jacket made from premium cotton. Perfect for casual wear.', 'Premium denim jacket', 89.99, 119.99, 'CDJ-013', 40, (SELECT id FROM categories WHERE slug = 'fashion'), 'active', true, '["/images/products/denim-jacket.svg"]'),
+('Cotton T-Shirt', 'cotton-t-shirt', 'Soft cotton t-shirt available in multiple colors. Comfortable and stylish.', 'Premium cotton t-shirt', 24.99, 34.99, 'CTS-014', 100, (SELECT id FROM categories WHERE slug = 'fashion'), 'active', false, '["/images/products/tshirt.svg"]'),
+('Running Sneakers', 'running-sneakers', 'Comfortable running shoes with excellent cushioning and support.', 'Athletic running shoes', 129.99, 159.99, 'RS-015', 30, (SELECT id FROM categories WHERE slug = 'fashion'), 'active', false, '["/images/products/sneakers.svg"]'),
+('Leather Handbag', 'leather-handbag', 'Elegant leather handbag perfect for everyday use.', 'Genuine leather handbag', 199.99, 249.99, 'LH-016', 20, (SELECT id FROM categories WHERE slug = 'fashion'), 'active', true, '["/images/products/handbag.svg"]'),
+('Winter Coat', 'winter-coat', 'Warm winter coat with water-resistant fabric and cozy lining.', 'Insulated winter coat', 149.99, 199.99, 'WC-017', 25, (SELECT id FROM categories WHERE slug = 'fashion'), 'active', false, '["/images/products/winter-coat.svg"]'),
 
 -- Home & Garden Category
-('Smart Coffee Maker', 'smart-coffee-maker', 'WiFi-enabled coffee maker with app control and precise brewing.', 'Smart coffee maker', 199.99, 249.99, 'SCM-018', 15, (SELECT id FROM categories WHERE slug = 'home-garden'), 'active', true, '["/images/products/placeholder.svg"]'),
-('Air Purifier', 'air-purifier', 'HEPA air purifier that removes 99.97% of airborne particles.', 'HEPA air purifier', 179.99, 229.99, 'AP-019', 20, (SELECT id FROM categories WHERE slug = 'home-garden'), 'active', false, '["/images/products/placeholder.svg"]'),
-('Garden Tools Set', 'garden-tools-set', 'Complete set of garden tools for all your gardening needs.', 'Professional garden tools', 79.99, 99.99, 'GTS-020', 35, (SELECT id FROM categories WHERE slug = 'home-garden'), 'active', false, '["/images/products/placeholder.svg"]'),
-('Smart Thermostat', 'smart-thermostat', 'WiFi smart thermostat that learns your schedule and saves energy.', 'Smart home thermostat', 129.99, 159.99, 'ST-021', 18, (SELECT id FROM categories WHERE slug = 'home-garden'), 'active', false, '["/images/products/placeholder.svg"]'),
-('Bed Sheets Set', 'bed-sheets-set', 'Luxury cotton bed sheets in various sizes and colors.', 'Premium cotton bed sheets', 69.99, 89.99, 'BSS-022', 50, (SELECT id FROM categories WHERE slug = 'home-garden'), 'active', false, '["/images/products/placeholder.svg"]'),
+('Smart Coffee Maker', 'smart-coffee-maker', 'WiFi-enabled coffee maker with app control and precise brewing.', 'Smart coffee maker', 199.99, 249.99, 'SCM-018', 15, (SELECT id FROM categories WHERE slug = 'home-garden'), 'active', true, '["/images/products/coffee-maker.svg"]'),
+('Air Purifier', 'air-purifier', 'HEPA air purifier that removes 99.97% of airborne particles.', 'HEPA air purifier', 179.99, 229.99, 'AP-019', 20, (SELECT id FROM categories WHERE slug = 'home-garden'), 'active', false, '["/images/products/air-purifier.svg"]'),
+('Garden Tools Set', 'garden-tools-set', 'Complete set of garden tools for all your gardening needs.', 'Professional garden tools', 79.99, 99.99, 'GTS-020', 35, (SELECT id FROM categories WHERE slug = 'home-garden'), 'active', false, '["/images/products/garden-tools.svg"]'),
+('Smart Thermostat', 'smart-thermostat', 'WiFi smart thermostat that learns your schedule and saves energy.', 'Smart home thermostat', 129.99, 159.99, 'ST-021', 18, (SELECT id FROM categories WHERE slug = 'home-garden'), 'active', false, '["/images/products/thermostat.svg"]'),
+('Bed Sheets Set', 'bed-sheets-set', 'Luxury cotton bed sheets in various sizes and colors.', 'Premium cotton bed sheets', 69.99, 89.99, 'BSS-022', 50, (SELECT id FROM categories WHERE slug = 'home-garden'), 'active', false, '["/images/products/bed-sheets.svg"]'),
 
 -- Sports Category
-('Yoga Mat', 'yoga-mat', 'Non-slip yoga mat with excellent grip and cushioning.', 'Premium yoga mat', 39.99, 54.99, 'YM-023', 60, (SELECT id FROM categories WHERE slug = 'sports'), 'active', true, '["/images/products/placeholder.svg"]'),
-('Dumbbell Set', 'dumbbell-set', 'Adjustable dumbbell set for home workouts.', 'Adjustable dumbbells', 149.99, 199.99, 'DS-024', 25, (SELECT id FROM categories WHERE slug = 'sports'), 'active', false, '["/images/products/placeholder.svg"]'),
-('Running Treadmill', 'running-treadmill', 'Foldable treadmill with incline and heart rate monitoring.', 'Home treadmill', 599.99, 799.99, 'RT-025', 8, (SELECT id FROM categories WHERE slug = 'sports'), 'active', false, '["/images/products/placeholder.svg"]'),
-('Basketball', 'basketball', 'Official size basketball with excellent grip and durability.', 'Professional basketball', 29.99, 39.99, 'BB-026', 45, (SELECT id FROM categories WHERE slug = 'sports'), 'active', false, '["/images/products/placeholder.svg"]'),
-('Swimming Goggles', 'swimming-goggles', 'Anti-fog swimming goggles with UV protection.', 'Competition swimming goggles', 24.99, 34.99, 'SG-027', 70, (SELECT id FROM categories WHERE slug = 'sports'), 'active', false, '["/images/products/placeholder.svg"]'),
+('Yoga Mat', 'yoga-mat', 'Non-slip yoga mat with excellent grip and cushioning.', 'Premium yoga mat', 39.99, 54.99, 'YM-023', 60, (SELECT id FROM categories WHERE slug = 'sports'), 'active', true, '["/images/products/yoga-mat.svg"]'),
+('Dumbbell Set', 'dumbbell-set', 'Adjustable dumbbell set for home workouts.', 'Adjustable dumbbells', 149.99, 199.99, 'DS-024', 25, (SELECT id FROM categories WHERE slug = 'sports'), 'active', false, '["/images/products/dumbbells.svg"]'),
+('Running Treadmill', 'running-treadmill', 'Foldable treadmill with incline and heart rate monitoring.', 'Home treadmill', 599.99, 799.99, 'RT-025', 8, (SELECT id FROM categories WHERE slug = 'sports'), 'active', false, '["/images/products/treadmill.svg"]'),
+('Basketball', 'basketball', 'Official size basketball with excellent grip and durability.', 'Professional basketball', 29.99, 39.99, 'BB-026', 45, (SELECT id FROM categories WHERE slug = 'sports'), 'active', false, '["/images/products/basketball.svg"]'),
+('Swimming Goggles', 'swimming-goggles', 'Anti-fog swimming goggles with UV protection.', 'Competition swimming goggles', 24.99, 34.99, 'SG-027', 70, (SELECT id FROM categories WHERE slug = 'sports'), 'active', false, '["/images/products/goggles.svg"]'),
 
 -- Books Category
-('Programming Guide', 'programming-guide', 'Complete guide to modern programming techniques and best practices.', 'Programming fundamentals', 49.99, 69.99, 'PG-028', 80, (SELECT id FROM categories WHERE slug = 'books'), 'active', true, '["/images/products/placeholder.svg"]'),
-('Fiction Novel', 'fiction-novel', 'Bestselling fiction novel with compelling characters and plot.', 'Award-winning fiction', 16.99, 24.99, 'FN-029', 120, (SELECT id FROM categories WHERE slug = 'books'), 'active', false, '["/images/products/placeholder.svg"]'),
-('Cookbook', 'cookbook', 'Beautiful cookbook with recipes from around the world.', 'International cuisine cookbook', 34.99, 44.99, 'CB-030', 90, (SELECT id FROM categories WHERE slug = 'books'), 'active', false, '["/images/products/placeholder.svg"]'),
-('History Book', 'history-book', 'Comprehensive history book covering major world events.', 'World history reference', 42.99, 59.99, 'HB-031', 65, (SELECT id FROM categories WHERE slug = 'books'), 'active', false, '["/images/products/placeholder.svg"]'),
-('Self-Help Book', 'self-help-book', 'Motivational self-help book for personal development.', 'Personal growth guide', 19.99, 29.99, 'SHB-032', 110, (SELECT id FROM categories WHERE slug = 'books'), 'active', false, '["/images/products/placeholder.svg"]'),
+('Programming Guide', 'programming-guide', 'Complete guide to modern programming techniques and best practices.', 'Programming fundamentals', 49.99, 69.99, 'PG-028', 80, (SELECT id FROM categories WHERE slug = 'books'), 'active', true, '["/images/products/book.svg"]'),
+('Fiction Novel', 'fiction-novel', 'Bestselling fiction novel with compelling characters and plot.', 'Award-winning fiction', 16.99, 24.99, 'FN-029', 120, (SELECT id FROM categories WHERE slug = 'books'), 'active', false, '["/images/products/book.svg"]'),
+('Cookbook', 'cookbook', 'Beautiful cookbook with recipes from around the world.', 'International cuisine cookbook', 34.99, 44.99, 'CB-030', 90, (SELECT id FROM categories WHERE slug = 'books'), 'active', false, '["/images/products/book.svg"]'),
+('History Book', 'history-book', 'Comprehensive history book covering major world events.', 'World history reference', 42.99, 59.99, 'HB-031', 65, (SELECT id FROM categories WHERE slug = 'books'), 'active', false, '["/images/products/book.svg"]'),
+('Self-Help Book', 'self-help-book', 'Motivational self-help book for personal development.', 'Personal growth guide', 19.99, 29.99, 'SHB-032', 110, (SELECT id FROM categories WHERE slug = 'books'), 'active', false, '["/images/products/book.svg"]'),
 
 -- Beauty Category
 ('Skincare Set', 'skincare-set', 'Complete skincare routine with cleanser, toner, and moisturizer.', 'Anti-aging skincare set', 89.99, 119.99, 'SS-033', 40, (SELECT id FROM categories WHERE slug = 'beauty'), 'active', true, '["/images/products/placeholder.svg"]'),
@@ -230,9 +230,9 @@ INSERT INTO products (name, slug, description, short_description, price, compare
 ('Face Mask Set', 'face-mask-set', 'Hydrating face mask set for all skin types.', 'Hydrating face masks', 24.99, 34.99, 'FMS-037', 75, (SELECT id FROM categories WHERE slug = 'beauty'), 'active', false, '["/images/products/placeholder.svg"]'),
 
 -- Automotive Category
-('Car Phone Mount', 'car-phone-mount', 'Magnetic phone mount for car dashboard with strong grip.', 'Dashboard phone holder', 19.99, 29.99, 'CPM-038', 100, (SELECT id FROM categories WHERE slug = 'automotive'), 'active', false, '["/images/products/placeholder.svg"]'),
-('Car Charger', 'car-charger', 'Fast charging car charger with multiple USB ports.', 'USB car charger', 24.99, 34.99, 'CC-039', 85, (SELECT id FROM categories WHERE slug = 'automotive'), 'active', false, '["/images/products/placeholder.svg"]'),
-('Car Floor Mats', 'car-floor-mats', 'All-weather car floor mats with custom fit.', 'All-weather floor mats', 49.99, 69.99, 'CFM-040', 60, (SELECT id FROM categories WHERE slug = 'automotive'), 'active', false, '["/images/products/placeholder.svg"]'),
+('Car Phone Mount', 'car-phone-mount', 'Magnetic phone mount for car dashboard with strong grip.', 'Dashboard phone holder', 19.99, 29.99, 'CPM-038', 100, (SELECT id FROM categories WHERE slug = 'automotive'), 'active', false, '["/images/products/car-mount.svg"]'),
+('Car Charger', 'car-charger', 'Fast charging car charger with multiple USB ports.', 'USB car charger', 24.99, 34.99, 'CC-039', 85, (SELECT id FROM categories WHERE slug = 'automotive'), 'active', false, '["/images/products/car-charger.svg"]'),
+('Car Floor Mats', 'car-floor-mats', 'All-weather car floor mats with custom fit.', 'All-weather floor mats', 49.99, 69.99, 'CFM-040', 60, (SELECT id FROM categories WHERE slug = 'automotive'), 'active', false, '["/images/products/floor-mats.svg"]'),
 
 -- Health Category
 ('Blood Pressure Monitor', 'blood-pressure-monitor', 'Digital blood pressure monitor with large display.', 'Digital BP monitor', 59.99, 79.99, 'BPM-041', 45, (SELECT id FROM categories WHERE slug = 'health'), 'active', false, '["/images/products/placeholder.svg"]'),
@@ -245,9 +245,9 @@ INSERT INTO products (name, slug, description, short_description, price, compare
 ('Board Game', 'board-game', 'Classic board game for family entertainment.', 'Strategy board game', 34.99, 44.99, 'BG-046', 55, (SELECT id FROM categories WHERE slug = 'toys'), 'active', false, '["/images/products/placeholder.svg"]'),
 
 -- Jewelry Category
-('Gold Necklace', 'gold-necklace', 'Elegant gold necklace with pendant.', '14K gold necklace', 299.99, 399.99, 'GN-047', 20, (SELECT id FROM categories WHERE slug = 'jewelry'), 'active', true, '["/images/products/placeholder.svg"]'),
-('Silver Ring', 'silver-ring', 'Sterling silver ring with gemstone.', 'Sterling silver ring', 89.99, 119.99, 'SR-048', 35, (SELECT id FROM categories WHERE slug = 'jewelry'), 'active', false, '["/images/products/placeholder.svg"]'),
-('Diamond Earrings', 'diamond-earrings', 'Beautiful diamond earrings for special occasions.', 'Diamond stud earrings', 499.99, 699.99, 'DE-049', 15, (SELECT id FROM categories WHERE slug = 'jewelry'), 'active', false, '["/images/products/placeholder.svg"]');
+('Gold Necklace', 'gold-necklace', 'Elegant gold necklace with pendant.', '14K gold necklace', 299.99, 399.99, 'GN-047', 20, (SELECT id FROM categories WHERE slug = 'jewelry'), 'active', true, '["/images/products/necklace.svg"]'),
+('Silver Ring', 'silver-ring', 'Sterling silver ring with gemstone.', 'Sterling silver ring', 89.99, 119.99, 'SR-048', 35, (SELECT id FROM categories WHERE slug = 'jewelry'), 'active', false, '["/images/products/ring.svg"]'),
+('Diamond Earrings', 'diamond-earrings', 'Beautiful diamond earrings for special occasions.', 'Diamond stud earrings', 499.99, 699.99, 'DE-049', 15, (SELECT id FROM categories WHERE slug = 'jewelry'), 'active', false, '["/images/products/earrings.svg"]');
 
 -- Sample orders
 INSERT INTO orders (order_number, user_id, status, payment_status, payment_method, subtotal, tax, shipping, total, currency, shipping_address, created_at) VALUES

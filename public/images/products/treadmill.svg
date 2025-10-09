@@ -1,0 +1,9 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#1e293b"/>
+  <path d="M50 120 L150 120 L150 160 L50 160 Z" fill="#374151" stroke="#4b5563" stroke-width="2"/>
+  <path d="M60 130 L140 130 L140 150 L60 150 Z" fill="#1f2937"/>
+  <path d="M70 135 L130 135 L130 145 L70 145 Z" fill="#111827"/>
+  <path d="M80 140 L120 140" stroke="#6b7280" stroke-width="2"/>
+  <path d="M80 145 L120 145" stroke="#6b7280" stroke-width="2"/>
+  <text x="100" y="175" text-anchor="middle" fill="#94a3b8" font-family="Arial" font-size="12">Treadmill</text>
+</svg>

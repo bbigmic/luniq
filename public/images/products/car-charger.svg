@@ -1,0 +1,8 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#1e293b"/>
+  <path d="M80 70 L120 70 L120 130 L80 130 Z" fill="#374151" stroke="#4b5563" stroke-width="2"/>
+  <path d="M85 75 L115 75 L115 125 L85 125 Z" fill="#1f2937"/>
+  <path d="M90 80 L110 80 L110 120 L90 120 Z" fill="#111827"/>
+  <path d="M95 85 L105 85 M95 95 L105 95 M95 105 L105 105 M95 115 L105 115" stroke="#6b7280" stroke-width="1"/>
+  <text x="100" y="150" text-anchor="middle" fill="#94a3b8" font-family="Arial" font-size="12">Car Charger</text>
+</svg>

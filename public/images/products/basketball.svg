@@ -1,0 +1,8 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#1e293b"/>
+  <circle cx="100" cy="100" r="40" fill="#ea580c" stroke="#dc2626" stroke-width="2"/>
+  <path d="M60 100 Q100 60 140 100 Q100 140 60 100" fill="#dc2626" opacity="0.3"/>
+  <path d="M100 60 Q140 100 100 140 Q60 100 100 60" fill="#dc2626" opacity="0.3"/>
+  <path d="M80 80 L120 120 M120 80 L80 120" stroke="#dc2626" stroke-width="2"/>
+  <text x="100" y="160" text-anchor="middle" fill="#94a3b8" font-family="Arial" font-size="12">Basketball</text>
+</svg>

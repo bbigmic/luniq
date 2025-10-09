@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { products, categories } from '@/lib/db/schema';
-import { eq, and, gte, lte, like, or, desc, asc } from 'drizzle-orm';
+import { eq, and, gte, lte, like, or, desc, asc, inArray } from 'drizzle-orm';
 
 export async function GET(request: NextRequest) {
   try {
@@ -21,16 +21,18 @@ export async function GET(request: NextRequest) {
     // Build where conditions
     let whereConditions = [eq(products.status, 'active')];
 
-    if (category && category !== 'all') {
-      const categoryData = await db.select({ id: categories.id })
-        .from(categories)
-        .where(eq(categories.slug, category))
-        .limit(1);
-      
-      if (categoryData.length > 0) {
-        whereConditions.push(eq(products.categoryId, categoryData[0].id));
+      if (category && category !== 'all') {
+        // Handle multiple categories (comma-separated)
+        const categorySlugs = category.split(',').map(s => s.trim());
+        const categoryData = await db.select({ id: categories.id })
+          .from(categories)
+          .where(inArray(categories.slug, categorySlugs));
+        
+        if (categoryData.length > 0) {
+          const categoryIds = categoryData.map(cat => cat.id);
+          whereConditions.push(inArray(products.categoryId, categoryIds));
+        }
       }
-    }
 
     if (minPrice) {
       whereConditions.push(gte(products.price, parseFloat(minPrice).toString()));
