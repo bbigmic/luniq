@@ -2,8 +2,9 @@
 
 import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Upload, X, Image as ImageIcon, Loader2 } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Upload, X, Image as ImageIcon, Loader2, Plus } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 interface ImageUploadProps {
@@ -38,14 +39,13 @@ export function ImageUpload({ images, onImagesChange, maxImages = 5 }: ImageUplo
           throw new Error(`${file.name} is too large. Maximum size is 5MB`);
         }
 
-        // For now, we'll create a URL for the image
-        // In a real app, you'd upload to a cloud service like Cloudinary, AWS S3, etc.
-        const imageUrl = URL.createObjectURL(file);
-        
-        // Simulate upload delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        return imageUrl;
+        // Convert to base64 for storage
+        return new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
       });
 
       const uploadedImages = await Promise.all(uploadPromises);
@@ -59,118 +59,122 @@ export function ImageUpload({ images, onImagesChange, maxImages = 5 }: ImageUplo
     }
   };
 
-  const removeImage = (index: number) => {
+  const handleRemoveImage = (index: number) => {
     const newImages = images.filter((_, i) => i !== index);
     onImagesChange(newImages);
   };
 
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    handleFileUpload(e.dataTransfer.files);
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-  };
-
-  const openFileDialog = () => {
-    fileInputRef.current?.click();
+  const handleManualAdd = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const url = e.target.value;
+    if (url && images.length < maxImages) {
+      onImagesChange([...images, url]);
+      e.target.value = ''; // Clear input
+    } else if (images.length >= maxImages) {
+      toast.error(`You can only add up to ${maxImages} images`);
+    }
   };
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-medium">Product Images</h3>
-        <span className="text-sm text-muted-foreground">
-          {images.length}/{maxImages} images
-        </span>
-      </div>
-
-      {/* Upload Area */}
-      <div
-        className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors cursor-pointer"
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-        onClick={openFileDialog}
-      >
-        <input
-          ref={fileInputRef}
-          type="file"
-          multiple
-          accept="image/*"
-          onChange={(e) => handleFileUpload(e.target.files)}
-          className="hidden"
-        />
-        
-        {uploading ? (
-          <div className="flex flex-col items-center space-y-2">
-            <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            <p className="text-sm text-muted-foreground">Uploading images...</p>
-          </div>
-        ) : (
-          <div className="flex flex-col items-center space-y-2">
-            <Upload className="h-8 w-8 text-muted-foreground" />
-            <div>
-              <p className="text-sm font-medium">Click to upload or drag and drop</p>
-              <p className="text-xs text-muted-foreground">
-                PNG, JPG, GIF up to 5MB each
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Image Preview Grid */}
+      {/* Existing Images */}
       {images.length > 0 && (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {images.map((image, index) => (
-            <Card key={index} className="relative group">
-              <CardContent className="p-2">
-                <div className="aspect-square relative overflow-hidden rounded-md bg-gray-100">
-                  <img
-                    src={image}
-                    alt={`Product image ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => removeImage(index)}
-                    className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
-                    <X className="h-3 w-3" />
-                  </button>
-                  {index === 0 && (
-                    <div className="absolute bottom-1 left-1">
-                      <span className="bg-primary text-primary-foreground text-xs px-1 py-0.5 rounded">
-                        Main
-                      </span>
-                    </div>
-                  )}
+            <div key={index} className="relative group aspect-square rounded-md overflow-hidden border">
+              <img src={image} alt={`Product image ${index + 1}`} className="w-full h-full object-cover" />
+              <Button
+                type="button"
+                variant="destructive"
+                size="icon"
+                className="absolute top-1 right-1 h-6 w-6 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                onClick={() => handleRemoveImage(index)}
+              >
+                <X className="h-3 w-3" />
+              </Button>
+              {index === 0 && (
+                <div className="absolute bottom-1 left-1 bg-primary/80 text-primary-foreground text-xs px-2 py-1 rounded">
+                  Main
                 </div>
-              </CardContent>
-            </Card>
+              )}
+            </div>
           ))}
         </div>
       )}
 
-      {/* Image Management Tips */}
-      {images.length === 0 && (
-        <Card className="bg-blue-50 border-blue-200">
-          <CardContent className="p-4">
-            <div className="flex items-start space-x-3">
-              <ImageIcon className="h-5 w-5 text-blue-600 mt-0.5" />
-              <div className="text-sm">
-                <p className="font-medium text-blue-900">Image Tips</p>
-                <ul className="mt-1 text-blue-700 space-y-1">
-                  <li>• First image will be used as the main product image</li>
-                  <li>• Use high-quality images with good lighting</li>
-                  <li>• Recommended size: 800x800px or larger</li>
-                  <li>• Supported formats: JPG, PNG, GIF</li>
-                </ul>
-              </div>
+      {/* File Upload */}
+      {images.length < maxImages && (
+        <div className="border-2 border-dashed border-muted-foreground/20 rounded-lg p-6">
+          <div className="text-center space-y-4">
+            <Upload className="mx-auto h-12 w-12 text-muted-foreground" />
+            <div>
+              <Label htmlFor="file-upload" className="cursor-pointer">
+                <span className="text-sm font-medium text-primary hover:text-primary/80">
+                  Click to upload images
+                </span>
+                <span className="text-xs text-muted-foreground block mt-1">
+                  PNG, JPG, GIF up to 5MB each
+                </span>
+              </Label>
+              <Input
+                ref={fileInputRef}
+                id="file-upload"
+                type="file"
+                accept="image/*"
+                multiple
+                className="hidden"
+                onChange={(e) => handleFileUpload(e.target.files)}
+              />
             </div>
-          </CardContent>
-        </Card>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={uploading}
+            >
+              {uploading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Uploading...
+                </>
+              ) : (
+                <>
+                  <Plus className="mr-2 h-4 w-4" />
+                  Select Images
+                </>
+              )}
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* Manual URL Input */}
+      {images.length < maxImages && (
+        <div className="space-y-2">
+          <Label htmlFor="imageUrl">Or add image URL</Label>
+          <div className="flex gap-2">
+            <Input
+              id="imageUrl"
+              placeholder="https://example.com/image.jpg"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  handleManualAdd(e as React.ChangeEvent<HTMLInputElement>);
+                }
+              }}
+            />
+            <Button type="button" onClick={(e) => handleManualAdd(e as any)}>
+              Add URL
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {images.length === 0 && (
+        <div className="text-center text-muted-foreground py-8">
+          <ImageIcon className="mx-auto h-8 w-8 mb-2" />
+          <p>No images added yet.</p>
+          <p className="text-sm">Upload images or add URLs to showcase your product.</p>
+        </div>
       )}
     </div>
   );
