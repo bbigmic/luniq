@@ -33,11 +33,11 @@ export async function GET(request: NextRequest) {
     }
 
     if (minPrice) {
-      whereConditions.push(gte(products.price, parseFloat(minPrice)));
+      whereConditions.push(gte(products.price, parseFloat(minPrice).toString()));
     }
 
     if (maxPrice) {
-      whereConditions.push(lte(products.price, parseFloat(maxPrice)));
+      whereConditions.push(lte(products.price, parseFloat(maxPrice).toString()));
     }
 
     if (inStock === 'true') {
