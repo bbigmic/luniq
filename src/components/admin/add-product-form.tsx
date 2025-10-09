@@ -58,11 +58,16 @@ export function AddProductForm() {
   const fetchCategories = async () => {
     try {
       setLoadingCategories(true);
+      console.log('Fetching categories...');
       const response = await fetch('/api/categories');
+      console.log('Categories response status:', response.status);
+      
       if (!response.ok) throw new Error('Failed to fetch categories');
       
       const data = await response.json();
+      console.log('Categories data:', data);
       setCategories(data.categories);
+      console.log('Categories loaded:', data.categories?.length || 0);
     } catch (error) {
       console.error('Error fetching categories:', error);
       toast.error('Failed to load categories');
@@ -101,33 +106,57 @@ export function AddProductForm() {
     e.preventDefault();
     setIsSubmitting(true);
 
+    // Prepare the data to send
+    const productData = {
+      ...formData,
+      tags: formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag),
+      quantity: parseInt(formData.quantity),
+      lowStockThreshold: parseInt(formData.lowStockThreshold),
+      weight: formData.weight ? parseFloat(formData.weight) : null,
+      price: parseFloat(formData.price),
+      comparePrice: formData.comparePrice ? parseFloat(formData.comparePrice) : null,
+      costPrice: formData.costPrice ? parseFloat(formData.costPrice) : null,
+    };
+
+    console.log('Form data before submission:', formData);
+    console.log('Processed product data:', productData);
+
+    // Validate required fields on frontend
+    const requiredFields = ['name', 'slug', 'description', 'price', 'sku', 'quantity', 'categoryId'];
+    const missingFields = requiredFields.filter(field => !productData[field as keyof typeof productData]);
+    
+    if (missingFields.length > 0) {
+      console.error('Missing required fields:', missingFields);
+      toast.error(`Missing required fields: ${missingFields.join(', ')}`);
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
+      console.log('Sending request to /api/admin/products');
       const response = await fetch('/api/admin/products', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...formData,
-          tags: formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag),
-          quantity: parseInt(formData.quantity),
-          lowStockThreshold: parseInt(formData.lowStockThreshold),
-          weight: formData.weight ? parseFloat(formData.weight) : null,
-          price: parseFloat(formData.price),
-          comparePrice: formData.comparePrice ? parseFloat(formData.comparePrice) : null,
-          costPrice: formData.costPrice ? parseFloat(formData.costPrice) : null,
-        }),
+        body: JSON.stringify(productData),
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
+
       if (response.ok) {
+        const result = await response.json();
+        console.log('Product created successfully:', result);
         toast.success('Product added successfully!');
         router.push('/admin/products');
       } else {
         const error = await response.json();
-        toast.error(error.error || 'Failed to add product');
+        console.error('API Error:', error);
+        toast.error(error.error || error.details || 'Failed to add product');
       }
     } catch (error) {
-      console.error('Error adding product:', error);
+      console.error('Network/Request Error:', error);
       toast.error('Failed to add product. Please try again.');
     } finally {
       setIsSubmitting(false);
