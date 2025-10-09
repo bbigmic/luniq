@@ -48,7 +48,7 @@ export function AddProductForm() {
     metaTitle: '',
     metaDescription: '',
     tags: '',
-    images: [],
+    images: [] as string[],
   });
 
   useEffect(() => {
