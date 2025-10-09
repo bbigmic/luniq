@@ -184,7 +184,7 @@ INSERT INTO products (name, slug, description, short_description, price, compare
 
 -- Sample orders
 INSERT INTO orders (order_number, user_id, status, payment_status, payment_method, subtotal, tax, shipping, total, currency, shipping_address, created_at) VALUES
-('ORD-2024-001', (SELECT id FROM users WHERE email = 'john@example.com'), 'completed', 'paid', 'credit_card', 299.99, 24.00, 9.99, 333.98, 'USD', '{"firstName": "John", "lastName": "Doe", "address1": "123 Main St", "city": "New York", "state": "NY", "zipCode": "10001", "country": "USA"}', NOW() - INTERVAL '5 days'),
+('ORD-2024-001', (SELECT id FROM users WHERE email = 'john@example.com'), 'delivered', 'paid', 'credit_card', 299.99, 24.00, 9.99, 333.98, 'USD', '{"firstName": "John", "lastName": "Doe", "address1": "123 Main St", "city": "New York", "state": "NY", "zipCode": "10001", "country": "USA"}', NOW() - INTERVAL '5 days'),
 ('ORD-2024-002', (SELECT id FROM users WHERE email = 'jane@example.com'), 'processing', 'paid', 'paypal', 149.99, 12.00, 9.99, 171.98, 'USD', '{"firstName": "Jane", "lastName": "Smith", "address1": "456 Oak Ave", "city": "Los Angeles", "state": "CA", "zipCode": "90210", "country": "USA"}', NOW() - INTERVAL '3 days'),
 ('ORD-2024-003', (SELECT id FROM users WHERE email = 'bob@example.com'), 'pending', 'pending', 'credit_card', 89.99, 7.20, 9.99, 107.18, 'USD', '{"firstName": "Bob", "lastName": "Johnson", "address1": "789 Pine Rd", "city": "Chicago", "state": "IL", "zipCode": "60601", "country": "USA"}', NOW() - INTERVAL '1 day');
 

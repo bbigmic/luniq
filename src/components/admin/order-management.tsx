@@ -25,7 +25,7 @@ const orders = [
     orderNumber: 'ORD-2024-001',
     customer: 'John Doe',
     email: 'john@example.com',
-    status: 'completed',
+    status: 'delivered',
     paymentStatus: 'paid',
     total: 299.99,
     items: 2,
@@ -74,16 +74,18 @@ const statusIcons = {
   pending: Clock,
   processing: Package,
   shipped: Truck,
-  completed: CheckCircle,
+  delivered: CheckCircle,
   cancelled: XCircle,
+  refunded: XCircle,
 };
 
 const statusColors = {
   pending: 'bg-yellow-100 text-yellow-800',
   processing: 'bg-blue-100 text-blue-800',
   shipped: 'bg-purple-100 text-purple-800',
-  completed: 'bg-green-100 text-green-800',
+  delivered: 'bg-green-100 text-green-800',
   cancelled: 'bg-red-100 text-red-800',
+  refunded: 'bg-red-100 text-red-800',
 };
 
 export function OrderManagement() {
@@ -156,11 +158,11 @@ export function OrderManagement() {
                 Shipped
               </Button>
               <Button
-                variant={filterStatus === 'completed' ? 'default' : 'outline'}
+                variant={filterStatus === 'delivered' ? 'default' : 'outline'}
                 size="sm"
-                onClick={() => setFilterStatus('completed')}
+                onClick={() => setFilterStatus('delivered')}
               >
-                Completed
+                Delivered
               </Button>
             </div>
             <div className="flex gap-2">
