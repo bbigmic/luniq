@@ -169,9 +169,28 @@ INSERT INTO categories (name, slug, description) VALUES
 INSERT INTO users (name, email, password, role) VALUES
 ('Admin User', 'admin@example.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2', 'admin');
 
+-- Sample regular users (password: user123)
+INSERT INTO users (name, email, password, role, phone, address, city, country, zip_code) VALUES
+('John Doe', 'john@example.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2', 'user', '+1-555-0123', '123 Main St', 'New York', 'USA', '10001'),
+('Jane Smith', 'jane@example.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2', 'user', '+1-555-0124', '456 Oak Ave', 'Los Angeles', 'USA', '90210'),
+('Bob Johnson', 'bob@example.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2', 'user', '+1-555-0125', '789 Pine Rd', 'Chicago', 'USA', '60601');
+
 -- Sample products
 INSERT INTO products (name, slug, description, short_description, price, compare_price, sku, quantity, category_id, status, featured) VALUES
 ('Premium Wireless Headphones', 'premium-wireless-headphones', 'High-quality wireless headphones with noise cancellation', 'Premium wireless headphones', 299.99, 399.99, 'PWH-001', 50, (SELECT id FROM categories WHERE slug = 'electronics'), 'active', true),
 ('Smart Fitness Watch', 'smart-fitness-watch', 'Advanced fitness tracking with heart rate monitoring', 'Smart fitness watch', 199.99, NULL, 'SFW-002', 25, (SELECT id FROM categories WHERE slug = 'electronics'), 'active', true),
 ('Wireless Charging Pad', 'wireless-charging-pad', 'Fast wireless charging for your devices', 'Wireless charging pad', 49.99, 69.99, 'WCP-003', 0, (SELECT id FROM categories WHERE slug = 'electronics'), 'draft', false),
 ('Bluetooth Speaker', 'bluetooth-speaker', 'Portable speaker with excellent sound quality', 'Bluetooth speaker', 79.99, NULL, 'BS-004', 15, (SELECT id FROM categories WHERE slug = 'electronics'), 'active', false);
+
+-- Sample orders
+INSERT INTO orders (order_number, user_id, status, payment_status, payment_method, subtotal, tax, shipping, total, currency, shipping_address, created_at) VALUES
+('ORD-2024-001', (SELECT id FROM users WHERE email = 'john@example.com'), 'completed', 'paid', 'credit_card', 299.99, 24.00, 9.99, 333.98, 'USD', '{"firstName": "John", "lastName": "Doe", "address1": "123 Main St", "city": "New York", "state": "NY", "zipCode": "10001", "country": "USA"}', NOW() - INTERVAL '5 days'),
+('ORD-2024-002', (SELECT id FROM users WHERE email = 'jane@example.com'), 'processing', 'paid', 'paypal', 149.99, 12.00, 9.99, 171.98, 'USD', '{"firstName": "Jane", "lastName": "Smith", "address1": "456 Oak Ave", "city": "Los Angeles", "state": "CA", "zipCode": "90210", "country": "USA"}', NOW() - INTERVAL '3 days'),
+('ORD-2024-003', (SELECT id FROM users WHERE email = 'bob@example.com'), 'pending', 'pending', 'credit_card', 89.99, 7.20, 9.99, 107.18, 'USD', '{"firstName": "Bob", "lastName": "Johnson", "address1": "789 Pine Rd", "city": "Chicago", "state": "IL", "zipCode": "60601", "country": "USA"}', NOW() - INTERVAL '1 day');
+
+-- Sample order items
+INSERT INTO order_items (order_id, product_id, quantity, price, total) VALUES
+((SELECT id FROM orders WHERE order_number = 'ORD-2024-001'), (SELECT id FROM products WHERE sku = 'PWH-001'), 1, 299.99, 299.99),
+((SELECT id FROM orders WHERE order_number = 'ORD-2024-002'), (SELECT id FROM products WHERE sku = 'SFW-002'), 1, 199.99, 199.99),
+((SELECT id FROM orders WHERE order_number = 'ORD-2024-003'), (SELECT id FROM products WHERE sku = 'WCP-003'), 1, 49.99, 49.99),
+((SELECT id FROM orders WHERE order_number = 'ORD-2024-003'), (SELECT id FROM products WHERE sku = 'BS-004'), 1, 79.99, 79.99);
