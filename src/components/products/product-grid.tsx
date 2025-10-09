@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Heart, ShoppingCart, Star } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+import { useCart } from '@/contexts/cart-context';
 
 // Mock data with actual product images
 const products = [
@@ -121,6 +122,7 @@ const products = [
 
 export function ProductGrid() {
   const [sortBy, setSortBy] = useState('featured');
+  const { addItem } = useCart();
 
   const sortedProducts = [...products].sort((a, b) => {
     switch (sortBy) {
@@ -230,6 +232,13 @@ export function ProductGrid() {
                 className="w-full" 
                 size="sm"
                 disabled={!product.inStock}
+                onClick={() => addItem({
+                  id: product.id,
+                  name: product.name,
+                  price: product.price,
+                  image: product.image,
+                  sku: product.id
+                })}
               >
                 <ShoppingCart className="mr-2 h-4 w-4" />
                 {product.inStock ? 'Add to Cart' : 'Out of Stock'}
