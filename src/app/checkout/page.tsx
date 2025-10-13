@@ -31,7 +31,9 @@ import {
 import toast from 'react-hot-toast';
 import { formatPrice } from '@/lib/utils';
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+const stripePromise = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+  ? loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+  : null;
 
 const cardElementOptions = {
   style: {
@@ -419,6 +421,23 @@ export default function CheckoutPage() {
           </p>
           <Button onClick={() => router.push('/products')}>
             Continue Shopping
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!stripePromise) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <AlertCircle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+          <h2 className="text-xl font-semibold mb-2">Payment system unavailable</h2>
+          <p className="text-muted-foreground mb-4">
+            Payment processing is not configured at this time
+          </p>
+          <Button onClick={() => router.push('/cart')}>
+            Back to Cart
           </Button>
         </div>
       </div>

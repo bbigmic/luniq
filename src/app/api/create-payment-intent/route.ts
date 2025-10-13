@@ -9,6 +9,14 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if Stripe is configured
+    if (!stripe) {
+      return NextResponse.json(
+        { error: 'Payment processing is not configured' },
+        { status: 503 }
+      );
+    }
+
     const body = await request.json();
     const { items, customerInfo } = body;
 
