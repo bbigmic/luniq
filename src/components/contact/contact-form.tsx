@@ -30,13 +30,25 @@ export function ContactForm() {
     setIsSubmitting(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      toast.success('Message sent successfully! We\'ll get back to you soon.');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success(data.message || 'Message sent successfully! We\'ll get back to you within 24 hours.');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        toast.error(data.error || 'Failed to send message. Please try again.');
+      }
     } catch (error) {
-      toast.error('Failed to send message. Please try again.');
+      console.error('Error sending contact form:', error);
+      toast.error('Failed to send message. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
