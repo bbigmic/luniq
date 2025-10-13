@@ -18,40 +18,18 @@ export async function GET(request: NextRequest) {
     // Calculate offset
     const offset = (page - 1) * limit;
 
-    // Build query conditions
-    let query = db.select().from(products);
+    // Build base query
+    let baseQuery = db.select().from(products);
     
-    // Add search filter if provided
-    if (search) {
-      query = query.where(
-        // Note: Drizzle doesn't have built-in ILIKE, so we'll use LIKE for now
-        // You might need to adjust this based on your database
-        // For PostgreSQL, you could use: sql`LOWER(${products.name}) LIKE LOWER(${'%' + search + '%'})`
-        // For now, we'll do client-side filtering for search
-      );
-    }
-
     // Add status filter if provided
     if (status && status !== 'all') {
-      query = query.where(eq(products.status, status));
+      baseQuery = baseQuery.where(eq(products.status, status));
     }
 
-    // Get total count for pagination
-    const totalCountQuery = db.select({ count: sql`count(*)` }).from(products);
-    if (status && status !== 'all') {
-      totalCountQuery.where(eq(products.status, status));
-    }
-    
-    const totalResult = await totalCountQuery;
-    const totalCount = parseInt(totalResult[0]?.count?.toString() || '0');
+    // Get all products first (for search filtering)
+    const allProducts = await baseQuery.orderBy(products.createdAt);
 
-    // Get paginated products
-    const allProducts = await query
-      .orderBy(products.createdAt)
-      .limit(limit)
-      .offset(offset);
-
-    // Apply search filter on the results (client-side for now)
+    // Apply search filter on the results (client-side)
     let filteredProducts = allProducts;
     if (search) {
       filteredProducts = allProducts.filter(product => 
@@ -60,13 +38,19 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    // Get total count after filtering
+    const totalCount = filteredProducts.length;
+
+    // Apply pagination to filtered results
+    const paginatedProducts = filteredProducts.slice(offset, offset + limit);
+
     // Calculate pagination info
     const totalPages = Math.ceil(totalCount / limit);
     const hasNextPage = page < totalPages;
     const hasPrevPage = page > 1;
 
     return NextResponse.json({
-      products: filteredProducts,
+      products: paginatedProducts,
       pagination: {
         page,
         limit,
