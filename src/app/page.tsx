@@ -5,7 +5,6 @@ import { Categories } from '@/components/home/categories';
 import { Newsletter } from '@/components/home/newsletter';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
-import { AuthStatus } from '@/components/debug/auth-status';
 
 // Force dynamic rendering to avoid static generation issues with cart context
 export const dynamic = 'force-dynamic';
@@ -23,7 +22,6 @@ export default function HomePage() {
         <Newsletter />
       </main>
       <Footer />
-      <AuthStatus />
     </div>
   );
 }

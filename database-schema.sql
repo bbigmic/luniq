@@ -261,3 +261,20 @@ INSERT INTO order_items (order_id, product_id, quantity, price, total) VALUES
 ((SELECT id FROM orders WHERE order_number = 'ORD-2024-002'), (SELECT id FROM products WHERE sku = 'SFW-002'), 1, 199.99, 199.99),
 ((SELECT id FROM orders WHERE order_number = 'ORD-2024-003'), (SELECT id FROM products WHERE sku = 'WCP-003'), 1, 49.99, 49.99),
 ((SELECT id FROM orders WHERE order_number = 'ORD-2024-003'), (SELECT id FROM products WHERE sku = 'BS-004'), 1, 79.99, 79.99);
+
+-- Wishlist table
+CREATE TABLE IF NOT EXISTS wishlist (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    product_id UUID NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
+    UNIQUE(user_id, product_id)
+);
+
+-- Sample wishlist items
+INSERT INTO wishlist (user_id, product_id, created_at) VALUES
+((SELECT id FROM users WHERE email = 'john@example.com'), (SELECT id FROM products WHERE sku = 'SFW-002'), NOW() - INTERVAL '2 days'),
+((SELECT id FROM users WHERE email = 'john@example.com'), (SELECT id FROM products WHERE sku = 'WCP-003'), NOW() - INTERVAL '1 day'),
+((SELECT id FROM users WHERE email = 'jane@example.com'), (SELECT id FROM products WHERE sku = 'PWH-001'), NOW() - INTERVAL '3 days'),
+((SELECT id FROM users WHERE email = 'jane@example.com'), (SELECT id FROM products WHERE sku = 'BS-004'), NOW() - INTERVAL '1 day'),
+((SELECT id FROM users WHERE email = 'bob@example.com'), (SELECT id FROM products WHERE sku = 'GN-047'), NOW() - INTERVAL '4 days');
