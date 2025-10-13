@@ -152,6 +152,7 @@ export function ProductGrid({ filters = {} }: ProductGridProps) {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
+                        console.log('Heart clicked for product:', product.id, 'isInWishlist:', isInWishlist(product.id));
                         if (isInWishlist(product.id)) {
                           removeFromWishlist(product.id);
                         } else {

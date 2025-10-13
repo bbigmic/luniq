@@ -102,10 +102,17 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
 
   const fetchWishlist = async () => {
     try {
+      console.log('Fetching wishlist for user:', { hasSession: !!session, userId: session?.user?.id });
       const response = await fetch('/api/wishlist');
+      console.log('Wishlist fetch response status:', response.status);
+      
       if (response.ok) {
         const data = await response.json();
+        console.log('Wishlist data received:', data);
         dispatch({ type: 'LOAD_WISHLIST', payload: data.wishlist || [] });
+      } else {
+        const error = await response.json();
+        console.log('Wishlist fetch error:', error);
       }
     } catch (error) {
       console.error('Error fetching wishlist:', error);
@@ -113,12 +120,16 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
   };
 
   const addItem = async (productId: string) => {
+    console.log('Adding item to wishlist:', { productId, hasSession: !!session, userId: session?.user?.id });
+    
     if (!session?.user?.id) {
+      console.log('No session or user ID - showing sign in message');
       toast.error('Please sign in to add items to your wishlist');
       return;
     }
 
     try {
+      console.log('Making wishlist POST request...');
       const response = await fetch('/api/wishlist', {
         method: 'POST',
         headers: {
@@ -127,14 +138,20 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
         body: JSON.stringify({ productId }),
       });
 
+      console.log('Wishlist response status:', response.status);
+      
       if (response.ok) {
         const data = await response.json();
+        console.log('Wishlist add success:', data);
         dispatch({ type: 'ADD_ITEM', payload: data.item });
         toast.success('Added to wishlist!');
       } else {
         const error = await response.json();
+        console.log('Wishlist add error:', error);
         if (response.status === 409) {
           toast.error('Item already in wishlist');
+        } else if (response.status === 401) {
+          toast.error('Please sign in to add items to your wishlist');
         } else {
           toast.error(error.error || 'Failed to add to wishlist');
         }
@@ -146,11 +163,15 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
   };
 
   const removeItem = async (productId: string) => {
+    console.log('Removing item from wishlist:', { productId, hasSession: !!session, userId: session?.user?.id });
+    
     if (!session?.user?.id) {
+      console.log('No session or user ID for remove operation');
       return;
     }
 
     try {
+      console.log('Making wishlist DELETE request...');
       const response = await fetch('/api/wishlist', {
         method: 'DELETE',
         headers: {
@@ -159,11 +180,14 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
         body: JSON.stringify({ productId }),
       });
 
+      console.log('Wishlist DELETE response status:', response.status);
+      
       if (response.ok) {
         dispatch({ type: 'REMOVE_ITEM', payload: productId });
         toast.success('Removed from wishlist');
       } else {
         const error = await response.json();
+        console.log('Wishlist remove error:', error);
         toast.error(error.error || 'Failed to remove from wishlist');
       }
     } catch (error) {

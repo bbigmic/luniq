@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { wishlist, products } from '@/lib/db/schema';
 import { eq, and } from 'drizzle-orm';
@@ -10,9 +11,16 @@ export const dynamic = 'force-dynamic';
 // GET user's wishlist
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession();
+    console.log('Wishlist GET request received');
+    const session = await getServerSession(authOptions);
+    console.log('Session data:', { 
+      hasSession: !!session, 
+      userId: session?.user?.id, 
+      userEmail: session?.user?.email 
+    });
     
     if (!session?.user?.id) {
+      console.log('Authentication failed - no session or user ID');
       return NextResponse.json(
         { error: 'Authentication required' },
         { status: 401 }
@@ -56,9 +64,16 @@ export async function GET(request: NextRequest) {
 // POST add item to wishlist
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession();
+    console.log('Wishlist POST request received');
+    const session = await getServerSession(authOptions);
+    console.log('Session data:', { 
+      hasSession: !!session, 
+      userId: session?.user?.id, 
+      userEmail: session?.user?.email 
+    });
     
     if (!session?.user?.id) {
+      console.log('Authentication failed - no session or user ID');
       return NextResponse.json(
         { error: 'Authentication required' },
         { status: 401 }
@@ -120,9 +135,16 @@ export async function POST(request: NextRequest) {
 // DELETE remove item from wishlist
 export async function DELETE(request: NextRequest) {
   try {
-    const session = await getServerSession();
+    console.log('Wishlist DELETE request received');
+    const session = await getServerSession(authOptions);
+    console.log('Session data:', { 
+      hasSession: !!session, 
+      userId: session?.user?.id, 
+      userEmail: session?.user?.email 
+    });
     
     if (!session?.user?.id) {
+      console.log('Authentication failed - no session or user ID');
       return NextResponse.json(
         { error: 'Authentication required' },
         { status: 401 }
