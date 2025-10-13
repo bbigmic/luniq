@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Heart, ShoppingCart, Star, Loader2 } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { useCart } from '@/contexts/cart-context';
+import { useWishlist } from '@/contexts/wishlist-context';
 
 interface Product {
   id: string;
@@ -48,6 +49,7 @@ export function ProductGrid({ filters = {} }: ProductGridProps) {
     totalPages: 0,
   });
   const { addItem } = useCart();
+  const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlist();
 
   const fetchProducts = useCallback(async () => {
     try {
@@ -143,8 +145,21 @@ export function ProductGrid({ filters = {} }: ProductGridProps) {
                   )}
 
                   <div className="absolute top-1 sm:top-2 right-1 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Button variant="ghost" size="icon" className="h-6 w-6 sm:h-8 sm:w-8">
-                      <Heart className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      className={`h-6 w-6 sm:h-8 sm:w-8 ${isInWishlist(product.id) ? 'text-red-500 hover:text-red-600' : 'hover:text-red-500'}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (isInWishlist(product.id)) {
+                          removeFromWishlist(product.id);
+                        } else {
+                          addToWishlist(product.id);
+                        }
+                      }}
+                    >
+                      <Heart className={`h-3 w-3 sm:h-4 sm:w-4 ${isInWishlist(product.id) ? 'fill-current' : ''}`} />
                     </Button>
                   </div>
                 </div>

@@ -152,10 +152,19 @@ export const cart = pgTable('cart', {
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
+// Wishlist table
+export const wishlist = pgTable('wishlist', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').references(() => users.id).notNull(),
+  productId: uuid('product_id').references(() => products.id).notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
 // Relations
 export const usersRelations = relations(users, ({ many }) => ({
   orders: many(orders),
   cart: many(cart),
+  wishlist: many(wishlist),
 }));
 
 export const categoriesRelations = relations(categories, ({ many }) => ({
@@ -170,6 +179,7 @@ export const productsRelations = relations(products, ({ one, many }) => ({
   variants: many(productVariants),
   orderItems: many(orderItems),
   cart: many(cart),
+  wishlist: many(wishlist),
 }));
 
 export const productVariantsRelations = relations(productVariants, ({ one, many }) => ({
@@ -216,6 +226,17 @@ export const cartRelations = relations(cart, ({ one }) => ({
   variant: one(productVariants, {
     fields: [cart.variantId],
     references: [productVariants.id],
+  }),
+}));
+
+export const wishlistRelations = relations(wishlist, ({ one }) => ({
+  user: one(users, {
+    fields: [wishlist.userId],
+    references: [users.id],
+  }),
+  product: one(products, {
+    fields: [wishlist.productId],
+    references: [products.id],
   }),
 }));
 

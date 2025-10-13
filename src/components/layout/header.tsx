@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { useCart } from '@/contexts/cart-context';
+import { useWishlist } from '@/contexts/wishlist-context';
 import { 
   ShoppingCart, 
   Search, 
@@ -22,6 +23,7 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { state } = useCart();
+  const { state: wishlistState } = useWishlist();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -78,9 +80,16 @@ export function Header() {
             </Button>
 
             {/* Wishlist */}
-            <Button variant="ghost" size="icon" className="hidden sm:flex h-8 w-8 sm:h-10 sm:w-10">
-              <Heart className="h-4 w-4 sm:h-5 sm:w-5" />
-            </Button>
+            <Link href="/wishlist">
+              <Button variant="ghost" size="icon" className="hidden sm:flex h-8 w-8 sm:h-10 sm:w-10 relative">
+                <Heart className="h-4 w-4 sm:h-5 sm:w-5" />
+                {wishlistState.totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 text-white text-xs flex items-center justify-center">
+                    {wishlistState.totalItems}
+                  </span>
+                )}
+              </Button>
+            </Link>
 
             {/* Cart */}
             <Link href="/cart">
@@ -202,6 +211,16 @@ export function Header() {
               >
                 Contact
               </Link>
+              {session && (
+                <Link 
+                  href="/wishlist" 
+                  className="text-sm font-medium hover:text-primary transition-colors flex items-center space-x-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <Heart className="h-4 w-4" />
+                  <span>Wishlist {wishlistState.totalItems > 0 && `(${wishlistState.totalItems})`}</span>
+                </Link>
+              )}
               
               {/* Mobile User Actions */}
               {session ? (
