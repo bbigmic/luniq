@@ -18,23 +18,27 @@ export async function GET(request: NextRequest) {
     // Calculate offset
     const offset = (page - 1) * limit;
 
-    // Build base query
-    let baseQuery = db.select().from(products);
-    
-    // Add status filter if provided
-    if (status && status !== 'all') {
-      baseQuery = baseQuery.where(eq(products.status, status));
-    }
+    // Get all products first (we'll filter client-side for simplicity)
+    const allProducts = await db
+      .select()
+      .from(products)
+      .orderBy(products.createdAt);
 
-    // Get all products first (for search filtering)
-    const allProducts = await baseQuery.orderBy(products.createdAt);
-
-    // Apply search filter on the results (client-side)
+    // Apply filters on the results (client-side)
     let filteredProducts = allProducts;
+    
+    // Apply search filter
     if (search) {
-      filteredProducts = allProducts.filter(product => 
+      filteredProducts = filteredProducts.filter(product => 
         product.name.toLowerCase().includes(search.toLowerCase()) ||
         product.sku.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+    
+    // Apply status filter
+    if (status && status !== 'all') {
+      filteredProducts = filteredProducts.filter(product => 
+        product.status === status
       );
     }
 
