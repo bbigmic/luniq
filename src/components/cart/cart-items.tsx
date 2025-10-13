@@ -133,9 +133,11 @@ export function CartItems() {
               </div>
             </div>
             
-            <Button className="w-full" size="sm">
-              Proceed to Checkout
-            </Button>
+            <Link href="/checkout">
+              <Button className="w-full" size="sm">
+                Proceed to Checkout
+              </Button>
+            </Link>
             
             <p className="text-xs sm:text-sm text-muted-foreground text-center">
               Secure checkout powered by Stripe
