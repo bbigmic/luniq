@@ -175,16 +175,16 @@ export function AddProductForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
       {/* Basic Information */}
       <Card>
-        <CardHeader>
-          <CardTitle>Basic Information</CardTitle>
+        <CardHeader className="px-3 sm:px-6 pt-3 sm:pt-6">
+          <CardTitle className="text-base sm:text-lg">Basic Information</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6 space-y-3 sm:space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Product Name *</Label>
+              <Label htmlFor="name" className="text-sm sm:text-base">Product Name *</Label>
               <Input
                 id="name"
                 name="name"
@@ -192,10 +192,11 @@ export function AddProductForm() {
                 onChange={handleNameChange}
                 required
                 placeholder="Enter product name"
+                className="text-sm sm:text-base"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="slug">Slug *</Label>
+              <Label htmlFor="slug" className="text-sm sm:text-base">Slug *</Label>
               <Input
                 id="slug"
                 name="slug"
@@ -203,23 +204,25 @@ export function AddProductForm() {
                 onChange={handleInputChange}
                 required
                 placeholder="product-slug"
+                className="text-sm sm:text-base"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="shortDescription">Short Description</Label>
+            <Label htmlFor="shortDescription" className="text-sm sm:text-base">Short Description</Label>
             <Input
               id="shortDescription"
               name="shortDescription"
               value={formData.shortDescription}
               onChange={handleInputChange}
               placeholder="Brief product description"
+              className="text-sm sm:text-base"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="description">Full Description *</Label>
+            <Label htmlFor="description" className="text-sm sm:text-base">Full Description *</Label>
             <Textarea
               id="description"
               name="description"
@@ -228,12 +231,13 @@ export function AddProductForm() {
               required
               placeholder="Detailed product description"
               rows={4}
+              className="text-sm sm:text-base"
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div className="space-y-2">
-              <Label htmlFor="sku">SKU *</Label>
+              <Label htmlFor="sku" className="text-sm sm:text-base">SKU *</Label>
               <Input
                 id="sku"
                 name="sku"
@@ -241,16 +245,18 @@ export function AddProductForm() {
                 onChange={handleInputChange}
                 required
                 placeholder="PROD-001"
+                className="text-sm sm:text-base"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="barcode">Barcode</Label>
+              <Label htmlFor="barcode" className="text-sm sm:text-base">Barcode</Label>
               <Input
                 id="barcode"
                 name="barcode"
                 value={formData.barcode}
                 onChange={handleInputChange}
                 placeholder="1234567890"
+                className="text-sm sm:text-base"
               />
             </div>
           </div>
@@ -259,13 +265,13 @@ export function AddProductForm() {
 
       {/* Pricing */}
       <Card>
-        <CardHeader>
-          <CardTitle>Pricing</CardTitle>
+        <CardHeader className="px-3 sm:px-6 pt-3 sm:pt-6">
+          <CardTitle className="text-base sm:text-lg">Pricing</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6 space-y-3 sm:space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             <div className="space-y-2">
-              <Label htmlFor="price">Price *</Label>
+              <Label htmlFor="price" className="text-sm sm:text-base">Price *</Label>
               <Input
                 id="price"
                 name="price"
@@ -275,10 +281,11 @@ export function AddProductForm() {
                 onChange={handleInputChange}
                 required
                 placeholder="99.99"
+                className="text-sm sm:text-base"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="comparePrice">Compare Price</Label>
+              <Label htmlFor="comparePrice" className="text-sm sm:text-base">Compare Price</Label>
               <Input
                 id="comparePrice"
                 name="comparePrice"
@@ -287,10 +294,11 @@ export function AddProductForm() {
                 value={formData.comparePrice}
                 onChange={handleInputChange}
                 placeholder="149.99"
+                className="text-sm sm:text-base"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="costPrice">Cost Price</Label>
+              <Label htmlFor="costPrice" className="text-sm sm:text-base">Cost Price</Label>
               <Input
                 id="costPrice"
                 name="costPrice"
@@ -299,6 +307,7 @@ export function AddProductForm() {
                 value={formData.costPrice}
                 onChange={handleInputChange}
                 placeholder="49.99"
+                className="text-sm sm:text-base"
               />
             </div>
           </div>
@@ -307,13 +316,13 @@ export function AddProductForm() {
 
       {/* Inventory */}
       <Card>
-        <CardHeader>
-          <CardTitle>Inventory</CardTitle>
+        <CardHeader className="px-3 sm:px-6 pt-3 sm:pt-6">
+          <CardTitle className="text-base sm:text-lg">Inventory</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6 space-y-3 sm:space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             <div className="space-y-2">
-              <Label htmlFor="quantity">Quantity *</Label>
+              <Label htmlFor="quantity" className="text-sm sm:text-base">Quantity *</Label>
               <Input
                 id="quantity"
                 name="quantity"
@@ -322,10 +331,11 @@ export function AddProductForm() {
                 onChange={handleInputChange}
                 required
                 placeholder="100"
+                className="text-sm sm:text-base"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="lowStockThreshold">Low Stock Threshold</Label>
+              <Label htmlFor="lowStockThreshold" className="text-sm sm:text-base">Low Stock Threshold</Label>
               <Input
                 id="lowStockThreshold"
                 name="lowStockThreshold"
@@ -333,10 +343,11 @@ export function AddProductForm() {
                 value={formData.lowStockThreshold}
                 onChange={handleInputChange}
                 placeholder="5"
+                className="text-sm sm:text-base"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="weight">Weight (kg)</Label>
+              <Label htmlFor="weight" className="text-sm sm:text-base">Weight (kg)</Label>
               <Input
                 id="weight"
                 name="weight"
@@ -345,6 +356,7 @@ export function AddProductForm() {
                 value={formData.weight}
                 onChange={handleInputChange}
                 placeholder="1.5"
+                className="text-sm sm:text-base"
               />
             </div>
           </div>
@@ -353,10 +365,10 @@ export function AddProductForm() {
 
       {/* Images */}
       <Card>
-        <CardHeader>
-          <CardTitle>Product Images</CardTitle>
+        <CardHeader className="px-3 sm:px-6 pt-3 sm:pt-6">
+          <CardTitle className="text-base sm:text-lg">Product Images</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
           <ImageUpload
             images={formData.images}
             onImagesChange={(images) => setFormData(prev => ({ ...prev, images }))}
@@ -367,15 +379,15 @@ export function AddProductForm() {
 
       {/* Category & Status */}
       <Card>
-        <CardHeader>
-          <CardTitle>Category & Status</CardTitle>
+        <CardHeader className="px-3 sm:px-6 pt-3 sm:pt-6">
+          <CardTitle className="text-base sm:text-lg">Category & Status</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6 space-y-3 sm:space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div className="space-y-2">
-              <Label htmlFor="categoryId">Category *</Label>
+              <Label htmlFor="categoryId" className="text-sm sm:text-base">Category *</Label>
               {loadingCategories ? (
-                <div className="px-3 py-2 border border-input bg-background rounded-md text-muted-foreground">
+                <div className="px-3 py-2 border border-input bg-background rounded-md text-muted-foreground text-sm">
                   Loading categories...
                 </div>
               ) : (
@@ -397,7 +409,7 @@ export function AddProductForm() {
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="status">Status</Label>
+              <Label htmlFor="status" className="text-sm sm:text-base">Status</Label>
               <select
                 id="status"
                 name="status"
@@ -419,31 +431,32 @@ export function AddProductForm() {
               name="featured"
               checked={formData.featured}
               onChange={handleInputChange}
-              className="rounded border-gray-300"
+              className="rounded border-gray-300 h-4 w-4"
             />
-            <Label htmlFor="featured">Featured Product</Label>
+            <Label htmlFor="featured" className="text-sm sm:text-base">Featured Product</Label>
           </div>
         </CardContent>
       </Card>
 
       {/* SEO */}
       <Card>
-        <CardHeader>
-          <CardTitle>SEO & Metadata</CardTitle>
+        <CardHeader className="px-3 sm:px-6 pt-3 sm:pt-6">
+          <CardTitle className="text-base sm:text-lg">SEO & Metadata</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6 space-y-3 sm:space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="metaTitle">Meta Title</Label>
+            <Label htmlFor="metaTitle" className="text-sm sm:text-base">Meta Title</Label>
             <Input
               id="metaTitle"
               name="metaTitle"
               value={formData.metaTitle}
               onChange={handleInputChange}
               placeholder="Product Meta Title"
+              className="text-sm sm:text-base"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="metaDescription">Meta Description</Label>
+            <Label htmlFor="metaDescription" className="text-sm sm:text-base">Meta Description</Label>
             <Textarea
               id="metaDescription"
               name="metaDescription"
@@ -451,16 +464,18 @@ export function AddProductForm() {
               onChange={handleInputChange}
               placeholder="Product meta description for search engines"
               rows={2}
+              className="text-sm sm:text-base"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="tags">Tags</Label>
+            <Label htmlFor="tags" className="text-sm sm:text-base">Tags</Label>
             <Input
               id="tags"
               name="tags"
               value={formData.tags}
               onChange={handleInputChange}
               placeholder="tag1, tag2, tag3"
+              className="text-sm sm:text-base"
             />
             <p className="text-xs text-muted-foreground">
               Separate tags with commas
@@ -470,16 +485,17 @@ export function AddProductForm() {
       </Card>
 
       {/* Actions */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
         <Button
           type="button"
           variant="outline"
           onClick={() => router.push('/admin/products')}
+          className="w-full sm:w-auto"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Cancel
         </Button>
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
           {isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

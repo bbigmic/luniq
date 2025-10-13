@@ -160,12 +160,12 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
   ].filter(Boolean).length;
 
   return (
-    <div className="space-y-4 sm:space-y-6">
+    <div className="space-y-3 sm:space-y-4 lg:space-y-6">
       {/* Filter Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <Filter className="h-4 w-4 sm:h-5 sm:w-5" />
-          <h3 className="text-base sm:text-lg font-semibold">Filters</h3>
+          <h3 className="text-sm sm:text-base lg:text-lg font-semibold">Filters</h3>
           {activeFiltersCount > 0 && (
             <Badge variant="secondary" className="text-xs">{activeFiltersCount}</Badge>
           )}
@@ -180,17 +180,17 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
 
       {/* Search */}
       <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="text-base sm:text-lg">Search</CardTitle>
+        <CardHeader className="pb-2 sm:pb-3 px-3 sm:px-6 pt-3 sm:pt-6">
+          <CardTitle className="text-sm sm:text-base lg:text-lg">Search</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0">
+        <CardContent className="pt-0 px-3 sm:px-6 pb-3 sm:pb-6">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 h-3 w-3 sm:h-4 sm:w-4 -translate-y-1/2 text-muted-foreground" />
             <Input 
               placeholder="Search products..." 
               value={filters.search}
               onChange={(e) => handleFilterChange('search', e.target.value)}
-              className="pl-10 text-sm sm:text-base"
+              className="pl-8 sm:pl-10 text-xs sm:text-sm lg:text-base"
             />
           </div>
         </CardContent>
@@ -198,12 +198,12 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
 
       {/* Price Range */}
       <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="text-base sm:text-lg">Price Range</CardTitle>
+        <CardHeader className="pb-2 sm:pb-3 px-3 sm:px-6 pt-3 sm:pt-6">
+          <CardTitle className="text-sm sm:text-base lg:text-lg">Price Range</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0 space-y-4">
+        <CardContent className="pt-0 px-3 sm:px-6 pb-3 sm:pb-6 space-y-3 sm:space-y-4">
           <div className="space-y-2">
-            <Label className="text-sm sm:text-base">${filters.priceRange[0]} - ${filters.priceRange[1]}</Label>
+            <Label className="text-xs sm:text-sm lg:text-base">${filters.priceRange[0]} - ${filters.priceRange[1]}</Label>
             <Slider
               value={[filters.priceRange[0], filters.priceRange[1]]}
               onValueChange={(value) => {
@@ -220,17 +220,17 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
 
       {/* Categories */}
       <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="text-base sm:text-lg">Categories</CardTitle>
+        <CardHeader className="pb-2 sm:pb-3 px-3 sm:px-6 pt-3 sm:pt-6">
+          <CardTitle className="text-sm sm:text-base lg:text-lg">Categories</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0">
+        <CardContent className="pt-0 px-3 sm:px-6 pb-3 sm:pb-6">
           {loadingCategories ? (
             <div className="flex items-center justify-center py-4">
-              <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
+              <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5 animate-spin" />
               <span className="ml-2 text-xs sm:text-sm">Loading categories...</span>
             </div>
           ) : (
-            <div className="space-y-2 max-h-60 overflow-y-auto">
+            <div className="space-y-1 sm:space-y-2 max-h-48 sm:max-h-60 overflow-y-auto">
               {categories.map((category) => {
                 const isChecked = filters.selectedCategories.includes(category.slug);
                 console.log(`Checkbox for ${category.name}:`, { 
@@ -246,6 +246,7 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
                       id={category.id}
                       checked={isChecked}
                       onChange={() => handleCategoryChange(category.slug)}
+                      className="h-3 w-3 sm:h-4 sm:w-4"
                     />
                     <label 
                       htmlFor={category.id}
@@ -266,16 +267,17 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
 
       {/* Availability */}
       <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="text-base sm:text-lg">Availability</CardTitle>
+        <CardHeader className="pb-2 sm:pb-3 px-3 sm:px-6 pt-3 sm:pt-6">
+          <CardTitle className="text-sm sm:text-base lg:text-lg">Availability</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0">
+        <CardContent className="pt-0 px-3 sm:px-6 pb-3 sm:pb-6">
           <div className="flex items-center space-x-2">
             <input
               type="checkbox"
               id="in-stock"
               checked={filters.inStockOnly}
               onChange={(e) => handleFilterChange('inStockOnly', e.target.checked)}
+              className="h-3 w-3 sm:h-4 sm:w-4"
             />
             <label 
               htmlFor="in-stock"

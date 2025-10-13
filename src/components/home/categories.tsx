@@ -111,27 +111,27 @@ export function Categories() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {categories.map((category) => (
             <Link key={category.id} href={`/products?category=${category.slug}`}>
               <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer">
-                <CardContent className="p-6">
-                  <div className={`w-full h-32 rounded-lg bg-gradient-to-br ${categoryColors[category.slug] || 'from-gray-500/20 to-slate-500/20'} flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300`}>
-                    <span className="text-4xl">{categoryIcons[category.slug] || '📦'}</span>
+                <CardContent className="p-4 sm:p-6">
+                  <div className={`w-full h-24 sm:h-32 rounded-lg bg-gradient-to-br ${categoryColors[category.slug] || 'from-gray-500/20 to-slate-500/20'} flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-105 transition-transform duration-300`}>
+                    <span className="text-3xl sm:text-4xl">{categoryIcons[category.slug] || '📦'}</span>
                   </div>
                   
                   <div className="space-y-2">
-                    <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
+                    <h3 className="text-lg sm:text-xl font-semibold group-hover:text-primary transition-colors">
                       {category.name}
                     </h3>
-                    <p className="text-muted-foreground">
+                    <p className="text-sm sm:text-base text-muted-foreground line-clamp-2">
                       {category.description}
                     </p>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">
+                      <span className="text-xs sm:text-sm text-muted-foreground">
                         {category.productCount} products
                       </span>
-                      <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                      <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
                     </div>
                   </div>
                 </CardContent>

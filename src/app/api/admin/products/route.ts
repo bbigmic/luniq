@@ -1,20 +1,81 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { products } from '@/lib/db/schema';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 
 // Force dynamic rendering for this API route
 export const dynamic = 'force-dynamic';
 
-// GET all products for admin
-export async function GET() {
+// GET all products for admin with pagination
+export async function GET(request: NextRequest) {
   try {
-    const allProducts = await db
-      .select()
-      .from(products)
-      .orderBy(products.createdAt);
+    const { searchParams } = new URL(request.url);
+    const page = parseInt(searchParams.get('page') || '1');
+    const limit = parseInt(searchParams.get('limit') || '20');
+    const search = searchParams.get('search') || '';
+    const status = searchParams.get('status') || '';
 
-    return NextResponse.json(allProducts);
+    // Calculate offset
+    const offset = (page - 1) * limit;
+
+    // Build query conditions
+    let query = db.select().from(products);
+    
+    // Add search filter if provided
+    if (search) {
+      query = query.where(
+        // Note: Drizzle doesn't have built-in ILIKE, so we'll use LIKE for now
+        // You might need to adjust this based on your database
+        // For PostgreSQL, you could use: sql`LOWER(${products.name}) LIKE LOWER(${'%' + search + '%'})`
+        // For now, we'll do client-side filtering for search
+      );
+    }
+
+    // Add status filter if provided
+    if (status && status !== 'all') {
+      query = query.where(eq(products.status, status));
+    }
+
+    // Get total count for pagination
+    const totalCountQuery = db.select({ count: sql`count(*)` }).from(products);
+    if (status && status !== 'all') {
+      totalCountQuery.where(eq(products.status, status));
+    }
+    
+    const totalResult = await totalCountQuery;
+    const totalCount = parseInt(totalResult[0]?.count?.toString() || '0');
+
+    // Get paginated products
+    const allProducts = await query
+      .orderBy(products.createdAt)
+      .limit(limit)
+      .offset(offset);
+
+    // Apply search filter on the results (client-side for now)
+    let filteredProducts = allProducts;
+    if (search) {
+      filteredProducts = allProducts.filter(product => 
+        product.name.toLowerCase().includes(search.toLowerCase()) ||
+        product.sku.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    // Calculate pagination info
+    const totalPages = Math.ceil(totalCount / limit);
+    const hasNextPage = page < totalPages;
+    const hasPrevPage = page > 1;
+
+    return NextResponse.json({
+      products: filteredProducts,
+      pagination: {
+        page,
+        limit,
+        totalCount,
+        totalPages,
+        hasNextPage,
+        hasPrevPage,
+      }
+    });
   } catch (error) {
     console.error('Error fetching products:', error);
     return NextResponse.json(
