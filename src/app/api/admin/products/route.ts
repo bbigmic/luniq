@@ -31,7 +31,9 @@ export async function GET(request: NextRequest) {
     if (search) {
       filteredProducts = filteredProducts.filter(product => 
         product.name.toLowerCase().includes(search.toLowerCase()) ||
-        product.sku.toLowerCase().includes(search.toLowerCase())
+        (product.sku && product.sku.toLowerCase().includes(search.toLowerCase())) ||
+        (product.shortDescription && product.shortDescription.toLowerCase().includes(search.toLowerCase())) ||
+        (product.description && product.description.toLowerCase().includes(search.toLowerCase()))
       );
     }
     
