@@ -13,9 +13,9 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main>
+      <main className="overflow-x-hidden">
         <Hero />
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div className="flex items-center justify-center py-12"><div className="text-muted-foreground">Loading...</div></Suspense>}>
           <FeaturedProducts />
         </Suspense>
         <Categories />

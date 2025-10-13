@@ -20,31 +20,32 @@ import {
 export function Header() {
   const { data: session } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { state } = useCart();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
+      <div className="container mx-auto px-3 sm:px-4">
+        <div className="flex h-14 sm:h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <Package className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold">E-Commerce</span>
+          <Link href="/" className="flex items-center space-x-1 sm:space-x-2">
+            <Package className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
+            <span className="text-lg sm:text-xl font-bold">E-Commerce</span>
           </Link>
 
           {/* Search Bar - Desktop */}
-          <div className="hidden md:flex flex-1 max-w-md mx-8">
+          <div className="hidden md:flex flex-1 max-w-md mx-4 lg:mx-8">
             <div className="relative w-full">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 placeholder="Search products..."
-                className="pl-10 pr-4"
+                className="pl-10 pr-4 text-sm"
               />
             </div>
           </div>
 
           {/* Navigation - Desktop */}
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6">
             <Link href="/products" className="text-sm font-medium hover:text-primary transition-colors">
               Products
             </Link>
@@ -65,21 +66,26 @@ export function Header() {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-1 sm:space-x-2 lg:space-x-4">
             {/* Search - Mobile */}
-            <Button variant="ghost" size="icon" className="md:hidden">
-              <Search className="h-5 w-5" />
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="md:hidden h-8 w-8 sm:h-10 sm:w-10"
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+            >
+              <Search className="h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
 
             {/* Wishlist */}
-            <Button variant="ghost" size="icon">
-              <Heart className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className="hidden sm:flex h-8 w-8 sm:h-10 sm:w-10">
+              <Heart className="h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
 
             {/* Cart */}
             <Link href="/cart">
-              <Button variant="ghost" size="icon" className="relative">
-                <ShoppingCart className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="relative h-8 w-8 sm:h-10 sm:w-10">
+                <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
                 {state.totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center">
                     {state.totalItems}
@@ -88,19 +94,19 @@ export function Header() {
               </Button>
             </Link>
 
-            {/* User Menu */}
+            {/* User Menu - Desktop */}
             {session ? (
-              <div className="flex items-center space-x-2">
-                <Button variant="ghost" size="icon">
-                  <User className="h-5 w-5" />
+              <div className="hidden sm:flex items-center space-x-2">
+                <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-10 sm:w-10">
+                  <User className="h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
-                <div className="hidden md:block">
+                <div className="hidden lg:block">
                   <p className="text-sm font-medium">{session.user.name}</p>
                   <p className="text-xs text-muted-foreground">{session.user.role}</p>
                 </div>
                 {session.user.role === 'admin' && (
                   <Link href="/admin">
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" className="hidden lg:flex">
                       Admin
                     </Button>
                   </Link>
@@ -109,19 +115,20 @@ export function Header() {
                   variant="ghost"
                   size="sm"
                   onClick={() => signOut()}
+                  className="hidden lg:flex"
                 >
                   Sign Out
                 </Button>
               </div>
             ) : (
-              <div className="flex items-center space-x-2">
+              <div className="hidden sm:flex items-center space-x-2">
                 <Link href="/auth/signin">
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" className="hidden lg:flex">
                     Sign In
                   </Button>
                 </Link>
                 <Link href="/auth/signup">
-                  <Button size="sm">
+                  <Button size="sm" className="hidden lg:flex">
                     Sign Up
                   </Button>
                 </Link>
@@ -132,35 +139,110 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="lg:hidden h-8 w-8 sm:h-10 sm:w-10"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMenuOpen ? <X className="h-4 w-4 sm:h-5 sm:w-5" /> : <Menu className="h-4 w-4 sm:h-5 sm:w-5" />}
             </Button>
           </div>
         </div>
 
+        {/* Mobile Search */}
+        {isSearchOpen && (
+          <div className="md:hidden pb-3">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                placeholder="Search products..."
+                className="pl-10 pr-4 text-sm"
+                autoFocus
+              />
+            </div>
+          </div>
+        )}
+
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <Card className="md:hidden mt-2 p-4">
+          <Card className="lg:hidden mt-2 p-4">
             <nav className="flex flex-col space-y-4">
-              <Link href="/products" className="text-sm font-medium hover:text-primary transition-colors">
+              <Link 
+                href="/products" 
+                className="text-sm font-medium hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Products
               </Link>
-              <Link href="/categories" className="text-sm font-medium hover:text-primary transition-colors">
+              <Link 
+                href="/categories" 
+                className="text-sm font-medium hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Categories
               </Link>
               {session && (
-                <Link href="/orders" className="text-sm font-medium hover:text-primary transition-colors">
+                <Link 
+                  href="/orders" 
+                  className="text-sm font-medium hover:text-primary transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   Orders
                 </Link>
               )}
-              <Link href="/about" className="text-sm font-medium hover:text-primary transition-colors">
+              <Link 
+                href="/about" 
+                className="text-sm font-medium hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 About
               </Link>
-              <Link href="/contact" className="text-sm font-medium hover:text-primary transition-colors">
+              <Link 
+                href="/contact" 
+                className="text-sm font-medium hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Contact
               </Link>
+              
+              {/* Mobile User Actions */}
+              {session ? (
+                <div className="pt-4 border-t space-y-3">
+                  <div className="flex items-center space-x-2">
+                    <User className="h-4 w-4" />
+                    <span className="text-sm font-medium">{session.user.name}</span>
+                  </div>
+                  {session.user.role === 'admin' && (
+                    <Link href="/admin" onClick={() => setIsMenuOpen(false)}>
+                      <Button variant="outline" size="sm" className="w-full">
+                        Admin Panel
+                      </Button>
+                    </Link>
+                  )}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      signOut();
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full"
+                  >
+                    Sign Out
+                  </Button>
+                </div>
+              ) : (
+                <div className="pt-4 border-t space-y-2">
+                  <Link href="/auth/signin" onClick={() => setIsMenuOpen(false)}>
+                    <Button variant="ghost" size="sm" className="w-full">
+                      Sign In
+                    </Button>
+                  </Link>
+                  <Link href="/auth/signup" onClick={() => setIsMenuOpen(false)}>
+                    <Button size="sm" className="w-full">
+                      Sign Up
+                    </Button>
+                  </Link>
+                </div>
+              )}
             </nav>
           </Card>
         )}

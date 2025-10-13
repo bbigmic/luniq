@@ -58,7 +58,7 @@ function ProductsPageContent() {
           </aside>
           
           <div className="lg:col-span-3 order-1 lg:order-2">
-            <Suspense fallback={<div>Loading products...</div>}>
+            <Suspense fallback={<div className="flex items-center justify-center py-12"><div className="text-muted-foreground">Loading products...</div></div>}>
               <ProductGrid filters={filters} />
             </Suspense>
           </div>
@@ -71,7 +71,7 @@ function ProductsPageContent() {
 
 export default function ProductsPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center"><div className="text-muted-foreground">Loading...</div></div>}>
       <ProductsPageContent />
     </Suspense>
   );
