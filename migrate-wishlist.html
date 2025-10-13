@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist Migration Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="url"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .info {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛠️ Wishlist Migration Tool</h1>
+        <p>This tool will create the wishlist table in your database and add sample data.</p>
+        
+        <div class="form-group">
+            <label for="vercelUrl">Your Vercel App URL:</label>
+            <input 
+                type="url" 
+                id="vercelUrl" 
+                placeholder="https://your-app-name.vercel.app"
+                value=""
+            >
+        </div>
+        
+        <button onclick="runMigration()" id="migrateBtn">Run Wishlist Migration</button>
+        
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        async function runMigration() {
+            const url = document.getElementById('vercelUrl').value;
+            const btn = document.getElementById('migrateBtn');
+            const result = document.getElementById('result');
+            
+            if (!url) {
+                showResult('Please enter your Vercel app URL', 'error');
+                return;
+            }
+            
+            // Validate URL format
+            try {
+                new URL(url);
+            } catch {
+                showResult('Please enter a valid URL', 'error');
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.textContent = 'Running Migration...';
+            showResult('Running migration, please wait...', 'info');
+            
+            try {
+                const response = await fetch(`${url}/api/migrate-wishlist`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult(`✅ Migration successful! ${data.message}`, 'success');
+                } else {
+                    showResult(`❌ Migration failed: ${data.error || 'Unknown error'}`, 'error');
+                }
+            } catch (error) {
+                showResult(`❌ Network error: ${error.message}`, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Run Wishlist Migration';
+            }
+        }
+        
+        function showResult(message, type) {
+            const result = document.getElementById('result');
+            result.textContent = message;
+            result.className = `result ${type}`;
+            result.style.display = 'block';
+        }
+        
+        // Auto-fill URL if possible
+        window.addEventListener('load', function() {
+            const currentUrl = window.location.href;
+            if (currentUrl.includes('vercel.app')) {
+                const baseUrl = currentUrl.split('/').slice(0, 3).join('/');
+                document.getElementById('vercelUrl').value = baseUrl;
+            }
+        });
+    </script>
+</body>
+</html>
