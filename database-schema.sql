@@ -169,15 +169,7 @@ INSERT INTO categories (name, slug, description) VALUES
 ('Toys', 'toys', 'Fun toys for all ages'),
 ('Jewelry', 'jewelry', 'Beautiful jewelry and watches');
 
--- Sample admin user (password: admin123)
-INSERT INTO users (name, email, password, role) VALUES
-('Admin User', 'admin@example.com', '$2a$12$rQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2', 'admin');
-
--- Sample regular users (password: user123)
-INSERT INTO users (name, email, password, role, phone, address, city, country, zip_code) VALUES
-('John Doe', 'john@example.com', '$2a$12$sQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2', 'user', '+1-555-0123', '123 Main St', 'New York', 'USA', '10001'),
-('Jane Smith', 'jane@example.com', '$2a$12$sQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2', 'user', '+1-555-0124', '456 Oak Ave', 'Los Angeles', 'USA', '90210'),
-('Bob Johnson', 'bob@example.com', '$2a$12$sQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2', 'user', '+1-555-0125', '789 Pine Rd', 'Chicago', 'USA', '60601');
+-- Users will be created dynamically through the application registration system
 
 -- Sample products with images - Electronics Category
 INSERT INTO products (name, slug, description, short_description, price, compare_price, sku, quantity, category_id, status, featured, images) VALUES
@@ -249,18 +241,7 @@ INSERT INTO products (name, slug, description, short_description, price, compare
 ('Silver Ring', 'silver-ring', 'Sterling silver ring with gemstone.', 'Sterling silver ring', 89.99, 119.99, 'SR-048', 35, (SELECT id FROM categories WHERE slug = 'jewelry'), 'active', false, '["/images/products/ring.svg"]'),
 ('Diamond Earrings', 'diamond-earrings', 'Beautiful diamond earrings for special occasions.', 'Diamond stud earrings', 499.99, 699.99, 'DE-049', 15, (SELECT id FROM categories WHERE slug = 'jewelry'), 'active', false, '["/images/products/earrings.svg"]');
 
--- Sample orders
-INSERT INTO orders (order_number, user_id, status, payment_status, payment_method, subtotal, tax, shipping, total, currency, shipping_address, created_at) VALUES
-('ORD-2024-001', (SELECT id FROM users WHERE email = 'john@example.com'), 'delivered', 'paid', 'credit_card', 299.99, 24.00, 9.99, 333.98, 'USD', '{"firstName": "John", "lastName": "Doe", "address1": "123 Main St", "city": "New York", "state": "NY", "zipCode": "10001", "country": "USA"}', NOW() - INTERVAL '5 days'),
-('ORD-2024-002', (SELECT id FROM users WHERE email = 'jane@example.com'), 'processing', 'paid', 'paypal', 149.99, 12.00, 9.99, 171.98, 'USD', '{"firstName": "Jane", "lastName": "Smith", "address1": "456 Oak Ave", "city": "Los Angeles", "state": "CA", "zipCode": "90210", "country": "USA"}', NOW() - INTERVAL '3 days'),
-('ORD-2024-003', (SELECT id FROM users WHERE email = 'bob@example.com'), 'pending', 'pending', 'credit_card', 89.99, 7.20, 9.99, 107.18, 'USD', '{"firstName": "Bob", "lastName": "Johnson", "address1": "789 Pine Rd", "city": "Chicago", "state": "IL", "zipCode": "60601", "country": "USA"}', NOW() - INTERVAL '1 day');
-
--- Sample order items
-INSERT INTO order_items (order_id, product_id, quantity, price, total) VALUES
-((SELECT id FROM orders WHERE order_number = 'ORD-2024-001'), (SELECT id FROM products WHERE sku = 'PWH-001'), 1, 299.99, 299.99),
-((SELECT id FROM orders WHERE order_number = 'ORD-2024-002'), (SELECT id FROM products WHERE sku = 'SFW-002'), 1, 199.99, 199.99),
-((SELECT id FROM orders WHERE order_number = 'ORD-2024-003'), (SELECT id FROM products WHERE sku = 'WCP-003'), 1, 49.99, 49.99),
-((SELECT id FROM orders WHERE order_number = 'ORD-2024-003'), (SELECT id FROM products WHERE sku = 'BS-004'), 1, 79.99, 79.99);
+-- Orders and order items will be created dynamically by the application
 
 -- Wishlist table
 CREATE TABLE IF NOT EXISTS wishlist (

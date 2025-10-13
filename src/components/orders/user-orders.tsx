@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -12,106 +12,38 @@ import {
   XCircle,
   Eye,
   Download,
-  RefreshCw
+  RefreshCw,
+  Loader2
 } from 'lucide-react';
 import { formatPrice, formatDate } from '@/lib/utils';
 
-// Mock order data - replace with actual data fetching
-const orders = [
-  {
-    id: '1',
-    orderNumber: 'ORD-2024-001',
-    status: 'delivered',
-    paymentStatus: 'paid',
-    total: 333.98,
-    currency: 'USD',
-    createdAt: new Date('2024-01-15'),
-    deliveredAt: new Date('2024-01-20'),
-    items: [
-      {
-        id: '1',
-        name: 'Premium Wireless Headphones',
-        image: '/images/products/headphones.svg',
-        quantity: 1,
-        price: 299.99,
-        total: 299.99,
-      }
-    ],
-    shippingAddress: {
-      firstName: 'John',
-      lastName: 'Doe',
-      address1: '123 Main St',
-      city: 'New York',
-      state: 'NY',
-      zipCode: '10001',
-      country: 'USA'
-    }
-  },
-  {
-    id: '2',
-    orderNumber: 'ORD-2024-002',
-    status: 'processing',
-    paymentStatus: 'paid',
-    total: 171.98,
-    currency: 'USD',
-    createdAt: new Date('2024-01-18'),
-    items: [
-      {
-        id: '2',
-        name: 'Smart Fitness Watch',
-        image: '/images/products/watch.svg',
-        quantity: 1,
-        price: 199.99,
-        total: 199.99,
-      }
-    ],
-    shippingAddress: {
-      firstName: 'John',
-      lastName: 'Doe',
-      address1: '123 Main St',
-      city: 'New York',
-      state: 'NY',
-      zipCode: '10001',
-      country: 'USA'
-    }
-  },
-  {
-    id: '3',
-    orderNumber: 'ORD-2024-003',
-    status: 'pending',
-    paymentStatus: 'pending',
-    total: 107.18,
-    currency: 'USD',
-    createdAt: new Date('2024-01-20'),
-    items: [
-      {
-        id: '3',
-        name: 'Wireless Charging Pad',
-        image: '/images/products/placeholder.svg',
-        quantity: 1,
-        price: 49.99,
-        total: 49.99,
-      },
-      {
-        id: '4',
-        name: 'Bluetooth Speaker',
-        image: '/images/products/speaker.svg',
-        quantity: 1,
-        price: 79.99,
-        total: 79.99,
-      }
-    ],
-    shippingAddress: {
-      firstName: 'John',
-      lastName: 'Doe',
-      address1: '123 Main St',
-      city: 'New York',
-      state: 'NY',
-      zipCode: '10001',
-      country: 'USA'
-    }
-  }
-];
+interface Order {
+  id: string;
+  orderNumber: string;
+  status: string;
+  paymentStatus: string;
+  total: string;
+  currency: string;
+  createdAt: string;
+  deliveredAt?: string;
+  items: {
+    id: string;
+    name: string;
+    image: string;
+    quantity: number;
+    price: number;
+    total: number;
+  }[];
+  shippingAddress: {
+    firstName: string;
+    lastName: string;
+    address1: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    country: string;
+  };
+}
 
 const getStatusIcon = (status: string) => {
   switch (status) {
@@ -149,10 +81,41 @@ const getStatusColor = (status: string) => {
 
 export function UserOrders() {
   const [filterStatus, setFilterStatus] = useState('all');
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  const fetchOrders = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('/api/orders');
+      if (!response.ok) throw new Error('Failed to fetch orders');
+      
+      const data = await response.json();
+      setOrders(data.orders || []);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+      setOrders([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const filteredOrders = orders.filter(order => 
     filterStatus === 'all' || order.status === filterStatus
   );
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <Loader2 className="h-8 w-8 animate-spin" />
+        <span className="ml-2">Loading orders...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
