@@ -10,7 +10,7 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <Package className="h-6 w-6 text-primary" />
-              <span className="text-lg font-bold">E-Commerce</span>
+              <span className="text-lg font-bold">Luniq</span>
             </div>
             <p className="text-sm text-muted-foreground">
               Your trusted partner for quality products and exceptional service. 
@@ -83,7 +83,7 @@ export function Footer() {
 
         <div className="border-t mt-8 pt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            © 2024 E-Commerce Platform. All rights reserved.
+            © 2024 Luniq. All rights reserved.
           </p>
         </div>
       </div>

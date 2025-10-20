@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Star, Truck, Shield, RotateCcw } from 'lucide-react';
 
@@ -11,12 +12,11 @@ export function Hero() {
           <div className="space-y-6 sm:space-y-8 text-center lg:text-left">
             <div className="space-y-3 sm:space-y-4">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                Discover Amazing
-                <span className="text-primary block">Products</span>
+                Luniq
+                <span className="text-primary block">Elevate Your Style</span>
               </h1>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0">
-                Shop the latest trends with our curated collection of premium products. 
-                Quality guaranteed, delivered to your doorstep.
+                Curated black-and-gold essentials inspired by modern luxury aesthetics. Discover the latest drops and timeless staples.
               </p>
             </div>
 
@@ -68,23 +68,14 @@ export function Hero() {
 
           {/* Image */}
           <div className="relative order-first lg:order-last">
-            <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 p-4 sm:p-6 lg:p-8">
-              <div className="h-full w-full rounded-xl bg-muted flex items-center justify-center">
-                <div className="text-center space-y-2 sm:space-y-4">
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
-                    <Star className="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 text-primary" />
-                  </div>
-                  <p className="text-sm sm:text-base text-muted-foreground">Featured Product Image</p>
-                </div>
-              </div>
-            </div>
-            
-            {/* Floating elements */}
-            <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-primary/10 rounded-full flex items-center justify-center animate-pulse">
-              <span className="text-lg sm:text-xl lg:text-2xl">✨</span>
-            </div>
-            <div className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-secondary/20 rounded-full flex items-center justify-center animate-pulse delay-1000">
-              <span className="text-sm sm:text-base lg:text-xl">🎯</span>
+            <div className="relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20">
+              <Image
+                src="/video/WhatsAppVideo2025-10-20at08.23.02-ezgif.com-video-to-avif-converter.avif"
+                alt="Featured visual"
+                fill
+                priority
+                className="object-cover"
+              />
             </div>
           </div>
         </div>

@@ -32,7 +32,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-1 sm:space-x-2">
             <Package className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
-            <span className="text-lg sm:text-xl font-bold">E-Commerce</span>
+            <span className="text-lg sm:text-xl font-bold">Luniq</span>
           </Link>
 
           {/* Search Bar - Desktop */}
@@ -51,9 +51,7 @@ export function Header() {
             <Link href="/products" className="text-sm font-medium hover:text-primary transition-colors">
               Products
             </Link>
-            <Link href="/categories" className="text-sm font-medium hover:text-primary transition-colors">
-              Categories
-            </Link>
+            {/* Categories link removed */}
             {session && (
               <Link href="/orders" className="text-sm font-medium hover:text-primary transition-colors">
                 Orders
@@ -181,13 +179,7 @@ export function Header() {
               >
                 Products
               </Link>
-              <Link 
-                href="/categories" 
-                className="text-sm font-medium hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Categories
-              </Link>
+              {/* Categories link removed */}
               {session && (
                 <Link 
                   href="/orders" 
