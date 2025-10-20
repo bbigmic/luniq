@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+// Image import not needed since we use <picture>/<img>
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Star, Truck, Shield, RotateCcw } from 'lucide-react';
 
@@ -69,13 +69,15 @@ export function Hero() {
           {/* Image */}
           <div className="relative order-first lg:order-last">
             <div className="relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20">
-              <Image
-                src="/video/WhatsAppVideo2025-10-20at08.23.02-ezgif.com-video-to-avif-converter.avif"
-                alt="Featured visual"
-                fill
-                priority
-                className="object-cover"
-              />
+              <picture>
+                <source srcSet="/video/WhatsAppVideo2025-10-20at08.23.02-ezgif.com-video-to-avif-converter.avif" type="image/avif" />
+                <img
+                  src="/images/products/placeholder.svg"
+                  alt="Featured visual"
+                  className="h-full w-full object-cover"
+                  loading="eager"
+                />
+              </picture>
             </div>
           </div>
         </div>
