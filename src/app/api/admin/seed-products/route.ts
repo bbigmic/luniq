@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { categories, products } from '@/lib/db/schema';
+import { categories, products, orderItems, cart, wishlist, productVariants } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
 import fs from 'fs';
 import path from 'path';
@@ -22,16 +22,46 @@ function toSlug(input: string): string {
     .replace(/(^-|-$)/g, '');
 }
 
-export async function POST(_req: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
-    const imagesDir = path.join(process.cwd(), 'public', 'images', 'products');
-    if (!fs.existsSync(imagesDir)) {
-      return NextResponse.json({ error: 'images directory not found', imagesDir }, { status: 400 });
+    const url = new URL(req.url);
+    const reset = url.searchParams.get('reset') === 'true' || url.searchParams.get('reset') === '1';
+
+    if (reset) {
+      await db.delete(orderItems);
+      await db.delete(cart);
+      await db.delete(wishlist);
+      await db.delete(productVariants);
+      await db.delete(products);
     }
 
-    const files = fs
-      .readdirSync(imagesDir)
-      .filter((f) => /\.(png|jpe?g|svg|webp|avif)$/i.test(f) && f.toLowerCase() !== 'placeholder.svg');
+    const publicProductsDir = path.join(process.cwd(), 'public', 'images', 'products');
+    const localImagesDir = path.join(process.cwd(), 'images');
+
+    if (!fs.existsSync(publicProductsDir)) {
+      fs.mkdirSync(publicProductsDir, { recursive: true });
+    }
+
+    const collected = new Set<string>();
+    if (fs.existsSync(publicProductsDir)) {
+      for (const f of fs.readdirSync(publicProductsDir)) {
+        if (/\.(png|jpe?g|svg|webp|avif)$/i.test(f) && f.toLowerCase() !== 'placeholder.svg') {
+          collected.add(f);
+        }
+      }
+    }
+    if (fs.existsSync(localImagesDir)) {
+      for (const f of fs.readdirSync(localImagesDir)) {
+        if (/\.(png|jpe?g|svg|webp|avif)$/i.test(f)) {
+          const src = path.join(localImagesDir, f);
+          const dest = path.join(publicProductsDir, f);
+          try { fs.copyFileSync(src, dest); } catch {}
+          collected.add(f);
+        }
+      }
+    }
+
+    const files = Array.from(collected);
 
     if (files.length === 0) {
       return NextResponse.json({ message: 'No product images found to seed.' }, { status: 200 });
