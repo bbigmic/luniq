@@ -112,7 +112,7 @@ export function FeaturedProducts() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {featuredProducts.map((product) => (
             <Card key={product.id} className="group hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 bg-gray-900 border-gray-700 hover:border-gray-600">
               <CardHeader className="p-0">
