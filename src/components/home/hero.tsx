@@ -12,9 +12,12 @@ export function Hero() {
           <div className="space-y-6 sm:space-y-8 text-center lg:text-left">
             <div className="space-y-3 sm:space-y-4">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                Kultowy z natury
-                <span className="text-primary block">Smak, który wyznacza standardy</span>
+                Luniq
+                <span className="text-primary block">Kultowy z natury</span>
               </h1>
+              <p className="text-lg sm:text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0">
+                Smak, który wyznacza standardy
+              </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
