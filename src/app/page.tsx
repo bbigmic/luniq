@@ -1,4 +1,6 @@
-import { Suspense } from 'react';
+'use client';
+
+import { Suspense, useEffect } from 'react';
 import { Hero } from '@/components/home/hero';
 import { FeaturedProducts } from '@/components/home/featured-products';
 import { Newsletter } from '@/components/home/newsletter';
@@ -10,6 +12,28 @@ import { Footer } from '@/components/layout/footer';
 export const dynamic = 'force-dynamic';
 
 export default function HomePage() {
+  useEffect(() => {
+    const handleScroll = () => {
+      // Disable parallax on mobile for better performance
+      if (window.innerWidth <= 768) return;
+      
+      const scrolled = window.pageYOffset;
+      const parallaxElement = document.getElementById('parallax-bg');
+      
+      if (parallaxElement) {
+        const speed = 0.5; // Adjust speed (0.5 = half the scroll speed)
+        const yPos = -(scrolled * speed);
+        parallaxElement.style.transform = `translateY(${yPos}px)`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -18,30 +42,46 @@ export default function HomePage() {
         <Suspense fallback={<div className="flex items-center justify-center py-12"><div className="text-muted-foreground">Loading...</div></div>}>
           <FeaturedProducts />
         </Suspense>
-        {/* Moved Features Section */}
-        <section className="py-12 sm:py-16">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center">
-              <div className="flex flex-col items-center space-y-2">
-                <div className="p-1.5 sm:p-2 bg-primary/10 rounded-lg flex-shrink-0">
-                  <Truck className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+        {/* Features Section with Parallax Background */}
+        <section className="relative py-16 sm:py-20 overflow-hidden">
+          {/* Parallax Background */}
+          <div 
+            id="parallax-bg"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat parallax-bg"
+            style={{
+              backgroundImage: 'url(/images/luniq-display-case.jpg)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center center',
+              transform: 'translateY(0px)'
+            }}
+          ></div>
+          
+          {/* Dark overlay for better text readability */}
+          <div className="absolute inset-0 bg-black/60"></div>
+          
+          {/* Content */}
+          <div className="relative z-10 container mx-auto px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
+              <div className="flex flex-col items-center space-y-3">
+                <div className="p-3 bg-primary/20 backdrop-blur-sm rounded-xl flex-shrink-0 border border-primary/30">
+                  <Truck className="h-6 w-6 sm:h-7 sm:w-7 text-primary" />
                 </div>
-                <p className="font-medium text-sm sm:text-base">Free Shipping</p>
-                <p className="text-xs sm:text-sm text-muted-foreground">On orders over $50</p>
+                <p className="font-semibold text-base sm:text-lg text-white">Free Shipping</p>
+                <p className="text-sm sm:text-base text-white/80">On orders over $50</p>
               </div>
-              <div className="flex flex-col items-center space-y-2">
-                <div className="p-1.5 sm:p-2 bg-primary/10 rounded-lg flex-shrink-0">
-                  <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+              <div className="flex flex-col items-center space-y-3">
+                <div className="p-3 bg-primary/20 backdrop-blur-sm rounded-xl flex-shrink-0 border border-primary/30">
+                  <Shield className="h-6 w-6 sm:h-7 sm:w-7 text-primary" />
                 </div>
-                <p className="font-medium text-sm sm:text-base">Secure Payment</p>
-                <p className="text-xs sm:text-sm text-muted-foreground">100% protected</p>
+                <p className="font-semibold text-base sm:text-lg text-white">Secure Payment</p>
+                <p className="text-sm sm:text-base text-white/80">100% protected</p>
               </div>
-              <div className="flex flex-col items-center space-y-2 sm:col-span-1 col-span-1 sm:col-start-auto">
-                <div className="p-1.5 sm:p-2 bg-primary/10 rounded-lg flex-shrink-0">
-                  <RotateCcw className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+              <div className="flex flex-col items-center space-y-3">
+                <div className="p-3 bg-primary/20 backdrop-blur-sm rounded-xl flex-shrink-0 border border-primary/30">
+                  <RotateCcw className="h-6 w-6 sm:h-7 sm:w-7 text-primary" />
                 </div>
-                <p className="font-medium text-sm sm:text-base">Easy Returns</p>
-                <p className="text-xs sm:text-sm text-muted-foreground">30-day policy</p>
+                <p className="font-semibold text-base sm:text-lg text-white">Easy Returns</p>
+                <p className="text-sm sm:text-base text-white/80">30-day policy</p>
               </div>
             </div>
           </div>

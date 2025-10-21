@@ -135,9 +135,24 @@
   animation: gradient 6s ease infinite;
 }
 
-/* Mobile-optimized background video */
+/* Parallax background effect */
+.parallax-bg {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Mobile-optimized backgrounds */
 @media (max-width: 768px) {
   .hero-background {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+  
+  .parallax-bg {
     background-attachment: scroll !important;
     background-size: cover !important;
     background-position: center center !important;
