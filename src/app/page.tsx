@@ -13,22 +13,31 @@ export const dynamic = 'force-dynamic';
 
 export default function HomePage() {
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      // Disable parallax on mobile for better performance
-      if (window.innerWidth <= 768) return;
-      
-      const parallaxElement = document.getElementById('parallax-bg');
-      if (!parallaxElement) {
-        console.log('Parallax element not found');
-        return;
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          // Disable parallax on mobile for better performance
+          if (window.innerWidth <= 768) return;
+          
+          const parallaxElement = document.getElementById('parallax-bg');
+          if (!parallaxElement) {
+            console.log('Parallax element not found');
+            ticking = false;
+            return;
+          }
+          
+          const scrolled = window.pageYOffset;
+          const speed = 0.3; // Slower speed for more noticeable effect
+          const yPos = -(scrolled * speed);
+          
+          console.log('Scrolling:', scrolled, 'Y Position:', yPos);
+          parallaxElement.style.transform = `translateY(${yPos}px)`;
+          ticking = false;
+        });
+        ticking = true;
       }
-      
-      const scrolled = window.pageYOffset;
-      const speed = 0.5; // Adjust speed (0.5 = half the scroll speed)
-      const yPos = -(scrolled * speed);
-      
-      console.log('Scrolling:', scrolled, 'Y Position:', yPos);
-      parallaxElement.style.transform = `translateY(${yPos}px)`;
     };
 
     // Add a small delay to ensure DOM is ready
