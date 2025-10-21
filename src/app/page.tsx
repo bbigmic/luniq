@@ -61,7 +61,7 @@ export default function HomePage() {
           <FeaturedProducts />
         </Suspense>
         {/* Features Section with Parallax Background */}
-        <section className="relative py-20 sm:py-24 overflow-hidden min-h-[600px] -mt-8">
+        <section className="relative py-24 sm:py-32 overflow-hidden min-h-[700px] -mt-4">
           {/* Parallax Background */}
           <div 
             id="parallax-bg"
@@ -69,39 +69,58 @@ export default function HomePage() {
             style={{
               backgroundImage: 'url(/images/luniq-display-case.jpg)',
               backgroundSize: 'cover',
-              backgroundPosition: 'center 80%',
+              backgroundPosition: 'center 65%',
               transform: 'translateY(0px)',
-              minHeight: '100%',
-              top: '0%'
+              minHeight: '120%',
+              top: '-10%'
             }}
           ></div>
           
-          {/* Dark overlay for better text readability */}
-          <div className="absolute inset-0 bg-black/50"></div>
+          {/* Gradient overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60"></div>
           
           {/* Content */}
-          <div className="relative z-10 container mx-auto px-4">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
-              <div className="flex flex-col items-center space-y-3">
-                <div className="p-3 bg-primary/20 backdrop-blur-sm rounded-xl flex-shrink-0 border border-primary/30">
-                  <Truck className="h-6 w-6 sm:h-7 sm:w-7 text-primary" />
-                </div>
-                <p className="font-semibold text-base sm:text-lg text-white">Free Shipping</p>
-                <p className="text-sm sm:text-base text-white/80">On orders over $50</p>
+          <div className="relative z-10 container mx-auto px-4 flex items-center min-h-[700px]">
+            <div className="w-full">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+                  Why Choose LuniQ Vape?
+                </h2>
+                <p className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto">
+                  Experience premium quality with our trusted services
+                </p>
               </div>
-              <div className="flex flex-col items-center space-y-3">
-                <div className="p-3 bg-primary/20 backdrop-blur-sm rounded-xl flex-shrink-0 border border-primary/30">
-                  <Shield className="h-6 w-6 sm:h-7 sm:w-7 text-primary" />
+              
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 text-center">
+                <div className="flex flex-col items-center space-y-4 group">
+                  <div className="p-4 bg-primary/20 backdrop-blur-sm rounded-2xl flex-shrink-0 border border-primary/30 group-hover:bg-primary/30 transition-all duration-300">
+                    <Truck className="h-8 w-8 sm:h-10 sm:w-10 text-primary" />
+                  </div>
+                  <div className="space-y-2">
+                    <p className="font-bold text-lg sm:text-xl text-white">Free Shipping</p>
+                    <p className="text-sm sm:text-base text-white/80">On orders over $50</p>
+                  </div>
                 </div>
-                <p className="font-semibold text-base sm:text-lg text-white">Secure Payment</p>
-                <p className="text-sm sm:text-base text-white/80">100% protected</p>
-              </div>
-              <div className="flex flex-col items-center space-y-3">
-                <div className="p-3 bg-primary/20 backdrop-blur-sm rounded-xl flex-shrink-0 border border-primary/30">
-                  <RotateCcw className="h-6 w-6 sm:h-7 sm:w-7 text-primary" />
+                
+                <div className="flex flex-col items-center space-y-4 group">
+                  <div className="p-4 bg-primary/20 backdrop-blur-sm rounded-2xl flex-shrink-0 border border-primary/30 group-hover:bg-primary/30 transition-all duration-300">
+                    <Shield className="h-8 w-8 sm:h-10 sm:w-10 text-primary" />
+                  </div>
+                  <div className="space-y-2">
+                    <p className="font-bold text-lg sm:text-xl text-white">Secure Payment</p>
+                    <p className="text-sm sm:text-base text-white/80">100% protected</p>
+                  </div>
                 </div>
-                <p className="font-semibold text-base sm:text-lg text-white">Easy Returns</p>
-                <p className="text-sm sm:text-base text-white/80">30-day policy</p>
+                
+                <div className="flex flex-col items-center space-y-4 group">
+                  <div className="p-4 bg-primary/20 backdrop-blur-sm rounded-2xl flex-shrink-0 border border-primary/30 group-hover:bg-primary/30 transition-all duration-300">
+                    <RotateCcw className="h-8 w-8 sm:h-10 sm:w-10 text-primary" />
+                  </div>
+                  <div className="space-y-2">
+                    <p className="font-bold text-lg sm:text-xl text-white">Easy Returns</p>
+                    <p className="text-sm sm:text-base text-white/80">30-day policy</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
