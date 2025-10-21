@@ -52,7 +52,7 @@ export default function HomePage() {
           <FeaturedProducts />
         </Suspense>
         {/* Features Section with Parallax Background */}
-        <section className="relative py-16 sm:py-20 overflow-hidden min-h-[400px]">
+        <section className="relative py-20 sm:py-24 overflow-hidden min-h-[500px]">
           {/* Parallax Background */}
           <div 
             id="parallax-bg"
@@ -62,12 +62,13 @@ export default function HomePage() {
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
               transform: 'translateY(0px)',
-              minHeight: '120%'
+              minHeight: '130%',
+              top: '-15%'
             }}
           ></div>
           
           {/* Dark overlay for better text readability */}
-          <div className="absolute inset-0 bg-black/60"></div>
+          <div className="absolute inset-0 bg-black/50"></div>
           
           {/* Content */}
           <div className="relative z-10 container mx-auto px-4">
