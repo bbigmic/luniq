@@ -6,17 +6,19 @@ import { ArrowRight, Star, Truck, Shield, RotateCcw } from 'lucide-react';
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background */}
+      {/* Background Image/Video */}
       <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src="/video/WhatsAppVideo2025-10-20at08.23.02-ezgif.com-video-to-avif-converter.avif" type="video/avif" />
-        </video>
+        {/* Use the AVIF as a background image with animation */}
+        <div 
+          className="w-full h-full bg-cover bg-center bg-no-repeat animate-pulse"
+          style={{
+            backgroundImage: 'url(/video/WhatsAppVideo2025-10-20at08.23.02-ezgif.com-video-to-avif-converter.avif)'
+          }}
+        ></div>
+        
+        {/* Animated gradient overlay for dynamic effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-secondary/20 animate-gradient"></div>
+        
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black/40"></div>
       </div>

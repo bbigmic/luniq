@@ -101,7 +101,25 @@
   animation: spin 1s linear infinite;
 }
 
-/* Fade in animation */
+/* Gradient animation for hero background */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 6s ease infinite;
+}
+
+/* Enhanced fade in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
