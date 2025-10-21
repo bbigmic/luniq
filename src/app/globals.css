@@ -9,25 +9,25 @@
 
 @layer base {
   :root {
-    /* LuniQ purple/magenta neon theme - black background */
+    /* LuniQ pure black theme */
     --background: 0 0% 0%; /* pure black */
-    --foreground: 0 0% 95%;
-    --card: 0 0% 5%; /* very dark gray */
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 5%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 320 100% 60%; /* vibrant pink/magenta like new logo */
+    --foreground: 0 0% 100%; /* pure white text */
+    --card: 0 0% 0%; /* pure black cards */
+    --card-foreground: 0 0% 100%; /* pure white text */
+    --popover: 0 0% 0%; /* pure black popovers */
+    --popover-foreground: 0 0% 100%; /* pure white text */
+    --primary: 320 100% 60%; /* vibrant pink/magenta */
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 8%; /* dark gray */
-    --secondary-foreground: 0 0% 95%;
-    --muted: 0 0% 10%; /* dark gray */
-    --muted-foreground: 0 0% 65%;
+    --secondary: 0 0% 0%; /* pure black secondary */
+    --secondary-foreground: 0 0% 100%; /* pure white text */
+    --muted: 0 0% 0%; /* pure black muted */
+    --muted-foreground: 0 0% 70%; /* light gray text */
     --accent: 320 100% 60%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 15%; /* dark gray borders */
-    --input: 0 0% 15%;
+    --border: 0 0% 20%; /* dark gray borders */
+    --input: 0 0% 0%; /* pure black inputs */
     --ring: 320 100% 60%;
     --radius: 0.5rem;
     
@@ -41,25 +41,25 @@
   }
 
   .dark {
-    /* Keep dark theme consistent with LuniQ purple/magenta - black background */
+    /* Pure black theme for all elements */
     --background: 0 0% 0%; /* pure black */
-    --foreground: 0 0% 95%;
-    --card: 0 0% 5%; /* very dark gray */
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 5%;
-    --popover-foreground: 0 0% 95%;
+    --foreground: 0 0% 100%; /* pure white text */
+    --card: 0 0% 0%; /* pure black cards */
+    --card-foreground: 0 0% 100%; /* pure white text */
+    --popover: 0 0% 0%; /* pure black popovers */
+    --popover-foreground: 0 0% 100%; /* pure white text */
     --primary: 320 100% 60%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 8%; /* dark gray */
-    --secondary-foreground: 0 0% 95%;
-    --muted: 0 0% 10%; /* dark gray */
-    --muted-foreground: 0 0% 65%;
+    --secondary: 0 0% 0%; /* pure black secondary */
+    --secondary-foreground: 0 0% 100%; /* pure white text */
+    --muted: 0 0% 0%; /* pure black muted */
+    --muted-foreground: 0 0% 70%; /* light gray text */
     --accent: 320 100% 60%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 0 0% 15%; /* dark gray borders */
-    --input: 0 0% 15%;
+    --border: 0 0% 20%; /* dark gray borders */
+    --input: 0 0% 0%; /* pure black inputs */
     --ring: 320 100% 60%;
   }
 }
@@ -70,6 +70,22 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-color: #000000 !important; /* Force pure black */
+  }
+  
+  /* Force all elements to be black */
+  html, body, #__next {
+    background-color: #000000 !important;
+  }
+  
+  /* Ensure all cards are black */
+  .card, [class*="card"], [class*="Card"] {
+    background-color: #000000 !important;
+  }
+  
+  /* Force all sections to be black */
+  section, main, article, aside, nav, header, footer {
+    background-color: #000000 !important;
   }
 }
 
