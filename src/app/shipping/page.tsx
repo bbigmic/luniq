@@ -22,9 +22,9 @@ export default function ShippingPage() {
             <Card className="bg-primary/5 border-primary/20">
               <CardContent className="p-6 text-center">
                 <Truck className="h-12 w-12 text-primary mx-auto mb-4" />
-                <h2 className="text-xl sm:text-2xl font-bold mb-2">Free Shipping on Orders Over $50</h2>
+                <h2 className="text-xl sm:text-2xl font-bold mb-2">Free Shipping on Orders Over 200 PLN</h2>
                 <p className="text-muted-foreground">
-                  Enjoy free standard shipping on all orders $50 and above
+                  Enjoy free standard shipping on all orders 200 PLN and above
                 </p>
               </CardContent>
             </Card>
@@ -44,7 +44,7 @@ export default function ShippingPage() {
                     <div>
                       <h3 className="font-semibold">Standard Shipping</h3>
                       <p className="text-sm text-muted-foreground">5-7 business days</p>
-                      <p className="text-sm text-muted-foreground">$5.99 or FREE on orders $50+</p>
+                      <p className="text-sm text-muted-foreground">25 PLN or FREE on orders 200 PLN+</p>
                     </div>
                   </div>
                   
@@ -53,7 +53,7 @@ export default function ShippingPage() {
                     <div>
                       <h3 className="font-semibold">Express Shipping</h3>
                       <p className="text-sm text-muted-foreground">2-3 business days</p>
-                      <p className="text-sm text-muted-foreground">$12.99</p>
+                      <p className="text-sm text-muted-foreground">55 PLN</p>
                     </div>
                   </div>
                   
@@ -62,7 +62,7 @@ export default function ShippingPage() {
                     <div>
                       <h3 className="font-semibold">Overnight Shipping</h3>
                       <p className="text-sm text-muted-foreground">Next business day</p>
-                      <p className="text-sm text-muted-foreground">$24.99</p>
+                      <p className="text-sm text-muted-foreground">105 PLN</p>
                     </div>
                   </div>
                   
@@ -71,7 +71,7 @@ export default function ShippingPage() {
                     <div>
                       <h3 className="font-semibold">International</h3>
                       <p className="text-sm text-muted-foreground">7-14 business days</p>
-                      <p className="text-sm text-muted-foreground">$19.99</p>
+                      <p className="text-sm text-muted-foreground">85 PLN</p>
                     </div>
                   </div>
                 </div>

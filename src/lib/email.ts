@@ -87,7 +87,7 @@ Sent at: ${new Date().toLocaleString()}
           <h3 style="color: #333; margin-top: 0;">Order Details</h3>
           <p><strong>Customer:</strong> ${data.customerName}</p>
           <p><strong>Email:</strong> ${data.customerEmail}</p>
-          <p><strong>Total:</strong> $${data.total}</p>
+          <p><strong>Total:</strong> ${data.total} PLN</p>
         </div>
         
         <div style="background-color: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
@@ -95,7 +95,7 @@ Sent at: ${new Date().toLocaleString()}
           ${data.items.map(item => `
             <div style="padding: 10px 0; border-bottom: 1px solid #eee;">
               <strong>${item.name}</strong><br>
-              Quantity: ${item.quantity} | Price: $${item.price}
+              Quantity: ${item.quantity} | Price: ${item.price} PLN
             </div>
           `).join('')}
         </div>
@@ -114,10 +114,10 @@ Thank you for your order!
 Order Number: ${data.orderNumber}
 Customer: ${data.customerName}
 Email: ${data.customerEmail}
-Total: $${data.total}
+Total: ${data.total} PLN
 
 Order Items:
-${data.items.map(item => `- ${item.name} (Qty: ${item.quantity}) - $${item.price}`).join('\n')}
+${data.items.map(item => `- ${item.name} (Qty: ${item.quantity}) - ${item.price} PLN`).join('\n')}
 
 ---
 Order placed at: ${new Date().toLocaleString()}

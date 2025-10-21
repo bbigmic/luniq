@@ -9,13 +9,13 @@ export default function CartPage() {
       <Header />
       <main className="container mx-auto px-3 sm:px-4 py-3 sm:py-6 lg:py-8">
         <div className="mb-4 sm:mb-6 lg:mb-8">
-          <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold mb-2 sm:mb-4">Shopping Cart</h1>
-          <p className="text-muted-foreground text-sm sm:text-base lg:text-lg">
-            Review your items before checkout
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4">Koszyk zakupów</h1>
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">
+            Przejrzyj swoje przedmioty przed finalizacją zamówienia
           </p>
         </div>
 
-        <Suspense fallback={<div className="flex items-center justify-center py-12"><div className="text-muted-foreground">Loading cart...</div></div>}>
+        <Suspense fallback={<div className="flex items-center justify-center py-12"><div className="text-muted-foreground">Ładowanie koszyka...</div></div>}>
           <CartItems />
         </Suspense>
       </main>

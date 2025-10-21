@@ -96,7 +96,7 @@ export const orders = pgTable('orders', {
   shipping: decimal('shipping', { precision: 10, scale: 2 }).default('0'),
   discount: decimal('discount', { precision: 10, scale: 2 }).default('0'),
   total: decimal('total', { precision: 10, scale: 2 }).notNull(),
-  currency: text('currency').default('USD').notNull(),
+  currency: text('currency').default('PLN').notNull(),
   shippingAddress: json('shipping_address').$type<{
     firstName: string;
     lastName: string;

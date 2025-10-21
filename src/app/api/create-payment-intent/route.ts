@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
         shipping: '0',
         discount: '0',
         total: finalAmount.toString(),
-        currency: 'USD',
+        currency: 'PLN',
         shippingAddress: customerInfo.shippingAddress || null,
         billingAddress: customerInfo.billingAddress || null,
         notes: customerInfo.notes || null,
@@ -102,7 +102,7 @@ export async function POST(request: NextRequest) {
     // Create Stripe payment intent
     const paymentIntent = await stripe.paymentIntents.create({
       amount: formatAmountForStripe(finalAmount),
-      currency: 'usd',
+      currency: 'pln',
       metadata: {
         orderId: orderId,
         orderNumber: orderNumber,

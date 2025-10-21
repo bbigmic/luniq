@@ -135,15 +135,6 @@
   animation: gradient 6s ease infinite;
 }
 
-/* Mobile-optimized backgrounds */
-@media (max-width: 768px) {
-  .hero-background {
-    background-attachment: scroll !important;
-    background-size: cover !important;
-    background-position: center center !important;
-  }
-}
-
 /* Smooth transitions to prevent flicker */
 .hero-background {
   transition: none;

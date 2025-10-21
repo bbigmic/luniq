@@ -14,21 +14,21 @@ import {
 } from 'lucide-react';
 
 const navigation = [
-  { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-  { name: 'Products', href: '/admin/products', icon: Package },
-  { name: 'Categories', href: '/admin/categories', icon: Tag },
-  { name: 'Orders', href: '/admin/orders', icon: ShoppingCart },
-  { name: 'Users', href: '/admin/users', icon: Users },
-  { name: 'Analytics', href: '/admin/analytics', icon: BarChart3 },
-  { name: 'Settings', href: '/admin/settings', icon: Settings },
+  { name: 'Panel', href: '/admin', icon: LayoutDashboard },
+  { name: 'Produkty', href: '/admin/products', icon: Package },
+  { name: 'Kategorie', href: '/admin/categories', icon: Tag },
+  { name: 'Zamówienia', href: '/admin/orders', icon: ShoppingCart },
+  { name: 'Użytkownicy', href: '/admin/users', icon: Users },
+  { name: 'Analityka', href: '/admin/analytics', icon: BarChart3 },
+  { name: 'Ustawienia', href: '/admin/settings', icon: Settings },
 ];
 
 export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-full lg:w-64 bg-card border-r lg:min-h-0">
-      <nav className="p-3 sm:p-4 space-y-1 sm:space-y-2">
+    <aside className="w-full lg:w-64 bg-card border-r lg:min-h-0 min-h-screen">
+      <nav className="p-3 sm:p-4 space-y-1 sm:space-y-2 min-h-full">
         {navigation.map((item) => {
           const isActive = pathname === item.href;
           return (

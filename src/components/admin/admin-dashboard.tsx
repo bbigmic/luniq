@@ -78,7 +78,7 @@ export function AdminDashboard() {
     return (
       <div className="flex items-center justify-center py-12">
         <Loader2 className="h-8 w-8 animate-spin" />
-        <span className="ml-2">Loading dashboard...</span>
+        <span className="ml-2">Ładowanie panelu...</span>
       </div>
     );
   }
@@ -86,35 +86,35 @@ export function AdminDashboard() {
   if (!stats) {
     return (
       <div className="text-center py-12">
-        <p className="text-muted-foreground">Failed to load dashboard data</p>
+        <p className="text-muted-foreground">Nie udało się załadować danych panelu</p>
       </div>
     );
   }
 
   const statsCards = [
     {
-      title: 'Total Revenue',
+      title: 'Całkowity przychód',
       value: formatPrice(stats.totalRevenue),
       change: `+${stats.revenueGrowth}%`,
       changeType: 'positive' as const,
       icon: DollarSign,
     },
     {
-      title: 'Total Orders',
+      title: 'Całkowite zamówienia',
       value: stats.totalOrders.toLocaleString(),
       change: `+${stats.ordersGrowth}%`,
       changeType: 'positive' as const,
       icon: ShoppingCart,
     },
     {
-      title: 'Total Products',
+      title: 'Całkowite produkty',
       value: stats.totalProducts.toLocaleString(),
       change: `+${stats.productsGrowth}%`,
       changeType: 'positive' as const,
       icon: Package,
     },
     {
-      title: 'Total Users',
+      title: 'Całkowici użytkownicy',
       value: stats.totalUsers.toLocaleString(),
       change: `+${stats.usersGrowth}%`,
       changeType: 'positive' as const,
@@ -127,14 +127,14 @@ export function AdminDashboard() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="min-w-0">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Dashboard</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Panel administracyjny</h2>
           <p className="text-sm sm:text-base text-muted-foreground">
-            Welcome back! Here's what's happening with your store.
+            Witaj z powrotem! Oto co dzieje się w Twoim sklepie.
           </p>
         </div>
         <Button className="w-full sm:w-auto">
           <Plus className="mr-2 h-4 w-4" />
-          Add Product
+          Dodaj produkt
         </Button>
       </div>
 
@@ -159,7 +159,7 @@ export function AdminDashboard() {
                 <span className={stat.changeType === 'positive' ? 'text-green-600' : 'text-red-600'}>
                   {stat.change}
                 </span>
-                <span className="ml-1 hidden sm:inline">from last month</span>
+                <span className="ml-1 hidden sm:inline">z ostatniego miesiąca</span>
               </div>
             </CardContent>
           </Card>
@@ -171,14 +171,14 @@ export function AdminDashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
             <CardTitle className="text-xs sm:text-sm font-medium">
-              Featured Products
+              Polecane produkty
             </CardTitle>
             <Package className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
             <div className="text-lg sm:text-2xl font-bold">{stats.featuredProducts}</div>
             <p className="text-xs text-muted-foreground">
-              Highlighted in catalog
+              Podświetlone w katalogu
             </p>
           </CardContent>
         </Card>
@@ -186,14 +186,14 @@ export function AdminDashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
             <CardTitle className="text-xs sm:text-sm font-medium">
-              Out of Stock
+              Brak w magazynie
             </CardTitle>
             <Package className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
             <div className="text-lg sm:text-2xl font-bold">{stats.outOfStockProducts}</div>
             <p className="text-xs text-muted-foreground">
-              Need restocking
+              Wymagają uzupełnienia
             </p>
           </CardContent>
         </Card>
@@ -201,14 +201,14 @@ export function AdminDashboard() {
         <Card className="sm:col-span-2 lg:col-span-1">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
             <CardTitle className="text-xs sm:text-sm font-medium">
-              Paid Orders
+              Opłacone zamówienia
             </CardTitle>
             <ShoppingCart className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
             <div className="text-lg sm:text-2xl font-bold">{stats.paidOrders}</div>
             <p className="text-xs text-muted-foreground">
-              Successfully processed
+              Pomyślnie przetworzone
             </p>
           </CardContent>
         </Card>
@@ -218,16 +218,16 @@ export function AdminDashboard() {
       <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader className="px-3 sm:px-6 pt-3 sm:pt-6">
-            <CardTitle className="text-base sm:text-lg">Recent Orders</CardTitle>
+            <CardTitle className="text-base sm:text-lg">Ostatnie zamówienia</CardTitle>
             <CardDescription className="text-xs sm:text-sm">
-              Latest orders from your customers
+              Najnowsze zamówienia od Twoich klientów
             </CardDescription>
           </CardHeader>
           <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
             <div className="space-y-3 sm:space-y-4">
               {recentOrders.length === 0 ? (
                 <div className="text-center py-4">
-                  <p className="text-xs sm:text-sm text-muted-foreground">No recent orders</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Brak ostatnich zamówień</p>
                 </div>
               ) : (
                 recentOrders.slice(0, 5).map((order) => (
@@ -255,28 +255,28 @@ export function AdminDashboard() {
         {/* Quick Actions */}
         <Card>
           <CardHeader className="px-3 sm:px-6 pt-3 sm:pt-6">
-            <CardTitle className="text-base sm:text-lg">Quick Actions</CardTitle>
+            <CardTitle className="text-base sm:text-lg">Szybkie akcje</CardTitle>
             <CardDescription className="text-xs sm:text-sm">
-              Common administrative tasks
+              Częste zadania administracyjne
             </CardDescription>
           </CardHeader>
           <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
             <div className="space-y-2 sm:space-y-3">
               <Button className="w-full justify-start" variant="outline" size="sm">
                 <Plus className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="text-xs sm:text-sm">Add New Product</span>
+                <span className="text-xs sm:text-sm">Dodaj nowy produkt</span>
               </Button>
               <Button className="w-full justify-start" variant="outline" size="sm">
                 <Eye className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="text-xs sm:text-sm">View All Orders</span>
+                <span className="text-xs sm:text-sm">Zobacz wszystkie zamówienia</span>
               </Button>
               <Button className="w-full justify-start" variant="outline" size="sm">
                 <Users className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="text-xs sm:text-sm">Manage Users</span>
+                <span className="text-xs sm:text-sm">Zarządzaj użytkownikami</span>
               </Button>
               <Button className="w-full justify-start" variant="outline" size="sm">
                 <Package className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="text-xs sm:text-sm">Update Inventory</span>
+                <span className="text-xs sm:text-sm">Aktualizuj magazyn</span>
               </Button>
             </div>
           </CardContent>

@@ -4,23 +4,23 @@ export function AboutStats() {
   const stats = [
     {
       number: '99.9%',
-      label: 'Uptime',
-      description: 'Reliable service with minimal downtime'
+      label: 'Czas działania',
+      description: 'Niezawodna usługa z minimalnym czasem przestoju'
     },
     {
       number: '< 2s',
-      label: 'Load Time',
-      description: 'Lightning-fast page loading speeds'
+      label: 'Czas ładowania',
+      description: 'Błyskawicznie szybkie ładowanie stron'
     },
     {
       number: '24/7',
-      label: 'Support',
-      description: 'Round-the-clock customer assistance'
+      label: 'Wsparcie',
+      description: 'Całodobowa pomoc klienta'
     },
     {
       number: 'SSL',
-      label: 'Security',
-      description: 'Bank-level encryption for all transactions'
+      label: 'Bezpieczeństwo',
+      description: 'Szyfrowanie na poziomie bankowym dla wszystkich transakcji'
     }
   ];
 
@@ -28,9 +28,9 @@ export function AboutStats() {
     <section className="py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Why Choose Us?</h2>
+          <h2 className="text-3xl font-bold mb-4">Dlaczego wybrać nas?</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            We're committed to delivering exceptional performance and reliability
+            Jesteśmy zaangażowani w dostarczanie wyjątkowej wydajności i niezawodności
           </p>
         </div>
         

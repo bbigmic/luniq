@@ -17,8 +17,8 @@ export function Footer() {
               <span className="text-lg font-bold">LuniQ Vape</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Your trusted partner for quality products and exceptional service. 
-              We're committed to bringing you the best shopping experience.
+              Twój zaufany partner w dostarczaniu wysokiej jakości produktów i wyjątkowej obsługi. 
+              Jesteśmy zaangażowani w zapewnienie Ci najlepszych doświadczeń zakupowych.
             </p>
             <div className="flex space-x-4">
               <Facebook className="h-5 w-5 text-muted-foreground hover:text-primary cursor-pointer transition-colors" />
@@ -29,57 +29,57 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold">Quick Links</h3>
+            <h3 className="text-sm font-semibold">Szybkie linki</h3>
             <div className="space-y-2">
               <Link href="/products" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-                All Products
+                Wszystkie produkty
               </Link>
               <Link href="/categories" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-                Categories
+                Kategorie
               </Link>
               <Link href="/about" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-                About Us
+                O nas
               </Link>
               <Link href="/contact" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-                Contact
+                Kontakt
               </Link>
             </div>
           </div>
 
           {/* Customer Service */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold">Customer Service</h3>
+            <h3 className="text-sm font-semibold">Obsługa klienta</h3>
             <div className="space-y-2">
               <Link href="/help" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-                Help Center
+                Centrum pomocy
               </Link>
               <Link href="/shipping" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-                Shipping Info
+                Informacje o dostawie
               </Link>
               <Link href="/returns" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-                Returns
+                Zwroty
               </Link>
               <Link href="/privacy" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-                Privacy Policy
+                Polityka prywatności
               </Link>
             </div>
           </div>
 
           {/* Contact Info */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold">Contact Info</h3>
+            <h3 className="text-sm font-semibold">Informacje kontaktowe</h3>
             <div className="space-y-2">
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4" />
-                <span>support@ecommerce.com</span>
+                <span>support@luniq-vape.pl</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4" />
-                <span>+1 (555) 123-4567</span>
+                <span>+48 123 456 789</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4" />
-                <span>123 Commerce St, City, State 12345</span>
+                <span>ul. Przykładowa 123, Warszawa, Polska</span>
               </div>
             </div>
           </div>
@@ -87,7 +87,7 @@ export function Footer() {
 
         <div className="border-t mt-8 pt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            © 2024 Luniq. All rights reserved.
+            © 2024 LuniQ Vape. Wszystkie prawa zastrzeżone.
           </p>
         </div>
       </div>

@@ -86,7 +86,7 @@ export function ProductGrid({ filters = {} }: ProductGridProps) {
     return (
       <div className="flex items-center justify-center py-12">
         <Loader2 className="h-8 w-8 animate-spin" />
-        <span className="ml-2">Loading products...</span>
+        <span className="ml-2">Ładowanie produktów...</span>
       </div>
     );
   }
@@ -96,11 +96,11 @@ export function ProductGrid({ filters = {} }: ProductGridProps) {
       {/* Sort Options */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <p className="text-muted-foreground text-sm sm:text-base">
-          Showing {pagination.total} products
+          Wyświetlanie {pagination.total} produktów
         </p>
         <div className="flex items-center gap-2">
           <label htmlFor="sort" className="text-xs sm:text-sm font-medium">
-            Sort by:
+            Sortuj według:
           </label>
           <select
             id="sort"
@@ -108,11 +108,11 @@ export function ProductGrid({ filters = {} }: ProductGridProps) {
             onChange={(e) => setSortBy(e.target.value)}
             className="px-2 sm:px-3 py-1 border border-input bg-background rounded-md text-xs sm:text-sm"
           >
-            <option value="featured">Featured</option>
-            <option value="price-low">Price: Low to High</option>
-            <option value="price-high">Price: High to Low</option>
-            <option value="name">Name A-Z</option>
-            <option value="newest">Newest</option>
+            <option value="featured">Polecane</option>
+            <option value="price-low">Cena: od najniższej</option>
+            <option value="price-high">Cena: od najwyższej</option>
+            <option value="name">Nazwa A-Z</option>
+            <option value="newest">Najnowsze</option>
           </select>
         </div>
       </div>
@@ -134,13 +134,13 @@ export function ProductGrid({ filters = {} }: ProductGridProps) {
 
                   {product.featured && (
                     <Badge className="absolute top-1 sm:top-2 left-1 sm:left-2 text-xs">
-                      Featured
+                      Polecane
                     </Badge>
                   )}
 
                   {product.comparePrice && product.comparePrice > product.price && (
                     <Badge variant="destructive" className="absolute top-1 sm:top-2 right-1 sm:right-2 text-xs">
-                      Sale
+                      Wyprzedaż
                     </Badge>
                   )}
 
@@ -200,7 +200,7 @@ export function ProductGrid({ filters = {} }: ProductGridProps) {
                 >
                   <ShoppingCart className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                   <span className="text-xs sm:text-sm">
-                    {product.quantity > 0 ? 'Add to Cart' : 'Out of Stock'}
+                    {product.quantity > 0 ? 'Dodaj do koszyka' : 'Brak w magazynie'}
                   </span>
                 </Button>
               </CardFooter>
@@ -209,7 +209,7 @@ export function ProductGrid({ filters = {} }: ProductGridProps) {
         </div>
       ) : (
         <div className="text-center py-12">
-          <p className="text-muted-foreground">No products found matching your criteria.</p>
+          <p className="text-muted-foreground">Nie znaleziono produktów spełniających kryteria.</p>
         </div>
       )}
 
@@ -221,17 +221,17 @@ export function ProductGrid({ filters = {} }: ProductGridProps) {
             onClick={() => setPagination(prev => ({ ...prev, page: prev.page - 1 }))}
             disabled={pagination.page === 1}
           >
-            Previous
+            Poprzednia
           </Button>
           <span className="px-4 py-2 text-sm">
-            Page {pagination.page} of {pagination.totalPages}
+            Strona {pagination.page} z {pagination.totalPages}
           </span>
           <Button
             variant="outline"
             onClick={() => setPagination(prev => ({ ...prev, page: prev.page + 1 }))}
             disabled={pagination.page === pagination.totalPages}
           >
-            Next
+            Następna
           </Button>
         </div>
       )}

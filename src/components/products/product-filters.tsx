@@ -54,7 +54,7 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
         const response = await fetch('/api/categories');
         if (!response.ok) throw new Error('Failed to fetch categories');
         const data = await response.json();
-        setCategories([{ id: 'all', name: 'All Categories', slug: 'all', description: '', productCount: data.totalProducts || 0 }, ...data.categories]);
+        setCategories([{ id: 'all', name: 'Wszystkie kategorie', slug: 'all', description: '', productCount: data.totalProducts || 0 }, ...data.categories]);
       } catch (error) {
         console.error('Error fetching categories:', error);
       } finally {
@@ -165,7 +165,7 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <Filter className="h-4 w-4 sm:h-5 sm:w-5" />
-          <h3 className="text-sm sm:text-base lg:text-lg font-semibold">Filters</h3>
+          <h3 className="text-sm sm:text-base lg:text-lg font-semibold">Filtry</h3>
           {activeFiltersCount > 0 && (
             <Badge variant="secondary" className="text-xs">{activeFiltersCount}</Badge>
           )}
@@ -173,7 +173,7 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
         {activeFiltersCount > 0 && (
           <Button variant="ghost" size="sm" onClick={clearFilters} className="text-xs sm:text-sm">
             <X className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
-            <span className="hidden sm:inline">Clear</span>
+            <span className="hidden sm:inline">Wyczyść</span>
           </Button>
         )}
       </div>
@@ -181,13 +181,13 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
       {/* Search */}
       <Card>
         <CardHeader className="pb-2 sm:pb-3 px-3 sm:px-6 pt-3 sm:pt-6">
-          <CardTitle className="text-sm sm:text-base lg:text-lg">Search</CardTitle>
+          <CardTitle className="text-sm sm:text-base lg:text-lg">Szukaj</CardTitle>
         </CardHeader>
         <CardContent className="pt-0 px-3 sm:px-6 pb-3 sm:pb-6">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-3 w-3 sm:h-4 sm:w-4 -translate-y-1/2 text-muted-foreground" />
             <Input 
-              placeholder="Search products..." 
+              placeholder="Szukaj produktów..." 
               value={filters.search}
               onChange={(e) => handleFilterChange('search', e.target.value)}
               className="pl-8 sm:pl-10 text-xs sm:text-sm lg:text-base"
@@ -199,11 +199,11 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
       {/* Price Range */}
       <Card>
         <CardHeader className="pb-2 sm:pb-3 px-3 sm:px-6 pt-3 sm:pt-6">
-          <CardTitle className="text-sm sm:text-base lg:text-lg">Price Range</CardTitle>
+          <CardTitle className="text-sm sm:text-base lg:text-lg">Zakres cen</CardTitle>
         </CardHeader>
         <CardContent className="pt-0 px-3 sm:px-6 pb-3 sm:pb-6 space-y-3 sm:space-y-4">
           <div className="space-y-2">
-            <Label className="text-xs sm:text-sm lg:text-base">${filters.priceRange[0]} - ${filters.priceRange[1]}</Label>
+            <Label className="text-xs sm:text-sm lg:text-base">{filters.priceRange[0]} PLN - {filters.priceRange[1]} PLN</Label>
             <Slider
               value={[filters.priceRange[0], filters.priceRange[1]]}
               onValueChange={(value) => {
@@ -221,13 +221,13 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
       {/* Categories */}
       <Card>
         <CardHeader className="pb-2 sm:pb-3 px-3 sm:px-6 pt-3 sm:pt-6">
-          <CardTitle className="text-sm sm:text-base lg:text-lg">Categories</CardTitle>
+          <CardTitle className="text-sm sm:text-base lg:text-lg">Kategorie</CardTitle>
         </CardHeader>
         <CardContent className="pt-0 px-3 sm:px-6 pb-3 sm:pb-6">
           {loadingCategories ? (
             <div className="flex items-center justify-center py-4">
               <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5 animate-spin" />
-              <span className="ml-2 text-xs sm:text-sm">Loading categories...</span>
+              <span className="ml-2 text-xs sm:text-sm">Ładowanie kategorii...</span>
             </div>
           ) : (
             <div className="space-y-1 sm:space-y-2 max-h-48 sm:max-h-60 overflow-y-auto">
@@ -268,7 +268,7 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
       {/* Availability */}
       <Card>
         <CardHeader className="pb-2 sm:pb-3 px-3 sm:px-6 pt-3 sm:pt-6">
-          <CardTitle className="text-sm sm:text-base lg:text-lg">Availability</CardTitle>
+          <CardTitle className="text-sm sm:text-base lg:text-lg">Dostępność</CardTitle>
         </CardHeader>
         <CardContent className="pt-0 px-3 sm:px-6 pb-3 sm:pb-6">
           <div className="flex items-center space-x-2">
@@ -283,7 +283,7 @@ export function ProductFilters({ onFiltersChange, initialFilters }: ProductFilte
               htmlFor="in-stock"
               className="text-xs sm:text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
             >
-              In Stock Only
+              Tylko dostępne
             </label>
           </div>
         </CardContent>

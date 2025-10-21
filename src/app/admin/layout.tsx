@@ -45,7 +45,7 @@ export default function AdminLayout({
       <AdminHeader />
       <div className="flex flex-col lg:flex-row">
         <AdminSidebar />
-        <main className="flex-1 p-3 sm:p-4 lg:p-6">
+        <main className="flex-1 p-3 sm:p-4 lg:p-6 min-h-screen">
           <div className="max-w-full overflow-x-auto">
             {children}
           </div>

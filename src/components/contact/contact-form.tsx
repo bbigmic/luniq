@@ -59,25 +59,26 @@ export function ContactForm() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Send className="h-5 w-5" />
-          Send us a Message
+          Wyślij nam wiadomość
         </CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="name">Name *</Label>
+              <Label htmlFor="name" className="text-base">Imię *</Label>
               <Input
                 id="name"
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
                 required
-                placeholder="Your full name"
+                placeholder="Twoje pełne imię"
+                className="h-12 text-base"
               />
             </div>
             <div>
-              <Label htmlFor="email">Email *</Label>
+              <Label htmlFor="email" className="text-base">Email *</Label>
               <Input
                 id="email"
                 name="email"
@@ -85,25 +86,27 @@ export function ContactForm() {
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                placeholder="your.email@example.com"
+                placeholder="twoj.email@przyklad.pl"
+                className="h-12 text-base"
               />
             </div>
           </div>
 
           <div>
-            <Label htmlFor="subject">Subject *</Label>
+            <Label htmlFor="subject" className="text-base">Temat *</Label>
             <Input
               id="subject"
               name="subject"
               value={formData.subject}
               onChange={handleInputChange}
               required
-              placeholder="What's this about?"
+              placeholder="O czym chcesz napisać?"
+              className="h-12 text-base"
             />
           </div>
 
           <div>
-            <Label htmlFor="message">Message *</Label>
+            <Label htmlFor="message" className="text-base">Wiadomość *</Label>
             <textarea
               id="message"
               name="message"
@@ -111,17 +114,17 @@ export function ContactForm() {
               onChange={handleInputChange}
               required
               rows={6}
-              className="w-full px-3 py-2 border border-input bg-background rounded-md resize-none"
-              placeholder="Tell us more about your inquiry..."
+              className="w-full px-3 py-3 border border-input bg-background rounded-md resize-none text-base"
+              placeholder="Opowiedz nam więcej o swoim zapytaniu..."
             />
           </div>
 
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full"
+            className="w-full h-14 text-base"
           >
-            {isSubmitting ? 'Sending...' : 'Send Message'}
+            {isSubmitting ? 'Wysyłanie...' : 'Wyślij wiadomość'}
           </Button>
         </form>
       </CardContent>

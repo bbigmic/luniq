@@ -15,12 +15,12 @@ export function CartItems() {
     return (
       <div className="text-center py-12">
         <ShoppingBag className="h-24 w-24 mx-auto text-muted-foreground mb-6" />
-        <h2 className="text-2xl font-bold mb-4">Your cart is empty</h2>
+        <h2 className="text-2xl font-bold mb-4">Twój koszyk jest pusty</h2>
         <p className="text-muted-foreground mb-8">
-          Looks like you haven't added any items to your cart yet.
+          Wygląda na to, że nie dodałeś jeszcze żadnych produktów do koszyka.
         </p>
         <Link href="/products">
-          <Button>Continue Shopping</Button>
+          <Button>Kontynuuj zakupy</Button>
         </Link>
       </div>
     );
@@ -99,10 +99,10 @@ export function CartItems() {
         
         <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-4">
           <Button variant="outline" onClick={clearCart} className="w-full sm:w-auto">
-            Clear Cart
+            Wyczyść koszyk
           </Button>
           <Link href="/products" className="w-full sm:w-auto">
-            <Button variant="outline" className="w-full">Continue Shopping</Button>
+            <Button variant="outline" className="w-full">Kontynuuj zakupy</Button>
           </Link>
         </div>
       </div>
@@ -111,36 +111,36 @@ export function CartItems() {
       <div className="lg:col-span-1">
         <Card>
           <CardHeader className="px-3 sm:px-6 pt-3 sm:pt-6">
-            <CardTitle className="text-base sm:text-lg">Order Summary</CardTitle>
+            <CardTitle className="text-base sm:text-lg">Podsumowanie zamówienia</CardTitle>
           </CardHeader>
           <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6 space-y-3 sm:space-y-4">
             <div className="flex justify-between text-sm sm:text-base">
-              <span>Items ({state.totalItems})</span>
+              <span>Produkty ({state.totalItems})</span>
               <span>{formatPrice(state.totalPrice)}</span>
             </div>
             <div className="flex justify-between text-sm sm:text-base">
-              <span>Shipping</span>
+              <span>Dostawa</span>
               <span>Free</span>
             </div>
             <div className="flex justify-between text-sm sm:text-base">
-              <span>Tax</span>
+              <span>Podatek</span>
               <span>{formatPrice(state.totalPrice * 0.08)}</span>
             </div>
             <div className="border-t pt-3 sm:pt-4">
               <div className="flex justify-between font-semibold text-base sm:text-lg">
-                <span>Total</span>
+                <span>Razem</span>
                 <span>{formatPrice(state.totalPrice * 1.08)}</span>
               </div>
             </div>
             
             <Link href="/checkout">
               <Button className="w-full" size="sm">
-                Proceed to Checkout
+                Przejdź do kasy
               </Button>
             </Link>
             
             <p className="text-xs sm:text-sm text-muted-foreground text-center">
-              Secure checkout powered by Stripe
+              Bezpieczna kasa obsługiwana przez Stripe
             </p>
           </CardContent>
         </Card>

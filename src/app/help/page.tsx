@@ -107,8 +107,8 @@ export default function HelpPage() {
                   <div className="space-y-2">
                     <h4 className="font-medium">Do you offer free shipping?</h4>
                     <p className="text-sm text-muted-foreground">
-                      Yes! We offer free standard shipping on all orders over $50. 
-                      International shipping is available for $19.99.
+                      Yes! We offer free standard shipping on all orders over 200 PLN. 
+                      International shipping is available for 85 PLN.
                     </p>
                   </div>
                   

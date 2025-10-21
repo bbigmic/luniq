@@ -43,9 +43,9 @@ function ProductsPageContent() {
       <Header />
       <main className="container mx-auto px-3 sm:px-4 py-3 sm:py-4 lg:py-8">
         <div className="mb-4 sm:mb-6 lg:mb-8">
-          <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold mb-2 sm:mb-4">All Products</h1>
-          <p className="text-muted-foreground text-sm sm:text-base lg:text-lg">
-            Discover our complete collection of premium products
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4">Wszystkie produkty</h1>
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">
+            Odkryj naszą kompletną kolekcję premium produktów
           </p>
         </div>
 
@@ -58,7 +58,7 @@ function ProductsPageContent() {
           </aside>
           
           <div className="lg:col-span-3 order-1 lg:order-2">
-            <Suspense fallback={<div className="flex items-center justify-center py-12"><div className="text-muted-foreground">Loading products...</div></div>}>
+            <Suspense fallback={<div className="flex items-center justify-center py-12"><div className="text-muted-foreground">Ładowanie produktów...</div></div>}>
               <ProductGrid filters={filters} />
             </Suspense>
           </div>
@@ -71,7 +71,7 @@ function ProductsPageContent() {
 
 export default function ProductsPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-black flex items-center justify-center"><div className="text-muted-foreground">Loading...</div></div>}>
+    <Suspense fallback={<div className="min-h-screen bg-black flex items-center justify-center"><div className="text-muted-foreground">Ładowanie...</div></div>}>
       <ProductsPageContent />
     </Suspense>
   );

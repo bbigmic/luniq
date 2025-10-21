@@ -11,9 +11,9 @@ export default function ContactPage() {
       <main className="container mx-auto px-3 sm:px-4 py-3 sm:py-6 lg:py-8">
         <div className="max-w-6xl mx-auto">
           <div className="mb-6 sm:mb-8">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">Contact Us</h1>
-            <p className="text-muted-foreground text-sm sm:text-base lg:text-lg">
-              We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Skontaktuj się z nami</h1>
+            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">
+              Chcielibyśmy usłyszeć od Ciebie. Wyślij nam wiadomość, a odpowiemy tak szybko, jak to możliwe.
             </p>
           </div>
 
@@ -27,36 +27,36 @@ export default function ContactPage() {
             <div className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Get in Touch</CardTitle>
+                  <CardTitle>Skontaktuj się z nami</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-start space-x-3">
                     <Mail className="h-5 w-5 text-primary mt-1" />
                     <div>
                       <h3 className="font-semibold">Email</h3>
-                      <p className="text-sm text-muted-foreground">support@ecommerce.com</p>
-                      <p className="text-sm text-muted-foreground">sales@ecommerce.com</p>
+                      <p className="text-sm text-muted-foreground">support@luniq-vape.pl</p>
+                      <p className="text-sm text-muted-foreground">sprzedaz@luniq-vape.pl</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start space-x-3">
                     <Phone className="h-5 w-5 text-primary mt-1" />
                     <div>
-                      <h3 className="font-semibold">Phone</h3>
-                      <p className="text-sm text-muted-foreground">+1 (555) 123-4567</p>
-                      <p className="text-sm text-muted-foreground">Toll-free: +1 (800) 123-4567</p>
+                      <h3 className="font-semibold">Telefon</h3>
+                      <p className="text-sm text-muted-foreground">+48 123 456 789</p>
+                      <p className="text-sm text-muted-foreground">Bezpłatny: +48 800 123 456</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start space-x-3">
                     <MapPin className="h-5 w-5 text-primary mt-1" />
                     <div>
-                      <h3 className="font-semibold">Address</h3>
+                      <h3 className="font-semibold">Adres</h3>
                       <p className="text-sm text-muted-foreground">
-                        123 Commerce Street<br />
-                        Business District<br />
-                        City, State 12345<br />
-                        United States
+                        ul. Przykładowa 123<br />
+                        Dzielnica Biznesowa<br />
+                        Warszawa, 00-001<br />
+                        Polska
                       </p>
                     </div>
                   </div>
@@ -64,11 +64,11 @@ export default function ContactPage() {
                   <div className="flex items-start space-x-3">
                     <Clock className="h-5 w-5 text-primary mt-1" />
                     <div>
-                      <h3 className="font-semibold">Business Hours</h3>
+                      <h3 className="font-semibold">Godziny pracy</h3>
                       <div className="text-sm text-muted-foreground space-y-1">
-                        <p>Monday - Friday: 9:00 AM - 6:00 PM EST</p>
-                        <p>Saturday: 10:00 AM - 4:00 PM EST</p>
-                        <p>Sunday: Closed</p>
+                        <p>Poniedziałek - Piątek: 9:00 - 18:00</p>
+                        <p>Sobota: 10:00 - 16:00</p>
+                        <p>Niedziela: Zamknięte</p>
                       </div>
                     </div>
                   </div>
@@ -77,30 +77,30 @@ export default function ContactPage() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Why Contact Us?</CardTitle>
+                  <CardTitle>Dlaczego się z nami skontaktować?</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="space-y-2">
-                    <h4 className="font-semibold">Customer Support</h4>
+                    <h4 className="font-semibold">Obsługa klienta</h4>
                     <p className="text-sm text-muted-foreground">
-                      Need help with your order, product questions, or account issues? 
-                      Our support team is here to help.
+                      Potrzebujesz pomocy z zamówieniem, pytaniami o produkty lub problemami z kontem? 
+                      Nasz zespół wsparcia jest tutaj, aby pomóc.
                     </p>
                   </div>
                   
                   <div className="space-y-2">
-                    <h4 className="font-semibold">Business Inquiries</h4>
+                    <h4 className="font-semibold">Zapytania biznesowe</h4>
                     <p className="text-sm text-muted-foreground">
-                      Interested in partnerships, bulk orders, or wholesale opportunities? 
-                      Let's discuss how we can work together.
+                      Zainteresowany partnerstwem, zamówieniami hurtowymi lub możliwościami sprzedaży? 
+                      Porozmawiajmy o tym, jak możemy współpracować.
                     </p>
                   </div>
                   
                   <div className="space-y-2">
-                    <h4 className="font-semibold">Feedback & Suggestions</h4>
+                    <h4 className="font-semibold">Opinie i sugestie</h4>
                     <p className="text-sm text-muted-foreground">
-                      We value your feedback! Share your thoughts on how we can improve 
-                      your shopping experience.
+                      Cenimy Twoją opinię! Podziel się swoimi przemyśleniami na temat tego, jak możemy poprawić 
+                      Twoje doświadczenia zakupowe.
                     </p>
                   </div>
                 </CardContent>
@@ -108,21 +108,21 @@ export default function ContactPage() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Response Time</CardTitle>
+                  <CardTitle>Czas odpowiedzi</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm">Email Support</span>
-                      <span className="text-sm font-medium">Within 24 hours</span>
+                      <span className="text-sm">Wsparcie email</span>
+                      <span className="text-sm font-medium">W ciągu 24 godzin</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm">Phone Support</span>
-                      <span className="text-sm font-medium">Immediate</span>
+                      <span className="text-sm">Wsparcie telefoniczne</span>
+                      <span className="text-sm font-medium">Natychmiastowe</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm">Live Chat</span>
-                      <span className="text-sm font-medium">Within 5 minutes</span>
+                      <span className="text-sm">Czat na żywo</span>
+                      <span className="text-sm font-medium">W ciągu 5 minut</span>
                     </div>
                   </div>
                 </CardContent>

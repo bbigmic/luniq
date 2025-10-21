@@ -15,7 +15,7 @@ export function Newsletter() {
     e.preventDefault();
     
     if (!email) {
-      toast.error('Please enter your email address');
+      toast.error('Proszę podać adres email');
       return;
     }
 
@@ -23,7 +23,7 @@ export function Newsletter() {
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     setIsSubscribed(true);
-    toast.success('Successfully subscribed to our newsletter!');
+    toast.success('Pomyślnie zapisano do newslettera!');
     setEmail('');
     
     // Reset after 3 seconds
@@ -40,36 +40,36 @@ export function Newsletter() {
                 <Mail className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
               </div>
               
-              <div className="space-y-2">
-                <h2 className="text-2xl sm:text-3xl font-bold">Stay Updated</h2>
-                <p className="text-sm sm:text-base text-muted-foreground">
-                  Subscribe to our newsletter and be the first to know about new products, 
-                  exclusive deals, and special offers.
+              <div className="space-y-3">
+                <h2 className="text-3xl sm:text-4xl font-bold">Bądź na bieżąco</h2>
+                <p className="text-base sm:text-lg text-muted-foreground">
+                  Zapisz się do naszego newslettera i bądź pierwszy, który dowie się o nowych produktach, 
+                  ekskluzywnych ofertach i specjalnych promocjach.
                 </p>
               </div>
 
               {isSubscribed ? (
                 <div className="flex items-center justify-center space-x-2 text-green-600">
                   <Check className="h-5 w-5" />
-                  <span className="font-medium">Thank you for subscribing!</span>
+                  <span className="font-medium">Dziękujemy za zapisanie się!</span>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                   <Input
                     type="email"
-                    placeholder="Enter your email"
+                    placeholder="Wprowadź swój email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="flex-1"
+                    className="flex-1 h-12 text-base"
                   />
-                  <Button type="submit" className="sm:w-auto">
-                    Subscribe
+                  <Button type="submit" className="sm:w-auto h-12 px-6 text-base">
+                    Zapisz się
                   </Button>
                 </form>
               )}
 
-              <p className="text-xs text-muted-foreground">
-                We respect your privacy. Unsubscribe at any time.
+              <p className="text-sm text-muted-foreground">
+                Szanujemy Twoją prywatność. Możesz wypisać się w każdej chwili.
               </p>
             </div>
           </CardContent>

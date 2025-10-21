@@ -36,7 +36,7 @@ export function Header() {
               alt="Luniq Logo" 
               className="h-8 w-8 sm:h-10 sm:w-10 rounded-lg object-cover"
             />
-            <span className="text-lg sm:text-xl font-bold">LuniQ Vape</span>
+            <span className="text-xl sm:text-2xl font-bold">LuniQ Vape</span>
           </Link>
 
           {/* Search Bar - Desktop */}
@@ -44,28 +44,28 @@ export function Header() {
             <div className="relative w-full">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                placeholder="Search products..."
-                className="pl-10 pr-4 text-sm"
+                placeholder="Szukaj produktów..."
+                className="pl-10 pr-4 text-base h-12"
               />
             </div>
           </div>
 
           {/* Navigation - Desktop */}
           <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6">
-            <Link href="/products" className="text-sm font-medium hover:text-primary transition-colors">
-              Products
+            <Link href="/products" className="text-base font-medium hover:text-primary transition-colors">
+              Produkty
             </Link>
             {/* Categories link removed */}
             {session && (
-              <Link href="/orders" className="text-sm font-medium hover:text-primary transition-colors">
-                Orders
+              <Link href="/orders" className="text-base font-medium hover:text-primary transition-colors">
+                Zamówienia
               </Link>
             )}
-            <Link href="/about" className="text-sm font-medium hover:text-primary transition-colors">
-              About
+            <Link href="/about" className="text-base font-medium hover:text-primary transition-colors">
+              O nas
             </Link>
-            <Link href="/contact" className="text-sm font-medium hover:text-primary transition-colors">
-              Contact
+            <Link href="/contact" className="text-base font-medium hover:text-primary transition-colors">
+              Kontakt
             </Link>
           </nav>
 
@@ -75,18 +75,18 @@ export function Header() {
             <Button 
               variant="ghost" 
               size="icon" 
-              className="md:hidden h-8 w-8 sm:h-10 sm:w-10"
+              className="md:hidden h-10 w-10 sm:h-12 sm:w-12"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
             >
-              <Search className="h-4 w-4 sm:h-5 sm:w-5" />
+              <Search className="h-5 w-5 sm:h-6 sm:w-6" />
             </Button>
 
             {/* Wishlist */}
             <Link href="/wishlist">
-              <Button variant="ghost" size="icon" className="hidden sm:flex h-8 w-8 sm:h-10 sm:w-10 relative">
-                <Heart className="h-4 w-4 sm:h-5 sm:w-5" />
+              <Button variant="ghost" size="icon" className="hidden sm:flex h-10 w-10 sm:h-12 sm:w-12 relative">
+                <Heart className="h-5 w-5 sm:h-6 sm:w-6" />
                 {wishlistState.totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 text-white text-xs flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-white text-sm flex items-center justify-center">
                     {wishlistState.totalItems}
                   </span>
                 )}
@@ -95,10 +95,10 @@ export function Header() {
 
             {/* Cart */}
             <Link href="/cart">
-              <Button variant="ghost" size="icon" className="relative h-8 w-8 sm:h-10 sm:w-10">
-                <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
+              <Button variant="ghost" size="icon" className="relative h-10 w-10 sm:h-12 sm:w-12">
+                <ShoppingCart className="h-5 w-5 sm:h-6 sm:w-6" />
                 {state.totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-sm flex items-center justify-center">
                     {state.totalItems}
                   </span>
                 )}
@@ -108,39 +108,38 @@ export function Header() {
             {/* User Menu - Desktop */}
             {session ? (
               <div className="hidden sm:flex items-center space-x-2">
-                <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-10 sm:w-10">
-                  <User className="h-4 w-4 sm:h-5 sm:w-5" />
-                </Button>
-                <div className="hidden lg:block">
-                  <p className="text-sm font-medium">{session.user.name}</p>
-                  <p className="text-xs text-muted-foreground">{session.user.role}</p>
+                <div className="hidden lg:flex items-center space-x-2">
+                  <Button variant="ghost" size="icon" className="h-10 w-10">
+                    <User className="h-5 w-5" />
+                  </Button>
+                  <span className="text-sm font-medium">{session.user.name}</span>
+                  {session.user.role === 'admin' && (
+                    <Link href="/admin">
+                      <Button variant="outline" size="sm" className="h-8 px-3 text-sm">
+                        Admin
+                      </Button>
+                    </Link>
+                  )}
                 </div>
-                {session.user.role === 'admin' && (
-                  <Link href="/admin">
-                    <Button variant="outline" size="sm" className="hidden lg:flex">
-                      Admin
-                    </Button>
-                  </Link>
-                )}
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => signOut()}
-                  className="hidden lg:flex"
+                  className="h-10 px-3 text-sm"
                 >
-                  Sign Out
+                  Wyloguj
                 </Button>
               </div>
             ) : (
               <div className="hidden sm:flex items-center space-x-2">
                 <Link href="/auth/signin">
-                  <Button variant="ghost" size="sm" className="hidden lg:flex">
-                    Sign In
+                  <Button variant="ghost" size="sm" className="h-10 px-3 text-sm">
+                    Zaloguj
                   </Button>
                 </Link>
                 <Link href="/auth/signup">
-                  <Button size="sm" className="hidden lg:flex">
-                    Sign Up
+                  <Button size="sm" className="h-10 px-3 text-sm">
+                    Rejestracja
                   </Button>
                 </Link>
               </div>
@@ -150,10 +149,10 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden h-8 w-8 sm:h-10 sm:w-10"
+              className="lg:hidden h-10 w-10 sm:h-12 sm:w-12"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="h-4 w-4 sm:h-5 sm:w-5" /> : <Menu className="h-4 w-4 sm:h-5 sm:w-5" />}
+              {isMenuOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
             </Button>
           </div>
         </div>
@@ -164,8 +163,8 @@ export function Header() {
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                placeholder="Search products..."
-                className="pl-10 pr-4 text-sm"
+                placeholder="Szukaj produktów..."
+                className="pl-10 pr-4 text-base h-12"
                 autoFocus
               />
             </div>
@@ -174,64 +173,66 @@ export function Header() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <Card className="lg:hidden mt-2 p-4">
+          <div className="lg:hidden mt-2 mb-2 p-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border rounded-lg shadow-sm">
             <nav className="flex flex-col space-y-4">
               <Link 
                 href="/products" 
-                className="text-sm font-medium hover:text-primary transition-colors"
+                className="text-base font-medium hover:text-primary transition-colors py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Products
+                Produkty
               </Link>
               {/* Categories link removed */}
               {session && (
                 <Link 
                   href="/orders" 
-                  className="text-sm font-medium hover:text-primary transition-colors"
+                  className="text-base font-medium hover:text-primary transition-colors py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Orders
+                  Zamówienia
                 </Link>
               )}
               <Link 
                 href="/about" 
-                className="text-sm font-medium hover:text-primary transition-colors"
+                className="text-base font-medium hover:text-primary transition-colors py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                About
+                O nas
               </Link>
               <Link 
                 href="/contact" 
-                className="text-sm font-medium hover:text-primary transition-colors"
+                className="text-base font-medium hover:text-primary transition-colors py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Contact
+                Kontakt
               </Link>
               {session && (
                 <Link 
                   href="/wishlist" 
-                  className="text-sm font-medium hover:text-primary transition-colors flex items-center space-x-2"
+                  className="text-base font-medium hover:text-primary transition-colors flex items-center space-x-2 py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <Heart className="h-4 w-4" />
-                  <span>Wishlist {wishlistState.totalItems > 0 && `(${wishlistState.totalItems})`}</span>
+                  <Heart className="h-5 w-5" />
+                  <span>Lista życzeń {wishlistState.totalItems > 0 && `(${wishlistState.totalItems})`}</span>
                 </Link>
               )}
               
               {/* Mobile User Actions */}
               {session ? (
-                <div className="pt-4 border-t space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <User className="h-4 w-4" />
-                    <span className="text-sm font-medium">{session.user.name}</span>
+                <div className="pt-4 border-t space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <User className="h-5 w-5" />
+                      <span className="text-sm font-medium">{session.user.name}</span>
+                    </div>
+                    {session.user.role === 'admin' && (
+                      <Link href="/admin" onClick={() => setIsMenuOpen(false)}>
+                        <Button variant="outline" size="sm" className="h-8 px-3 text-sm">
+                          Admin
+                        </Button>
+                      </Link>
+                    )}
                   </div>
-                  {session.user.role === 'admin' && (
-                    <Link href="/admin" onClick={() => setIsMenuOpen(false)}>
-                      <Button variant="outline" size="sm" className="w-full">
-                        Admin Panel
-                      </Button>
-                    </Link>
-                  )}
                   <Button
                     variant="ghost"
                     size="sm"
@@ -239,27 +240,27 @@ export function Header() {
                       signOut();
                       setIsMenuOpen(false);
                     }}
-                    className="w-full"
+                    className="w-full h-10 text-sm"
                   >
-                    Sign Out
+                    Wyloguj
                   </Button>
                 </div>
               ) : (
                 <div className="pt-4 border-t space-y-2">
                   <Link href="/auth/signin" onClick={() => setIsMenuOpen(false)}>
-                    <Button variant="ghost" size="sm" className="w-full">
-                      Sign In
+                    <Button variant="ghost" size="sm" className="w-full h-10 text-sm">
+                      Zaloguj
                     </Button>
                   </Link>
                   <Link href="/auth/signup" onClick={() => setIsMenuOpen(false)}>
-                    <Button size="sm" className="w-full">
-                      Sign Up
+                    <Button size="sm" className="w-full h-10 text-sm">
+                      Rejestracja
                     </Button>
                   </Link>
                 </div>
               )}
             </nav>
-          </Card>
+          </div>
         )}
       </div>
     </header>

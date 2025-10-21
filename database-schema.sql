@@ -92,7 +92,7 @@ CREATE TABLE orders (
     shipping DECIMAL(10,2) DEFAULT 0,
     discount DECIMAL(10,2) DEFAULT 0,
     total DECIMAL(10,2) NOT NULL,
-    currency TEXT DEFAULT 'USD' NOT NULL,
+    currency TEXT DEFAULT 'PLN' NOT NULL,
     shipping_address JSONB,
     billing_address JSONB,
     notes TEXT,
