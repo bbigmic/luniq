@@ -67,7 +67,7 @@ export function FeaturedProducts() {
 
   if (loading) {
     return (
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-black">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl md:text-4xl font-bold">Featured Products</h2>
@@ -86,7 +86,7 @@ export function FeaturedProducts() {
 
   if (featuredProducts.length === 0) {
     return (
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-black">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl md:text-4xl font-bold">Featured Products</h2>
@@ -103,7 +103,7 @@ export function FeaturedProducts() {
   }
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-black">
       <div className="container mx-auto px-4">
         <div className="text-center space-y-4 mb-12">
           <h2 className="text-3xl md:text-4xl font-bold">Featured Products</h2>
