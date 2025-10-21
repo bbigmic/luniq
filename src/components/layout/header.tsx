@@ -30,12 +30,13 @@ export function Header() {
       <div className="container mx-auto px-3 sm:px-4">
         <div className="flex h-14 sm:h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center space-x-2 sm:space-x-3">
             <img 
               src="/images/luniq-logo-new.png" 
               alt="Luniq Logo" 
-              className="h-8 w-8 sm:h-10 sm:w-10 rounded-lg object-cover border border-primary/20 shadow-lg"
+              className="h-8 w-8 sm:h-10 sm:w-10 rounded-lg object-cover"
             />
+            <span className="text-lg sm:text-xl font-bold">Luniq Vape</span>
           </Link>
 
           {/* Search Bar - Desktop */}
