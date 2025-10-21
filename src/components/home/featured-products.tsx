@@ -70,16 +70,16 @@ export function FeaturedProducts() {
       <section className="relative py-20 bg-black overflow-hidden">
         {/* Background Image */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
           style={{
             backgroundImage: 'url(/images/background-products.png)',
-            backgroundSize: 'cover',
+            backgroundSize: 'contain',
             backgroundPosition: 'center center'
           }}
         ></div>
         
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/60"></div>
+        {/* Light overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/30"></div>
         
         {/* Content */}
         <div className="relative z-10 container mx-auto px-4">
@@ -103,16 +103,16 @@ export function FeaturedProducts() {
       <section className="relative py-20 bg-black overflow-hidden">
         {/* Background Image */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
           style={{
             backgroundImage: 'url(/images/background-products.png)',
-            backgroundSize: 'cover',
+            backgroundSize: 'contain',
             backgroundPosition: 'center center'
           }}
         ></div>
         
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/60"></div>
+        {/* Light overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/30"></div>
         
         {/* Content */}
         <div className="relative z-10 container mx-auto px-4">
@@ -134,16 +134,16 @@ export function FeaturedProducts() {
     <section className="relative py-20 bg-black overflow-hidden">
       {/* Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
         style={{
           backgroundImage: 'url(/images/background-products.png)',
-          backgroundSize: 'cover',
+          backgroundSize: 'contain',
           backgroundPosition: 'center center'
         }}
       ></div>
       
-      {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/60"></div>
+      {/* Light overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/30"></div>
       
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4">
