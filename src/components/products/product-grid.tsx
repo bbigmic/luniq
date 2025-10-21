@@ -121,10 +121,10 @@ export function ProductGrid({ filters = {} }: ProductGridProps) {
       {products.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
           {products.map((product) => (
-            <Card key={product.id} className="group hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 bg-gray-900 border-gray-700 hover:border-gray-600">
+            <Card key={product.id} className="group hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 bg-card border-border hover:border-primary/20">
               <CardHeader className="p-0">
                 <div className="relative overflow-hidden rounded-t-lg">
-                  <div className="aspect-square bg-gray-800 flex items-center justify-center">
+                  <div className="aspect-square bg-muted flex items-center justify-center">
                     <img
                       src={product.images?.[0] || '/images/products/placeholder.svg'}
                       alt={product.name}

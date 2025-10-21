@@ -324,7 +324,7 @@ export function ProductManagement() {
                   className="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 border rounded-lg hover:bg-muted/50 transition-colors gap-3 sm:gap-4"
                 >
                   <div className="flex items-center space-x-3 sm:space-x-4 min-w-0 flex-1">
-                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-800 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
                       <img 
                         src={product.images?.[0] || '/images/products/placeholder.svg'} 
                         alt={product.name}
