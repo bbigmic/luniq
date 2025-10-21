@@ -10,7 +10,7 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center">
               <img 
-                src="/images/luniq-logo-new.jpeg" 
+                src="/images/luniq-logo-new.png" 
                 alt="Luniq Logo" 
                 className="h-8 w-8 rounded-lg object-cover border border-primary/20 shadow-lg"
               />
