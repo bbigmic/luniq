@@ -16,19 +16,19 @@
     --card-foreground: 0 0% 95%;
     --popover: 220 25% 6%;
     --popover-foreground: 0 0% 95%;
-    --primary: 300 100% 60%; /* vibrant purple/magenta */
+    --primary: 300 85% 45%; /* darker purple/magenta */
     --primary-foreground: 0 0% 100%;
     --secondary: 220 20% 10%;
     --secondary-foreground: 0 0% 95%;
     --muted: 220 20% 12%;
     --muted-foreground: 0 0% 65%;
-    --accent: 300 100% 60%;
+    --accent: 300 85% 45%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     --border: 220 20% 12%;
     --input: 220 20% 12%;
-    --ring: 300 100% 60%;
+    --ring: 300 85% 45%;
     --radius: 0.5rem;
     
     /* LuniQ product flavor accent colors */
@@ -48,19 +48,19 @@
     --card-foreground: 0 0% 95%;
     --popover: 220 25% 6%;
     --popover-foreground: 0 0% 95%;
-    --primary: 300 100% 60%;
+    --primary: 300 85% 45%;
     --primary-foreground: 0 0% 100%;
     --secondary: 220 20% 10%;
     --secondary-foreground: 0 0% 95%;
     --muted: 220 20% 12%;
     --muted-foreground: 0 0% 65%;
-    --accent: 300 100% 60%;
+    --accent: 300 85% 45%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
     --border: 220 20% 12%;
     --input: 220 20% 12%;
-    --ring: 300 100% 60%;
+    --ring: 300 85% 45%;
   }
 }
 

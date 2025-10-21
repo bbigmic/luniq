@@ -8,11 +8,11 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-3">
               <img 
                 src="/images/luniq-logo.jpeg" 
                 alt="Luniq Logo" 
-                className="h-6 w-6 rounded-sm object-cover"
+                className="h-8 w-8 rounded-lg object-cover border border-primary/20 shadow-lg"
               />
               <span className="text-lg font-bold">Luniq</span>
             </div>
