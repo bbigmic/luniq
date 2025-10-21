@@ -65,14 +65,15 @@ export default function HomePage() {
           {/* Parallax Background */}
           <div 
             id="parallax-bg"
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat parallax-bg"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: 'url(/images/luniq-display-case.jpg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center 90%',
               transform: 'translateY(0px)',
-              minHeight: '110%',
-              top: '-5%'
+              height: '100%',
+              width: '100%',
+              top: '0%'
             }}
           ></div>
           
