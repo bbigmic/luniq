@@ -142,8 +142,8 @@
   background-repeat: no-repeat;
   will-change: transform;
   transform: translateZ(0);
-  height: 120%; /* Make it taller to allow for parallax movement */
-  top: -10%; /* Offset to center the extra height */
+  height: 100%;
+  width: 100%;
 }
 
 /* Mobile-optimized backgrounds */

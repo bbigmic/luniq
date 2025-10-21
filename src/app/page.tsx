@@ -18,30 +18,28 @@ export default function HomePage() {
       if (window.innerWidth <= 768) return;
       
       const parallaxElement = document.getElementById('parallax-bg');
-      if (!parallaxElement) return;
+      if (!parallaxElement) {
+        console.log('Parallax element not found');
+        return;
+      }
       
       const scrolled = window.pageYOffset;
-      const rect = parallaxElement.getBoundingClientRect();
-      const elementTop = rect.top + scrolled;
-      const elementHeight = rect.height;
+      const speed = 0.5; // Adjust speed (0.5 = half the scroll speed)
+      const yPos = -(scrolled * speed);
       
-      // Only apply parallax when element is in viewport
-      if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
-        const speed = 0.5; // Adjust speed (0.5 = half the scroll speed)
-        const yPos = -(scrolled * speed);
-        parallaxElement.style.transform = `translateY(${yPos}px)`;
-      }
+      console.log('Scrolling:', scrolled, 'Y Position:', yPos);
+      parallaxElement.style.transform = `translateY(${yPos}px)`;
     };
 
-    // Initial call
-    handleScroll();
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
+    // Add a small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      handleScroll();
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    }, 100);
     
     return () => {
+      clearTimeout(timer);
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
     };
   }, []);
 
@@ -54,7 +52,7 @@ export default function HomePage() {
           <FeaturedProducts />
         </Suspense>
         {/* Features Section with Parallax Background */}
-        <section className="relative py-16 sm:py-20 overflow-hidden">
+        <section className="relative py-16 sm:py-20 overflow-hidden min-h-[400px]">
           {/* Parallax Background */}
           <div 
             id="parallax-bg"
@@ -63,7 +61,8 @@ export default function HomePage() {
               backgroundImage: 'url(/images/luniq-display-case.jpg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
-              transform: 'translateY(0px)'
+              transform: 'translateY(0px)',
+              minHeight: '120%'
             }}
           ></div>
           
