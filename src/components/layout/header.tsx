@@ -31,7 +31,11 @@ export function Header() {
         <div className="flex h-14 sm:h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-1 sm:space-x-2">
-            <Package className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
+            <img 
+              src="/images/luniq-logo.jpeg" 
+              alt="Luniq Logo" 
+              className="h-6 w-6 sm:h-8 sm:w-8 rounded-sm object-cover"
+            />
             <span className="text-lg sm:text-xl font-bold">Luniq</span>
           </Link>
 

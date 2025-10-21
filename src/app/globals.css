@@ -9,25 +9,25 @@
 
 @layer base {
   :root {
-    /* LuniQ purple/magenta neon theme */
-    --background: 220 20% 6%;
-    --foreground: 0 0% 100%;
-    --card: 220 20% 8%;
-    --card-foreground: 0 0% 100%;
-    --popover: 220 20% 8%;
-    --popover-foreground: 0 0% 100%;
+    /* LuniQ purple/magenta neon theme - darker */
+    --background: 220 25% 4%;
+    --foreground: 0 0% 95%;
+    --card: 220 25% 6%;
+    --card-foreground: 0 0% 95%;
+    --popover: 220 25% 6%;
+    --popover-foreground: 0 0% 95%;
     --primary: 300 100% 60%; /* vibrant purple/magenta */
     --primary-foreground: 0 0% 100%;
-    --secondary: 220 16% 14%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 220 16% 18%;
-    --muted-foreground: 0 0% 70%;
+    --secondary: 220 20% 10%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 220 20% 12%;
+    --muted-foreground: 0 0% 65%;
     --accent: 300 100% 60%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 16% 18%;
-    --input: 220 16% 18%;
+    --border: 220 20% 12%;
+    --input: 220 20% 12%;
     --ring: 300 100% 60%;
     --radius: 0.5rem;
     
@@ -41,25 +41,25 @@
   }
 
   .dark {
-    /* Keep dark theme consistent with LuniQ purple/magenta */
-    --background: 220 20% 6%;
-    --foreground: 0 0% 100%;
-    --card: 220 20% 8%;
-    --card-foreground: 0 0% 100%;
-    --popover: 220 20% 8%;
-    --popover-foreground: 0 0% 100%;
+    /* Keep dark theme consistent with LuniQ purple/magenta - darker */
+    --background: 220 25% 4%;
+    --foreground: 0 0% 95%;
+    --card: 220 25% 6%;
+    --card-foreground: 0 0% 95%;
+    --popover: 220 25% 6%;
+    --popover-foreground: 0 0% 95%;
     --primary: 300 100% 60%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 220 16% 14%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 220 16% 18%;
-    --muted-foreground: 0 0% 70%;
+    --secondary: 220 20% 10%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 220 20% 12%;
+    --muted-foreground: 0 0% 65%;
     --accent: 300 100% 60%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 220 16% 18%;
-    --input: 220 16% 18%;
+    --border: 220 20% 12%;
+    --input: 220 20% 12%;
     --ring: 300 100% 60%;
   }
 }

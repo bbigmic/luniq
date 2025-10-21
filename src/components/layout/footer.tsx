@@ -9,7 +9,11 @@ export function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <Package className="h-6 w-6 text-primary" />
+              <img 
+                src="/images/luniq-logo.jpeg" 
+                alt="Luniq Logo" 
+                className="h-6 w-6 rounded-sm object-cover"
+              />
               <span className="text-lg font-bold">Luniq</span>
             </div>
             <p className="text-sm text-muted-foreground">
