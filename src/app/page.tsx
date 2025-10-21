@@ -61,7 +61,7 @@ export default function HomePage() {
           <FeaturedProducts />
         </Suspense>
         {/* Features Section with Parallax Background */}
-        <section className="relative py-40 sm:py-48 overflow-hidden min-h-[800px]">
+        <section className="relative py-20 sm:py-24 overflow-hidden min-h-[600px] -mt-8">
           {/* Parallax Background */}
           <div 
             id="parallax-bg"
