@@ -61,7 +61,7 @@ export default function HomePage() {
           <FeaturedProducts />
         </Suspense>
         {/* Features Section with Parallax Background */}
-        <section className="relative py-20 sm:py-24 overflow-hidden min-h-[500px]">
+        <section className="relative py-32 sm:py-40 overflow-hidden min-h-[700px]">
           {/* Parallax Background */}
           <div 
             id="parallax-bg"
@@ -69,10 +69,10 @@ export default function HomePage() {
             style={{
               backgroundImage: 'url(/images/luniq-display-case.jpg)',
               backgroundSize: 'cover',
-              backgroundPosition: 'center 30%',
+              backgroundPosition: 'center 40%',
               transform: 'translateY(0px)',
-              minHeight: '140%',
-              top: '-10%'
+              minHeight: '100%',
+              top: '0%'
             }}
           ></div>
           
