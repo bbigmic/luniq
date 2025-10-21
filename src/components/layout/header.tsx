@@ -36,7 +36,7 @@ export function Header() {
               alt="Luniq Logo" 
               className="h-8 w-8 sm:h-10 sm:w-10 rounded-lg object-cover"
             />
-            <span className="text-lg sm:text-xl font-bold">Luniq Vape</span>
+            <span className="text-lg sm:text-xl font-bold">LuniQ Vape</span>
           </Link>
 
           {/* Search Bar - Desktop */}

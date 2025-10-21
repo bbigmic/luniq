@@ -31,7 +31,7 @@ export function Hero() {
         <div className="space-y-4 sm:space-y-6 md:space-y-8">
           <div className="space-y-2 sm:space-y-3 md:space-y-4">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-white">
-              Luniq Vape
+              LuniQ Vape
               <span className="text-primary block">Kultowy z natury</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto px-4">

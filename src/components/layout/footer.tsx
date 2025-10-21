@@ -14,7 +14,7 @@ export function Footer() {
                 alt="Luniq Logo" 
                 className="h-8 w-8 rounded-lg object-cover"
               />
-              <span className="text-lg font-bold">Luniq Vape</span>
+              <span className="text-lg font-bold">LuniQ Vape</span>
             </div>
             <p className="text-sm text-muted-foreground">
               Your trusted partner for quality products and exceptional service. 
