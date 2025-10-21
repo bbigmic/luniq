@@ -42,6 +42,15 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // LuniQ brand colors
+        luniq: {
+          pink: "hsl(var(--luniq-pink))",
+          blue: "hsl(var(--luniq-blue))",
+          green: "hsl(var(--luniq-green))",
+          orange: "hsl(var(--luniq-orange))",
+          red: "hsl(var(--luniq-red))",
+          mint: "hsl(var(--luniq-mint))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
