@@ -17,20 +17,31 @@ export default function HomePage() {
       // Disable parallax on mobile for better performance
       if (window.innerWidth <= 768) return;
       
-      const scrolled = window.pageYOffset;
       const parallaxElement = document.getElementById('parallax-bg');
+      if (!parallaxElement) return;
       
-      if (parallaxElement) {
+      const scrolled = window.pageYOffset;
+      const rect = parallaxElement.getBoundingClientRect();
+      const elementTop = rect.top + scrolled;
+      const elementHeight = rect.height;
+      
+      // Only apply parallax when element is in viewport
+      if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
         const speed = 0.5; // Adjust speed (0.5 = half the scroll speed)
         const yPos = -(scrolled * speed);
         parallaxElement.style.transform = `translateY(${yPos}px)`;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // Initial call
+    handleScroll();
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
     };
   }, []);
 

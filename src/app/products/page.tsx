@@ -39,7 +39,7 @@ function ProductsPageContent() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-black">
       <Header />
       <main className="container mx-auto px-3 sm:px-4 py-3 sm:py-4 lg:py-8">
         <div className="mb-4 sm:mb-6 lg:mb-8">
@@ -71,7 +71,7 @@ function ProductsPageContent() {
 
 export default function ProductsPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center"><div className="text-muted-foreground">Loading...</div></div>}>
+    <Suspense fallback={<div className="min-h-screen bg-black flex items-center justify-center"><div className="text-muted-foreground">Loading...</div></div>}>
       <ProductsPageContent />
     </Suspense>
   );
