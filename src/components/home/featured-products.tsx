@@ -67,22 +67,8 @@ export function FeaturedProducts() {
 
   if (loading) {
     return (
-      <section className="relative py-20 bg-black overflow-hidden">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
-          style={{
-            backgroundImage: 'url(/images/background-products.png)',
-            backgroundSize: 'contain',
-            backgroundPosition: 'center center'
-          }}
-        ></div>
-        
-        {/* Light overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/30"></div>
-        
-        {/* Content */}
-        <div className="relative z-10 container mx-auto px-4">
+      <section className="py-20 bg-black">
+        <div className="container mx-auto px-4">
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl md:text-4xl font-bold">Featured Products</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -100,22 +86,8 @@ export function FeaturedProducts() {
 
   if (featuredProducts.length === 0) {
     return (
-      <section className="relative py-20 bg-black overflow-hidden">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
-          style={{
-            backgroundImage: 'url(/images/background-products.png)',
-            backgroundSize: 'contain',
-            backgroundPosition: 'center center'
-          }}
-        ></div>
-        
-        {/* Light overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/30"></div>
-        
-        {/* Content */}
-        <div className="relative z-10 container mx-auto px-4">
+      <section className="py-20 bg-black">
+        <div className="container mx-auto px-4">
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl md:text-4xl font-bold">Featured Products</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -131,22 +103,8 @@ export function FeaturedProducts() {
   }
 
   return (
-    <section className="relative py-20 bg-black overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
-        style={{
-          backgroundImage: 'url(/images/background-products.png)',
-          backgroundSize: 'contain',
-          backgroundPosition: 'center center'
-        }}
-      ></div>
-      
-      {/* Light overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/30"></div>
-      
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4">
+    <section className="py-20 bg-black">
+      <div className="container mx-auto px-4">
         <div className="text-center space-y-4 mb-12">
           <h2 className="text-3xl md:text-4xl font-bold">Featured Products</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
