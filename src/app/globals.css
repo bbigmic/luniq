@@ -9,25 +9,25 @@
 
 @layer base {
   :root {
-    /* LuniQ purple/magenta neon theme - darker */
-    --background: 220 25% 4%;
+    /* LuniQ purple/magenta neon theme - black background */
+    --background: 0 0% 0%; /* pure black */
     --foreground: 0 0% 95%;
-    --card: 220 25% 6%;
+    --card: 0 0% 5%; /* very dark gray */
     --card-foreground: 0 0% 95%;
-    --popover: 220 25% 6%;
+    --popover: 0 0% 5%;
     --popover-foreground: 0 0% 95%;
     --primary: 320 100% 60%; /* vibrant pink/magenta like new logo */
     --primary-foreground: 0 0% 100%;
-    --secondary: 220 20% 10%;
+    --secondary: 0 0% 8%; /* dark gray */
     --secondary-foreground: 0 0% 95%;
-    --muted: 220 20% 12%;
+    --muted: 0 0% 10%; /* dark gray */
     --muted-foreground: 0 0% 65%;
     --accent: 320 100% 60%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 20% 12%;
-    --input: 220 20% 12%;
+    --border: 0 0% 15%; /* dark gray borders */
+    --input: 0 0% 15%;
     --ring: 320 100% 60%;
     --radius: 0.5rem;
     
@@ -41,25 +41,25 @@
   }
 
   .dark {
-    /* Keep dark theme consistent with LuniQ purple/magenta - darker */
-    --background: 220 25% 4%;
+    /* Keep dark theme consistent with LuniQ purple/magenta - black background */
+    --background: 0 0% 0%; /* pure black */
     --foreground: 0 0% 95%;
-    --card: 220 25% 6%;
+    --card: 0 0% 5%; /* very dark gray */
     --card-foreground: 0 0% 95%;
-    --popover: 220 25% 6%;
+    --popover: 0 0% 5%;
     --popover-foreground: 0 0% 95%;
     --primary: 320 100% 60%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 220 20% 10%;
+    --secondary: 0 0% 8%; /* dark gray */
     --secondary-foreground: 0 0% 95%;
-    --muted: 220 20% 12%;
+    --muted: 0 0% 10%; /* dark gray */
     --muted-foreground: 0 0% 65%;
     --accent: 320 100% 60%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 220 20% 12%;
-    --input: 220 20% 12%;
+    --border: 0 0% 15%; /* dark gray borders */
+    --input: 0 0% 15%;
     --ring: 320 100% 60%;
   }
 }
