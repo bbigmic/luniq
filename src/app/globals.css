@@ -138,13 +138,13 @@
 /* Parallax background effect */
 .parallax-bg {
   background-size: cover;
-  background-position: center top;
+  background-position: center 30%;
   background-repeat: no-repeat;
   will-change: transform;
   transform: translateZ(0);
   height: 140%;
   width: 100%;
-  top: -20%;
+  top: -10%;
 }
 
 /* Mobile-optimized backgrounds */

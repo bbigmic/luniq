@@ -69,10 +69,10 @@ export default function HomePage() {
             style={{
               backgroundImage: 'url(/images/luniq-display-case.jpg)',
               backgroundSize: 'cover',
-              backgroundPosition: 'center top',
+              backgroundPosition: 'center 30%',
               transform: 'translateY(0px)',
               minHeight: '140%',
-              top: '-20%'
+              top: '-10%'
             }}
           ></div>
           
