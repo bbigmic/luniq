@@ -65,15 +65,14 @@ export default function HomePage() {
           {/* Parallax Background */}
           <div 
             id="parallax-bg"
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            className="relative bg-cover bg-center bg-no-repeat mx-auto"
             style={{
               backgroundImage: 'url(/images/luniq-display-case.jpg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center 90%',
               transform: 'translateY(0px)',
               height: '100%',
-              width: '100%',
-              top: '0%'
+              width: '100%'
             }}
           ></div>
           
@@ -81,7 +80,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60"></div>
           
           {/* Content */}
-          <div className="relative z-10 container mx-auto px-4 flex items-center min-h-[500px] sm:min-h-[600px] md:min-h-[700px]">
+          <div className="relative z-10 container mx-auto px-4 flex items-center min-h-[500px] sm:min-h-[600px] md:min-h-[700px] -mt-[500px] sm:-mt-[600px] md:-mt-[700px]">
             <div className="w-full">
               <div className="text-center mb-8 sm:mb-12">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">
