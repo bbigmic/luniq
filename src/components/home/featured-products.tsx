@@ -201,7 +201,7 @@ export function FeaturedProducts() {
                 >
                   <ShoppingCart className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                   <span className="text-xs sm:text-sm">
-                    {product.quantity > 0 ? 'Add to Cart' : 'Out of Stock'}
+                    {product.quantity > 0 ? 'Dodaj do koszyka' : 'Brak w magazynie'}
                   </span>
                 </Button>
               </CardFooter>

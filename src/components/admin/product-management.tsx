@@ -238,7 +238,7 @@ export function ProductManagement() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
             <CardTitle className="text-xs sm:text-sm font-medium">
-              Out of Stock
+              Brak w magazynie
             </CardTitle>
             <Package className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
@@ -358,7 +358,7 @@ export function ProductManagement() {
                           {product.status}
                         </Badge>
                         <Badge variant={product.quantity > 0 ? 'default' : 'destructive'} className="text-xs">
-                          {product.quantity > 0 ? `${product.quantity} in stock` : 'Out of stock'}
+                          {product.quantity > 0 ? `${product.quantity} w magazynie` : 'Brak w magazynie'}
                         </Badge>
                       </div>
                       <p className="text-xs text-muted-foreground">

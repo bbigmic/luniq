@@ -137,7 +137,7 @@ export default function WishlistPage() {
 
                     {item.product.status === 'active' && item.product.quantity === 0 && (
                       <Badge variant="destructive" className="absolute top-2 left-2 text-xs">
-                        Out of Stock
+                        Brak w magazynie
                       </Badge>
                     )}
                   </div>
@@ -178,7 +178,7 @@ export default function WishlistPage() {
                       })}
                     >
                       <ShoppingCart className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
-                      {item.product.quantity > 0 ? 'Add to Cart' : 'Out of Stock'}
+                      {item.product.quantity > 0 ? 'Dodaj do koszyka' : 'Brak w magazynie'}
                     </Button>
                     
                     <Link href={`/products/${item.product.slug}`} className="flex-1">
