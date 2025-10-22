@@ -106,9 +106,9 @@ export function FeaturedProducts() {
     <section className="py-20 bg-black">
       <div className="container mx-auto px-4">
         <div className="text-center space-y-4 mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold">Featured Products</h2>
+          <h2 className="text-3xl md:text-4xl font-bold">Polecane Produkty</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Discover our handpicked selection of premium products that our customers love
+            Odkryj naszą starannie wyselekcjonowaną kolekcję produktów premium, które pokochali nasi klienci
           </p>
         </div>
 
@@ -127,13 +127,13 @@ export function FeaturedProducts() {
                   
                   {product.featured && (
                     <Badge className="absolute top-1 sm:top-2 left-1 sm:left-2 text-xs">
-                      Featured
+                      Polecane
                     </Badge>
                   )}
 
                   {product.comparePrice && parseFloat(product.comparePrice) > parseFloat(product.price) && (
                     <Badge variant="destructive" className="absolute top-1 sm:top-2 right-1 sm:right-2 text-xs">
-                      Sale
+                      Wyprzedaż
                     </Badge>
                   )}
 
