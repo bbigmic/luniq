@@ -7,7 +7,7 @@ import { Toaster } from 'react-hot-toast';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://luniq-vape.pl'),
+  metadataBase: new URL('https://luniq-five.vercel.app'),
   title: 'LuniQ Vape - Kultowy z natury | Premium Liquidy do E-papierosów',
   description: 'Odkryj wyjątkowe smaki liquidów LuniQ Vape. Kultowy z natury - najwyższa jakość, autentyczne smaki. Darmowa dostawa od 200zł. Sprawdź naszą ofertę!',
   keywords: 'liquidy, e-papierosy, vape, LuniQ, smaki, premium, polska marka, liquidy do e-papierosów',
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'pl_PL',
-    url: 'https://luniq-vape.pl',
+    url: 'https://luniq-five.vercel.app',
     siteName: 'LuniQ Vape',
     title: 'LuniQ Vape - Kultowy z natury | Premium Liquidy do E-papierosów',
     description: 'Odkryj wyjątkowe smaki liquidów LuniQ Vape. Kultowy z natury - najwyższa jakość, autentyczne smaki.',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     images: ['/images/luniq-logo-new.png'],
   },
   alternates: {
-    canonical: 'https://luniq-vape.pl',
+    canonical: 'https://luniq-five.vercel.app',
   },
 };
 

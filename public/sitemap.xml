@@ -6,7 +6,7 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://luniq-vape.pl/</loc>
+    <loc>https://luniq-five.vercel.app/</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -14,7 +14,7 @@
 
   <!-- Products -->
   <url>
-    <loc>https://luniq-vape.pl/products</loc>
+    <loc>https://luniq-five.vercel.app/products</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -22,7 +22,7 @@
 
   <!-- Categories -->
   <url>
-    <loc>https://luniq-vape.pl/categories</loc>
+    <loc>https://luniq-five.vercel.app/categories</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -30,7 +30,7 @@
 
   <!-- About -->
   <url>
-    <loc>https://luniq-vape.pl/about</loc>
+    <loc>https://luniq-five.vercel.app/about</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -38,7 +38,7 @@
 
   <!-- Contact -->
   <url>
-    <loc>https://luniq-vape.pl/contact</loc>
+    <loc>https://luniq-five.vercel.app/contact</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -46,7 +46,7 @@
 
   <!-- Help -->
   <url>
-    <loc>https://luniq-vape.pl/help</loc>
+    <loc>https://luniq-five.vercel.app/help</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -54,7 +54,7 @@
 
   <!-- Shipping -->
   <url>
-    <loc>https://luniq-vape.pl/shipping</loc>
+    <loc>https://luniq-five.vercel.app/shipping</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -62,7 +62,7 @@
 
   <!-- Returns -->
   <url>
-    <loc>https://luniq-vape.pl/returns</loc>
+    <loc>https://luniq-five.vercel.app/returns</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -70,7 +70,7 @@
 
   <!-- Privacy -->
   <url>
-    <loc>https://luniq-vape.pl/privacy</loc>
+    <loc>https://luniq-five.vercel.app/privacy</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>

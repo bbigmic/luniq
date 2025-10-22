@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://luniq-vape.pl/sitemap.xml
+Sitemap: https://luniq-five.vercel.app/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1

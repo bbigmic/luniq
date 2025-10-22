@@ -9,6 +9,7 @@ import { Heart, ShoppingCart, Star, Loader2 } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { useCart } from '@/contexts/cart-context';
 import { useWishlist } from '@/contexts/wishlist-context';
+import { ScrollAnimation } from '@/components/ui/scroll-animation';
 
 interface FeaturedProduct {
   id: string;
@@ -105,15 +106,24 @@ export function FeaturedProducts() {
   return (
     <section className="py-20 bg-black">
       <div className="container mx-auto px-4">
-        <div className="text-center space-y-4 mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold">Polecane Produkty</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Odkryj naszą starannie wyselekcjonowaną kolekcję produktów premium, które pokochali nasi klienci
-          </p>
-        </div>
+        <ScrollAnimation direction="fade" delay={0.2} duration={0.8}>
+          <div className="text-center space-y-4 mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold">Polecane Produkty</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Odkryj naszą starannie wyselekcjonowaną kolekcję produktów premium, które pokochali nasi klienci
+            </p>
+          </div>
+        </ScrollAnimation>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {featuredProducts.map((product) => (
+          {featuredProducts.map((product, index) => (
+            <ScrollAnimation 
+              key={product.id}
+              direction="up" 
+              delay={0.1 * index} 
+              duration={0.6} 
+              distance={30}
+            >
             <Card key={product.id} className="group hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 bg-card border-border hover:border-primary/20">
               <CardHeader className="p-0">
                 <div className="relative overflow-hidden rounded-t-lg">
@@ -206,16 +216,19 @@ export function FeaturedProducts() {
                 </Button>
               </CardFooter>
             </Card>
+            </ScrollAnimation>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <Link href="/products">
-            <Button variant="outline" size="lg">
-              View All Products
-            </Button>
-          </Link>
-        </div>
+        <ScrollAnimation direction="up" delay={0.8} duration={0.6} distance={30}>
+          <div className="text-center mt-12">
+            <Link href="/products">
+              <Button variant="outline" size="lg">
+                View All Products
+              </Button>
+            </Link>
+          </div>
+        </ScrollAnimation>
       </div>
     </section>
   );

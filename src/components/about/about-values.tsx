@@ -1,5 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Heart, Shield, Zap, Users } from 'lucide-react';
+import { ScrollAnimation } from '@/components/ui/scroll-animation';
 
 export function AboutValues() {
   const values = [
@@ -28,30 +29,40 @@ export function AboutValues() {
   return (
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Our Values</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            These core principles guide everything we do
-          </p>
-        </div>
+        <ScrollAnimation direction="fade" delay={0.2} duration={0.8}>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Our Values</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              These core principles guide everything we do
+            </p>
+          </div>
+        </ScrollAnimation>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {values.map((value, index) => (
-            <Card key={index}>
-              <CardContent className="p-6">
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
-                    {value.icon}
+            <ScrollAnimation 
+              key={index} 
+              direction="left" 
+              delay={0.4 + (index * 0.2)} 
+              duration={0.6} 
+              distance={40}
+            >
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+                      {value.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {value.description}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {value.description}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </ScrollAnimation>
           ))}
         </div>
       </div>

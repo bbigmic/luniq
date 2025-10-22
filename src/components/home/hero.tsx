@@ -2,6 +2,7 @@ import Link from 'next/link';
 // Image import not needed since we use <picture>/<img>
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Star, Truck, Shield, RotateCcw } from 'lucide-react';
+import { ScrollAnimation } from '@/components/ui/scroll-animation';
 
 export function Hero() {
   return (
@@ -28,27 +29,31 @@ export function Hero() {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="space-y-4 sm:space-y-6 md:space-y-8">
-          <div className="space-y-2 sm:space-y-3 md:space-y-4">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-white">
-              LuniQ Vape
-              <span className="text-primary block">Kultowy z natury</span>
-            </h1>
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90 max-w-2xl mx-auto px-4">
-              Smak, który wyznacza standardy
-            </p>
-          </div>
+          <ScrollAnimation direction="fade" delay={0.2} duration={0.8}>
+            <div className="space-y-2 sm:space-y-3 md:space-y-4">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-white">
+                LuniQ Vape
+                <span className="text-primary block">Kultowy z natury</span>
+              </h1>
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90 max-w-2xl mx-auto px-4">
+                Smak, który wyznacza standardy
+              </p>
+            </div>
+          </ScrollAnimation>
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
-            <Link href="/products">
-              <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-base sm:text-lg px-8 py-4 h-14 sm:h-12">
-                Kup Teraz
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-            <Link href="/products">
+          <ScrollAnimation direction="up" delay={0.6} duration={0.8} distance={30}>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
+              <Link href="/products">
+                <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-base sm:text-lg px-8 py-4 h-14 sm:h-12">
+                  Kup Teraz
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Link href="/products">
 
-            </Link>
-          </div>
+              </Link>
+            </div>
+          </ScrollAnimation>
         </div>
       </div>
     </section>

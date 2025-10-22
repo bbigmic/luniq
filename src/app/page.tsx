@@ -7,6 +7,7 @@ import { Newsletter } from '@/components/home/newsletter';
 import { Truck, Shield, RotateCcw } from 'lucide-react';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
+import { ScrollAnimation } from '@/components/ui/scroll-animation';
 
 // Force dynamic rendering to avoid static generation issues with cart context
 export const dynamic = 'force-dynamic';
@@ -40,45 +41,53 @@ export default function HomePage() {
           {/* Content */}
           <div className="relative z-10 container mx-auto px-4 flex items-center min-h-[300px] sm:min-h-[350px] md:min-h-[400px]">
             <div className="w-full">
-              <div className="text-center mb-8 sm:mb-12">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
-                  Dlaczego wybrać LuniQ Vape?
-                </h2>
-                <p className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-2xl mx-auto px-4">
-                  Doświadcz najwyższej jakości z naszymi zaufanymi usługami
-                </p>
-              </div>
+              <ScrollAnimation direction="fade" delay={0.2} duration={0.8}>
+                <div className="text-center mb-8 sm:mb-12">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
+                    Dlaczego wybrać LuniQ Vape?
+                  </h2>
+                  <p className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-2xl mx-auto px-4">
+                    Doświadcz najwyższej jakości z naszymi zaufanymi usługami
+                  </p>
+                </div>
+              </ScrollAnimation>
               
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 md:gap-12 text-center">
-                <div className="flex flex-col items-center space-y-3 sm:space-y-4 group">
-                  <div className="p-3 sm:p-4 bg-primary/20 backdrop-blur-sm rounded-xl sm:rounded-2xl flex-shrink-0 border border-primary/30 group-hover:bg-primary/30 transition-all duration-300">
-                    <Truck className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-primary" />
+                <ScrollAnimation direction="up" delay={0.4} duration={0.6} distance={30}>
+                  <div className="flex flex-col items-center space-y-3 sm:space-y-4 group">
+                    <div className="p-3 sm:p-4 bg-primary/20 backdrop-blur-sm rounded-xl sm:rounded-2xl flex-shrink-0 border border-primary/30 group-hover:bg-primary/30 transition-all duration-300">
+                      <Truck className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-primary" />
+                    </div>
+                    <div className="space-y-2 sm:space-y-3">
+                      <p className="font-bold text-lg sm:text-xl md:text-2xl text-white">Darmowa Dostawa</p>
+                      <p className="text-sm sm:text-base md:text-lg text-white/80">Od zamówień powyżej 200zł</p>
+                    </div>
                   </div>
-                  <div className="space-y-2 sm:space-y-3">
-                    <p className="font-bold text-lg sm:text-xl md:text-2xl text-white">Darmowa Dostawa</p>
-                    <p className="text-sm sm:text-base md:text-lg text-white/80">Od zamówień powyżej 200zł</p>
-                  </div>
-                </div>
+                </ScrollAnimation>
                 
-                <div className="flex flex-col items-center space-y-3 sm:space-y-4 group">
-                  <div className="p-3 sm:p-4 bg-primary/20 backdrop-blur-sm rounded-xl sm:rounded-2xl flex-shrink-0 border border-primary/30 group-hover:bg-primary/30 transition-all duration-300">
-                    <Shield className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-primary" />
+                <ScrollAnimation direction="up" delay={0.6} duration={0.6} distance={30}>
+                  <div className="flex flex-col items-center space-y-3 sm:space-y-4 group">
+                    <div className="p-3 sm:p-4 bg-primary/20 backdrop-blur-sm rounded-xl sm:rounded-2xl flex-shrink-0 border border-primary/30 group-hover:bg-primary/30 transition-all duration-300">
+                      <Shield className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-primary" />
+                    </div>
+                    <div className="space-y-2 sm:space-y-3">
+                      <p className="font-bold text-lg sm:text-xl md:text-2xl text-white">Bezpieczne Płatności</p>
+                      <p className="text-sm sm:text-base md:text-lg text-white/80">100% zabezpieczone</p>
+                    </div>
                   </div>
-                  <div className="space-y-2 sm:space-y-3">
-                    <p className="font-bold text-lg sm:text-xl md:text-2xl text-white">Bezpieczne Płatności</p>
-                    <p className="text-sm sm:text-base md:text-lg text-white/80">100% zabezpieczone</p>
-                  </div>
-                </div>
+                </ScrollAnimation>
                 
-                <div className="flex flex-col items-center space-y-3 sm:space-y-4 group">
-                  <div className="p-3 sm:p-4 bg-primary/20 backdrop-blur-sm rounded-xl sm:rounded-2xl flex-shrink-0 border border-primary/30 group-hover:bg-primary/30 transition-all duration-300">
-                    <RotateCcw className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-primary" />
+                <ScrollAnimation direction="up" delay={0.8} duration={0.6} distance={30}>
+                  <div className="flex flex-col items-center space-y-3 sm:space-y-4 group">
+                    <div className="p-3 sm:p-4 bg-primary/20 backdrop-blur-sm rounded-xl sm:rounded-2xl flex-shrink-0 border border-primary/30 group-hover:bg-primary/30 transition-all duration-300">
+                      <RotateCcw className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-primary" />
+                    </div>
+                    <div className="space-y-2 sm:space-y-3">
+                      <p className="font-bold text-lg sm:text-xl md:text-2xl text-white">Łatwe Zwroty</p>
+                      <p className="text-sm sm:text-base md:text-lg text-white/80">30-dniowa polityka</p>
+                    </div>
                   </div>
-                  <div className="space-y-2 sm:space-y-3">
-                    <p className="font-bold text-lg sm:text-xl md:text-2xl text-white">Łatwe Zwroty</p>
-                    <p className="text-sm sm:text-base md:text-lg text-white/80">30-dniowa polityka</p>
-                  </div>
-                </div>
+                </ScrollAnimation>
               </div>
             </div>
           </div>

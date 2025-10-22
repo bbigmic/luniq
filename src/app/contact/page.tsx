@@ -34,8 +34,8 @@ export default function ContactPage() {
                     <Mail className="h-5 w-5 text-primary mt-1" />
                     <div>
                       <h3 className="font-semibold">Email</h3>
-                      <p className="text-sm text-muted-foreground">support@luniq-vape.pl</p>
-                      <p className="text-sm text-muted-foreground">sprzedaz@luniq-vape.pl</p>
+                      <p className="text-sm text-muted-foreground">support@luniq-five.vercel.app</p>
+                      <p className="text-sm text-muted-foreground">sprzedaz@luniq-five.vercel.app</p>
                     </div>
                   </div>
                   

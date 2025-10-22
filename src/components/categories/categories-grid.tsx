@@ -18,6 +18,7 @@ import {
   Gamepad2,
   Gem
 } from 'lucide-react';
+import { ScrollAnimation } from '@/components/ui/scroll-animation';
 
 interface Category {
   id: string;
@@ -86,64 +87,76 @@ export function CategoriesGrid() {
 
   return (
     <div>
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold mb-4">Browse All Categories</h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
-          Explore our diverse range of product categories and find what you need
-        </p>
-      </div>
+      <ScrollAnimation direction="fade" delay={0.2} duration={0.8}>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold mb-4">Browse All Categories</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Explore our diverse range of product categories and find what you need
+          </p>
+        </div>
+      </ScrollAnimation>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {categories.map((category) => (
-          <Link key={category.id} href={`/products?category=${category.slug}`}>
-            <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer">
-              <CardContent className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`w-16 h-16 rounded-lg flex items-center justify-center ${categoryColors[category.slug] || 'bg-gray-500/10 text-gray-600'}`}>
-                    {categoryIcons[category.slug] || <Smartphone className="h-12 w-12" />}
+        {categories.map((category, index) => (
+          <ScrollAnimation 
+            key={category.id} 
+            direction="up" 
+            delay={0.4 + (index * 0.1)} 
+            duration={0.6} 
+            distance={30}
+          >
+            <Link href={`/products?category=${category.slug}`}>
+              <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer">
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className={`w-16 h-16 rounded-lg flex items-center justify-center ${categoryColors[category.slug] || 'bg-gray-500/10 text-gray-600'}`}>
+                      {categoryIcons[category.slug] || <Smartphone className="h-12 w-12" />}
+                    </div>
+                    <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                   </div>
-                  <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                </div>
-                
-                <h3 className="text-xl font-semibold mb-2">{category.name}</h3>
-                <p className="text-muted-foreground mb-4">{category.description}</p>
-                
-                <div className="flex items-center justify-between">
-                  <Badge variant="outline">
-                    {category.productCount} products
-                  </Badge>
-                  <span className="text-sm font-medium text-primary group-hover:underline">
-                    Shop Now
-                  </span>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
+                  
+                  <h3 className="text-xl font-semibold mb-2">{category.name}</h3>
+                  <p className="text-muted-foreground mb-4">{category.description}</p>
+                  
+                  <div className="flex items-center justify-between">
+                    <Badge variant="outline">
+                      {category.productCount} products
+                    </Badge>
+                    <span className="text-sm font-medium text-primary group-hover:underline">
+                      Shop Now
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          </ScrollAnimation>
         ))}
       </div>
 
-      <div className="mt-12 text-center">
-        <Card className="max-w-2xl mx-auto">
-          <CardContent className="p-8">
-            <h3 className="text-2xl font-bold mb-4">Can't Find What You're Looking For?</h3>
-            <p className="text-muted-foreground mb-6">
-              Browse all our products or use our search feature to find exactly what you need.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/products">
-                <button className="bg-primary text-primary-foreground px-6 py-2 rounded-md hover:bg-primary/90 transition-colors">
-                  View All Products
-                </button>
-              </Link>
-              <Link href="/contact">
-                <button className="border border-input px-6 py-2 rounded-md hover:bg-muted transition-colors">
-                  Contact Support
-                </button>
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      <ScrollAnimation direction="up" delay={0.8} duration={0.6} distance={40}>
+        <div className="mt-12 text-center">
+          <Card className="max-w-2xl mx-auto">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-bold mb-4">Can't Find What You're Looking For?</h3>
+              <p className="text-muted-foreground mb-6">
+                Browse all our products or use our search feature to find exactly what you need.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/products">
+                  <button className="bg-primary text-primary-foreground px-6 py-2 rounded-md hover:bg-primary/90 transition-colors">
+                    View All Products
+                  </button>
+                </Link>
+                <Link href="/contact">
+                  <button className="border border-input px-6 py-2 rounded-md hover:bg-muted transition-colors">
+                    Contact Support
+                  </button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </ScrollAnimation>
     </div>
   );
 }
