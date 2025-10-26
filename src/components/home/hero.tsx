@@ -1,10 +1,14 @@
-import Link from 'next/link';
-// Image import not needed since we use <picture>/<img>
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Star, Truck, Shield, RotateCcw } from 'lucide-react';
 import { ScrollAnimation } from '@/components/ui/scroll-animation';
+import { ChevronDown } from 'lucide-react';
 
 export function Hero() {
+  const scrollToNext = () => {
+    window.scrollBy({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image/Video */}
@@ -24,6 +28,10 @@ export function Hero() {
         
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black/30"></div>
+        
+        {/* Bottom shadow gradient for smooth transition */}
+        <div className="absolute bottom-16 left-0 right-0 h-60 bg-gradient-to-b from-transparent to-black"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-black"></div>
       </div>
 
       {/* Content */}
@@ -41,21 +49,20 @@ export function Hero() {
             </div>
           </ScrollAnimation>
 
-          <ScrollAnimation direction="up" delay={0.6} duration={0.8} distance={30}>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
-              <Link href="/products">
-                <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-base sm:text-lg px-8 py-4 h-14 sm:h-12">
-                  Kup Teraz
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="/products">
-
-              </Link>
-            </div>
-          </ScrollAnimation>
         </div>
       </div>
+
+      {/* Scroll Down Icon */}
+      <ScrollAnimation direction="fade" delay={1.2} duration={0.8}>
+        <button
+          onClick={scrollToNext}
+          className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center gap-2 text-white/80 hover:text-white transition-colors duration-300 group"
+          aria-label="Przewiń w dół"
+        >
+          <span className="text-xs uppercase tracking-wider font-medium">Przewiń</span>
+          <ChevronDown className="w-6 h-6 animate-bounce" strokeWidth={2} />
+        </button>
+      </ScrollAnimation>
     </section>
   );
 }

@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/providers';
 import { Toaster } from 'react-hot-toast';
+import { FloatingInstagram } from '@/components/layout/floating-instagram';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -51,6 +52,7 @@ export default function RootLayout({
     <html lang="pl" className="dark">
       <body className={`${inter.className} dark-theme`}>
         <Providers>
+          <FloatingInstagram />
           {children}
           <Toaster position="top-right" />
         </Providers>

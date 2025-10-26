@@ -159,6 +159,20 @@
   animation: fadeIn 0.5s ease-out;
 }
 
+/* Slow bounce animation for Instagram icon */
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
+}
+
 /* Enhanced fallback styles for better UI */
 * {
   box-sizing: border-box;

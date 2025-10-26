@@ -1,8 +1,10 @@
 'use client';
 
 import { Suspense } from 'react';
+import Link from 'next/link';
 import { Hero } from '@/components/home/hero';
 import { FeaturedProducts } from '@/components/home/featured-products';
+import { LiquidProductsCarousel } from '@/components/home/liquid-products-carousel';
 import { Newsletter } from '@/components/home/newsletter';
 import { Truck, Shield, RotateCcw } from 'lucide-react';
 import { Header } from '@/components/layout/header';
@@ -18,11 +20,87 @@ export default function HomePage() {
       <Header />
       <main className="overflow-x-hidden">
         <Hero />
-        <Suspense fallback={<div className="flex items-center justify-center py-12"><div className="text-muted-foreground">Ładowanie...</div></div>}>
-          <FeaturedProducts />
-        </Suspense>
+        
+        {/* Logo Section - PRZED karuzelą */}
+        <section className="bg-black py-12 sm:py-16 md:py-20">
+          <div className="container mx-auto px-4">
+            <ScrollAnimation direction="fade" delay={0.2} duration={0.8}>
+              <div className="text-center space-y-6 sm:space-y-8">
+                <div className="flex justify-center mb-8 sm:mb-12">
+                  <img 
+                    src="/images/luniq-logo-new.png" 
+                    alt="LuniQ Logo" 
+                    className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain"
+                  />
+                </div>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white max-w-4xl mx-auto">
+                  Najwyższa jakość liquidów do vape w jednym miejscu
+                </h2>
+                <p className="text-lg sm:text-xl md:text-2xl text-white/70 max-w-3xl mx-auto px-4">
+                  Doświadcz niezapomnianych smaków z naszą szeroką gamą premium e-liquidów
+                </p>
+                
+                {/* Product Stats */}
+                <div className="grid grid-cols-3 gap-8 sm:gap-12 md:gap-16 mt-12 sm:mt-16 max-w-4xl mx-auto">
+                  <ScrollAnimation direction="up" delay={0.4} duration={0.8} distance={50}>
+                    <div className="flex flex-col items-center">
+                      <div className="text-5xl sm:text-6xl md:text-7xl font-bold text-white/80 mb-2">
+                        10
+                      </div>
+                      <div className="text-lg sm:text-xl md:text-2xl font-medium text-white/60 uppercase tracking-wider">
+                        ML
+                      </div>
+                    </div>
+                  </ScrollAnimation>
+                  <ScrollAnimation direction="up" delay={0.6} duration={0.8} distance={50}>
+                    <div className="flex flex-col items-center">
+                      <div className="text-5xl sm:text-6xl md:text-7xl font-bold text-white/80 mb-2">
+                        20
+                      </div>
+                      <div className="text-lg sm:text-xl md:text-2xl font-medium text-white/60 uppercase tracking-wider">
+                        MG/ML
+                      </div>
+                    </div>
+                  </ScrollAnimation>
+                  <ScrollAnimation direction="up" delay={0.8} duration={0.8} distance={50}>
+                    <div className="flex flex-col items-center">
+                      <div className="text-5xl sm:text-6xl md:text-7xl font-bold text-white/80 mb-2">
+                        10
+                      </div>
+                      <div className="text-lg sm:text-xl md:text-2xl font-medium text-white/60 uppercase tracking-wider">
+                        FLAVORS
+                      </div>
+                    </div>
+                  </ScrollAnimation>
+                </div>
+              </div>
+            </ScrollAnimation>
+          </div>
+        </section>
+
+        <LiquidProductsCarousel />
+        
+        {/* Content Section - PO karuzeli */}
+        <section className="bg-black py-16 sm:py-20 md:py-24">
+          <div className="container mx-auto px-4">
+            <ScrollAnimation direction="fade" delay={0.3} duration={0.8}>
+              <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+                  Dołącz do społeczności LuniQ
+                </h2>
+                <p className="text-xl sm:text-2xl md:text-3xl text-white/80 leading-relaxed">
+                  Odkryj niesamowity świat smaków i aromatów, które przemienią Twoją przygodę z vapowaniem
+                </p>
+              </div>
+            </ScrollAnimation>
+          </div>
+        </section>
+
         {/* Features Section */}
         <section className="relative py-12 sm:py-16 md:py-20 overflow-hidden min-h-[300px] sm:min-h-[350px] md:min-h-[400px] -mt-2 sm:-mt-4">
+          {/* Top gradient - smooth transition from black */}
+          <div className="absolute top-0 left-0 right-0 h-60 bg-gradient-to-b from-black to-transparent z-20"></div>
+          
           {/* Static Background */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -38,8 +116,11 @@ export default function HomePage() {
           {/* Gradient overlay for better text readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60"></div>
           
+          {/* Bottom gradient - smooth transition to black */}
+          <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-b from-transparent to-black z-20"></div>
+          
           {/* Content */}
-          <div className="relative z-10 container mx-auto px-4 flex items-center min-h-[300px] sm:min-h-[350px] md:min-h-[400px]">
+          <div className="relative z-30 container mx-auto px-4 flex items-center min-h-[300px] sm:min-h-[350px] md:min-h-[400px]">
             <div className="w-full">
               <ScrollAnimation direction="fade" delay={0.2} duration={0.8}>
                 <div className="text-center mb-8 sm:mb-12">
