@@ -42,7 +42,7 @@ export function FloatingInstagram() {
       className="absolute right-6 z-50 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-500 p-3 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 group"
       style={{
         top: `${96 + animatedY * 1}px`,
-        transition: 'top 0.3s ease-out',
+        transition: 'top 0.6s ease-out',
       }}
       aria-label="Odwiedź nas na Instagramie"
     >
