@@ -22,8 +22,24 @@ export default function HomePage() {
         <Hero />
         
         {/* Logo Section - PRZED karuzelą */}
-        <section className="bg-black py-12 sm:py-16 md:py-20">
-          <div className="container mx-auto px-4">
+        <section className="relative py-12 sm:py-16 md:py-20 overflow-hidden">
+          {/* Video Background */}
+          <div className="absolute inset-0 z-0 flex items-center justify-center">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-contain"
+            >
+              <source src="/images/1026.webm" type="video/webm" />
+            </video>
+            
+            {/* Gradient overlay for better text readability */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60"></div>
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
             <ScrollAnimation direction="fade" delay={0.2} duration={0.8}>
               <div className="text-center space-y-6 sm:space-y-8">
                 <div className="flex justify-center mb-8 sm:mb-12">
