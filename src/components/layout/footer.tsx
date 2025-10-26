@@ -59,7 +59,7 @@ export function Footer() {
 
         <div className="border-t border-white/20 mt-8 pt-8 text-center">
           <p className="text-sm text-white/70">
-            © 2024 LuniQ Vape. Wszystkie prawa zastrzeżone.
+            © 2025 LuniQ Vape. Wszystkie prawa zastrzeżone.
           </p>
         </div>
       </div>
