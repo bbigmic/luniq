@@ -10,16 +10,16 @@ export default function ContactPage() {
       <main>
         {/* Top Section with Blurred Background */}
         <div className="relative h-[400px] overflow-hidden">
-          {/* Background Image with Blur */}
+          {/* Background Image */}
           <div 
-            className="absolute inset-0 bg-cover bg-center blur-sm"
+            className="absolute inset-0 bg-cover bg-center scale-x-[-1]"
             style={{
               backgroundImage: "url('/images/bg-ct.avif')"
             }}
           />
           
           {/* Overlay for better text readability */}
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-black/40" />
           
           {/* Content */}
           <div className="relative h-full flex flex-col items-center justify-center px-4 text-center">
